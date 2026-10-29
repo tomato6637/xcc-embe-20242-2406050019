@@ -1,0 +1,29 @@
+# Keil MDK 编译中间文件
+*.hex
+*.elf
+*.axf
+*.o
+*.d
+*.crf
+*._2i
+*.lnp
+*.sct
+*.map
+*.lst
+*.fed
+*.dep
+*.iex
+*.l2p
+*.htm
+*.scvd
+*.bak
+*.uvgui*
+DebugConfig/
+RTE/
+build/
+Debug/
+Release/
+# 误拷入工程的 Keil 器件包缓存
+**/%LOCALAPPDATA%/
+# STM32CubeIDE
+.metadata/
