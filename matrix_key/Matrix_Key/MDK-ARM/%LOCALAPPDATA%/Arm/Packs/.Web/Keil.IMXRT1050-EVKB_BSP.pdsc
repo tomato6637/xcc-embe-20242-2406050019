@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package schemaVersion="1.7.36" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.36/schema/PACK.xsd">
+  <name>IMXRT1050-EVKB_BSP</name>
+  <vendor>Keil</vendor>
+  <description>NXP IMXRT1050-EVKB board support pack</description>
+  <url>https://www.keil.com/pack/</url>
+  <repository type="git">https://github.com/Open-CMSIS-Pack/NXP_IMXRT1050-EVKB_BSP.git</repository>
+  <license>LICENSE</license>
+  <licenseSets>
+    <licenseSet id="all" default="true" gating="true">
+      <license name="./LICENSE" title="Apache 2.0 open-source license" spdx="Apache-2.0"/>
+    </licenseSet>
+  </licenseSets>
+
+  <releases>
+    <release version="2.0.0" date="2026-06-05" deprecated="2026-06-05" tag="v2.0.0">
+      This Software Pack is deprecated and no longer maintained
+      Synchronize with NXP MIMXRT1052_DFP 18.0.0 and NXP EVKB-IMXRT1050_BSP 18.0.0
+      Pack Description:
+      - Update schemaVersion (1.7.36)
+      - Remove EVKB-IMXRT1050_MDK board decription (use EVKB-IMXRT1050 instead)
+      - Add board layer
+      Example projects:
+      - Migrate Blinky example to CMSIS Solution
+      - Remove Plafrom example
+      Minor documentation update
+    </release>
+    <release version="1.2.0" date="2024-04-10">
+      Synchronize with NXP MIMXRT1052_DFP 17.0.0 and NXP EVKB-IMXRT1050_BSP 17.0.0
+      Pack Description:
+      - Add LICENSE file
+      - Update schemaVersion (1.7.28)
+      Drivers:
+      - CMSIS-Driver VIO:
+      -- Update VIO to API 1.0.0
+      Example projects:
+      - Update projects to CMSIS 6
+      - Migrate Event Recorder component (from Compiler to CMSIS-View pack)
+      - Add cmsis_core5.h legacy header file
+      - Platform:
+      -- Migrate STDIO components (from Compiler to CMSIS-Compiler pack)
+      -- Update README.md
+    </release>
+    <release version="1.1.1" date="2022-11-30">
+      Synchronize with NXP MIMXRT1052_DFP 15.1.0 and NXP EVKB-IMXRT1050_BSP 15.1.0
+      Drivers:
+      - CMSIS-Driver VIO:
+      -- Remove VIO_SENSOR_DISABLE define
+      -- Correct variables initialization to avoid compiler warnings
+      Example projects:
+      - Add BOARD_InitBootPeripherals() function call to main.c module
+      - Change Debugger adapter from CMSIS-DAP to Any
+    </release>
+    <release version="1.1.0" date="2022-10-03">
+      Synchronize with NXP MIMXRT1052_DFP 15.0.0 and NXP EVKB-IMXRT1050_BSP 15.0.0
+      Platform project:
+      - add support for Audio
+    </release>
+    <release version="1.0.1" date="2021-09-29">
+      Added board features to board description
+    </release>
+    <release version="1.0.0" date="2021-09-14">
+      Board description and documentation for IMXRT1050-EVKB
+      Synchronized with NXP MIMXRT1052_DFP 13.1.0 and NXP EVKB-IMXRT1050_BSP 13.1.0
+      Drivers:
+      - CMSIS-Driver VIO
+      Example projects:
+      - CMSIS-RTOS2 Blinky (verify the basic tool setup)
+      - CMSIS-RTOS2 Platform (configure the board hardware)
+    </release>
+  </releases>
+
+  <requirements>
+    <packages>
+      <package vendor="NXP" name="MIMXRT1052_DFP"     version="18.0.0-0"/>
+      <package vendor="NXP" name="EVKB-IMXRT1050_BSP" version="18.0.0-0"/>
+      <package vendor="ARM" name="CMSIS"              version="6.0.0-0"/>
+    </packages>
+  </requirements>
+
+  <keywords>
+    <!-- keywords for indexing -->
+    <keyword>NXP</keyword>
+    <keyword>iMXRT</keyword>
+    <keyword>iMXRT1052</keyword>
+    <keyword>MIMXRT</keyword>
+    <keyword>IMXRT1050-EVKB</keyword>
+  </keywords>
+
+  <conditions>
+    <!-- Board Condition -->
+    <condition id="IMXRT1050-EVKB">
+      <description>NXP IMXRT1050-EVKB Board</description>
+      <require Bvendor="NXP" Bname="EVKB-IMXRT1050"/>
+    </condition>
+
+    <condition id="IMXRT1050-EVKB VIO">
+      <description>Virtual I/O IMXRT1050-EVKB</description>
+      <require condition="IMXRT1050-EVKB"/>
+      <require Cclass="CMSIS" Cgroup="CORE"/>
+      <require Cclass="Board Support" Cgroup="SDK Project Template"/>
+    </condition>
+  </conditions>
+
+  <components>
+    <!-- VIO component for IMXRT1050-EVKB -->
+    <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant="IMXRT1050-EVKB" Cversion="2.0.0" Capiversion="1.0.0" condition="IMXRT1050-EVKB VIO">
+      <description>Virtual I/O implementation for IMXRT1050-EVKB VIO</description>
+      <RTE_Components_h>
+        #define RTE_VIO_BOARD
+        #define RTE_VIO_IMXRT1050_EVKB
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="CMSIS/Driver/vio_IMXRT1050-EVKB.c"/>
+      </files>
+    </component>
+  </components>
+
+  <csolution> 
+    <clayer type="Board" path="Layers/IoT" file="Board.clayer.yml" copy-to="Board/IMXRT1050-EVKB" condition="IMXRT1050-EVKB"/>
+  </csolution>
+
+  <examples>
+    <example name="Blinky" doc="README.md" folder="Examples/Blinky">
+      <description>CMSIS-RTOS2 Blinky example with VIO</description>
+      <board name="EVKB-IMXRT1050" vendor="NXP"/>
+      <project>
+        <environment name="csolution" load="Blinky.csolution.yml"/>
+      </project>
+    </example>
+  </examples>
+</package>

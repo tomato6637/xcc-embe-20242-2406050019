@@ -1,0 +1,976 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         schemaVersion="1.7.57"
+         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.57/schema/PACK.xsd">
+   <vendor>Microchip</vendor>
+   <url>https://packs.download.microchip.com/</url>
+   <name>SAMD09_DFP</name>
+   <description overview="./OVERVIEW.md">Microchip SAMD09 Series Device Support</description>
+   <supportContact>https://www.microchip.com/en-us/support</supportContact>
+   <license>LICENSE.txt</license>
+   <licenseSets>
+      <licenseSet id="all" default="true" gating="false">
+         <license name="LICENSE.txt"
+                  title="Apache License, Version 2.0"
+                  spdx="Apache-2.0"
+                  url="https://www.apache.org/licenses/LICENSE-2.0"/>
+      </licenseSet>
+   </licenseSets>
+   <releases>
+      <release version="2.6.271" date="2026-05-15">
+                - Adds ARMCC scatter/linker script
+            </release>
+      <release version="2.5.147" date="2022-03-17">
+                - Hold in reset supported for J32 probes.
+                - Included fuse description (component\fuses.h).
+                - Support for board file.
+                - Headers minor version increased to v2.1.0.
+                - Changed integer constant literal macros from _Ux_ to _UNITxx_ (where xx is 32, 16
+                or 8) (MISRA C2012:R12.2).
+            </release>
+      <release version="2.4.129" date="2021-02-08">
+                - Added read device ID and security bit programming for MPLAB X.
+                - Added instance headers.
+            </release>
+      <release version="2.3.113" date="2020-04-28">
+                - Updated MPLAB X debug scripts.
+            </release>
+      <release version="2.2.110" date="2020-02-12">
+                - Updated XOSC32K startup time value-group for OSC32KCTRL module.
+                - Added value-groups for SERCOM module. Updated XC32 content.
+                - Updated MPLAB X debug scripts.
+            </release>
+      <release version="2.1.100" date="2019-10-08">
+                - Added XC32 content. Updated fuse enums.
+                - Update description of SERCOM and SYSCTRL.
+                - Updated programming and debugging scripts.
+            </release>
+      <release version="2.0.10" date="2019-04-11">
+                - Succeeds Atmel.SAMD09_DFP 1.1.76.
+                - Added programming/debugging support in MPLAB X.
+            </release>
+   </releases>
+   <keywords>
+      <keyword>Microchip</keyword>
+      <keyword>Device Family Package Microchip</keyword>
+      <keyword>Device Support</keyword>
+      <keyword>SAMD09</keyword>
+      <keyword>Microcontrollers and Processors</keyword>
+      <keyword>32-bit Microcontrollers</keyword>
+   </keywords>
+   <requirements>
+      <packages>
+         <package vendor="ARM" name="CMSIS"/>
+      </packages>
+   </requirements>
+   <devices>
+      <family Dfamily="SAMD09" Dvendor="Microchip:3">
+         <environment name="microchip">
+            <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
+                            schemaVersion="1.0"
+                            xsi:schemaLocation="http://crownking/pack-device-microchip-extension PACK.DEVICE.MICROCHIP.EXTENSION.xsd"><!--https://schemas.microchip.com/com/microchip/packs/extensions/mchp/1.0/PACK.DEVICE.MICROCHIP.EXTENSION.xsd-->
+               <mchp:prerequisite component="MPLAB X IDE" version="[5.10-"/>
+               <mchp:prerequisite component="MPLAB X IPE" version="[5.10-"/>
+            </mchp:extension>
+         </environment>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/DataSheets/Atmel-42414-SAM-D09_Datasheet.pdf"
+               title="SAM D09 Datasheet"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/DataSheets/Atmel-42414-SAM-D09_Summary.pdf"
+               title="SAMD09_Summary.pdf"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ApplicationNotes/ApplicationNotes/Atmel-42411-Ultra-Low-Power-Techniques-AT06549_Application-Note.pdf"
+               title="AT06549: Ultra Low Power Techniques"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ApplicationNotes/ApplicationNotes/Atmel-42336-ASF-USB-Stack-Manual_ApplicationNote_AT09331.pdf"
+               title="AT09331: ASF USB Stack Manual"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ApplicationNotes/ApplicationNotes/Atmel-42472-Peripheral-Power-Consumption-in-Standby-Mode-for-SAM-D-Devices_ApplicationNote_AT6490.pdf"
+               title="AT11491: Peripheral Power Consumption in Standby Mode for SAM D Devices"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ApplicationNotes/ApplicationNotes/Atmel-42362-Getting-Started-with-SAM-D10-D11_ApplicationNote_AT06467.pdf"
+               title="AT06467: Getting Started with SAM D09/D10/D11"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ApplicationNotes/ApplicationNotes/00002466B.pdf"
+               title="Using Atmel-ICE for AVR Programming In Mass Production"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ApplicationNotes/ApplicationNotes/Atmel-42382-Getting-Started-with-FreeRTOS-on-Atmel-SAM-Flash-MCUs_ApplicationNote_AT04056.pdf"
+               title="AN_42382 - AT04056: Getting Started with FreeRTOS on  SAM Flash MCUs"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ApplicationNotes/ApplicationNotes/Production-Programming-of-Microchip-AVR-SAM-MCU-00002468D.pdf"
+               title="Production Programming of Microchip AVR and SAM Microcontrollers"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ApplicationNotes/ApplicationNotes/00002584A.pdf"
+               title="Integrated Power Factor Correction (PFC) and Sensorless Field Oriented Control (FOC) System for Microchip 32-bit Microcontrollers Application Note"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ApplicationNotes/ApplicationNotes/00002587A.pdf"
+               title="EMI, EMC, EFT, and ESD Circuit Design Consideration for 32-bit Microcontrollers Application Note"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ApplicationNotes/ApplicationNotes/MPLAB-Harmony-v3-Project-Migration-DS00004495.pdf"
+               title="AN4495 - MPLAB Harmony v3 Project Migration"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ApplicationNotes/ApplicationNotes/Sensorless-FOC-For-PMSM-using-PLL-Estimator-FW-AN-DS00002520C.pdf"
+               title="Sensorless Field Oriented Control (FOC) for a Permanent Magnet Synchronous Motor (PMSM) Using a PLL Estimator and Equation-based Flux Weakening (FW) Application Note"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ApplicationNotes/ApplicationNotes/Atmel-42393-SAMD-Debugging-Watchdog-Timer-Reset_ApplicationNote_AT09381.pdf"
+               title="AT09381: SAM D - Debugging Watchdog Timer Reset"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/LegacyCollaterals/Atmel-42438-SAM-BA-Overview-and-Customization-Process_ApplicationNote_AT09423.pdf"
+               title="AN_42438 - AT09423: SAM-BA Overview and Customization Process"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ApplicationNotes/ApplicationNotes/AN2584-Integrated-Power-Factor-Correction-and-Sensorless-Field-Oriented-Control-System-for-Microchip-32-bit-Microcontrollers-DS00002584.pdf"
+               title="Integrated Power Factor Correction and Sensorless Field Oriented Control System for Microchip 32-bit Microcontrollers"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ApplicationNotes/ApplicationNotes/AN5807-SERCOM-USART-on-Microchip-Cortex-Devices-SAM-and-PIC32C-DS00005807.pdf"
+               title="SERCOM USART on Microchip Cortex Devices (SAM and PIC32C)"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42344-USB-Host-Interface-UHI-for-Mass-Storage-Class-MSC_ApplicationNote_AT09339.pdf"
+               title="AN_42344 - AT09339: USB Host Interface (UHI) for Mass Storage Class (MSC)"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42106-SAM-Analog-Comparator-Driver_ApplicationNote_AT03242.pdf"
+               title="AN_42106 - AT03242: SAM D20/D21/D10/D11/DA1/L/C Analog Comparator (AC) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42108-SAM-Events-System-EVENTS-Driver_ApplicationNote_AT03245.pdf"
+               title="AN_42108 - AT03245: SAM D/R/L/C Event System (EVENTS) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42123-SAM-Timer-Counter-%28TC%29-Driver_ApplicationNote_AT03263.pdf"
+               title="AN_42123 - AT03263: SAM D/R/L/C Timer Counter (TC) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42113-SAM-Port-Driver_ApplicationNote_AT03248.pdf"
+               title="AN_42113 - AT03248: SAM D/R/L/C Port (PORT) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42343-USB-Device-Interface-UDI-for-Mass-Storage-Class-MSC_ApplicationNote_AT09338.pdf"
+               title="AN_42343 - AT09338: USB Device Interface (UDI) for Mass Storage Class (MSC)"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/LegacyCollaterals/Atmel-42371-CPU-Usage-Demonstration-using-DMAC-Application_ApplicationNote_AT07685.pdf"
+               title="AN_42371 - AT07685: CPU Usage Demonstration using DMAC Application"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/ProductBrief/The-Difference-Between-MPLAB-Harmonyv3-Synchronous-and-Asynchronous-Drivers-and-When-to-Use-DS90003269A.pdf"
+               title="The Differences Between MPLAB Harmony v3 Synchronous and Asynchronous Drivers and When to Use Them"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42337-USB-Device-Interface-UDI-for-Communication-Class-Device-CDC_ApplicationNote_AT09332.pdf"
+               title="AN_42337 - AT09332: USB Device Interface (UDI) for Communication Class Device (CDC)"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/SupportingCollateral/90003183A.pdf"
+               title="What is SleepWalking? How it Helps to Reduce Power Consumption"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42121-SAM-Pin-Multiplexer-PINMUX-Driver_ApplicationNote_AT03262.pdf"
+               title="AN_42121 - AT03262: SAM D/R/L/C System Pin Multiplexer (SYSTEM PINMUX) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42338-USB-Host-Interface-UHI-for-Communication-Class-Device-CDC_ApplicationNote_AT09333.pdf"
+               title="AN_42338 - AT09333: USB Host Interface (UHI) for Communication Class Device (CDC)"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/SupportingCollateral/How-to-Use-the-MPLAB-Harmony-v3-Debug-System-Service-DS90003246.pdf"
+               title="How to Use the MPLAB Harmony v3 Debug System Service"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42120-SAM-System-SYSTEM-Driver_ApplicationNote_AT03260.pdf"
+               title="AN_42120 - AT03260: SAM D/R System (SYSTEM) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42508-Software-Library-for-AES-128-Encryption-and-Decryption_ApplicationNote_AT10764.pdf"
+               title="AN_42508 - AT10764: Software Library for AES-128 Encryption and Decryption"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42473-Analog-Comparator-Application-Examples_UserGuide_AT11480.pdf"
+               title="AN_42473 - AT11480: Analog Comparator Application Examples"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42124-SAM-Watchdog-WDT-Driver_ApplicationNote_AT03264.pdf"
+               title="AN_42124 - AT03264: SAM D/R/L/C Watchdog (WDT) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/LegacyCollaterals/Atmel-42370-Optimizing-ASF-Code-Size-to-Minimize-Flash-and-RAM-Usage_ApplicationNote_AT08569.pdf"
+               title="AN_42370 - AT08569: Optimizing ASF Code Size to Minimize Flash and RAM Usage"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/SupportingCollateral/90003170A.pdf"
+               title="How the Event System Helps to Lower CPU Load TB"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/SupportingCollateral/Creating-a-Hello-World-Application-on-Arm-Microcontrollers-Using-MPLAB-Harmony-v3-with-MPLAB-Code-Configurator-DS90003231.pdf"
+               title="Creating a 'Hello World' Application on Arm Microcontrollers Using MPLAB Harmony v3 with MPLAB Code Configurator (MCC)"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/SupportingCollateral/How-to-Build-an-Application-by-Adding-a-New-PLIB-Driver-or-Middleware-to-an-Existing-MPLAB-Harmony-v3-Project-DS90003253.pdf"
+               title="How to Build an Application by Adding a New PLIB, Driver, or Middleware to an Existing MPLAB Harmony v3 Project"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/SupportingCollateral/EEPROM_Emulation_for_Flash-Only_Devices_DS90003222A.pdf"
+               title="EEPROM Emulation for Flash-Only Devices Tech Brief"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42346-USB-Host-Interface-UHI-for-Vendor-Class-Device_ApplicationNote_AT09341.pdf"
+               title="AN_42346 - AT09341: USB Host Interface (UHI) for Vendor Class Device"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Designing_Feature-Rich_UIs_Article.pdf"
+               title="Designing Feature-Rich User Interfaces for Home and Industrial Controllers"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42339-USB-Device-Interface-UDI-for-Human-Interface-Device-Generic_ApplicationNote_AT09334.pdf"
+               title="AN_42339 - AT09334: USB Device Interface (UDI) for Human Interface Device Generic (HID Generic)"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42116-SAM-I2C-Bus-Driver-Sercom-I2C_ApplicationNote_AT03254.pdf"
+               title="AN_42116 - AT03254: SAM D/R/L/C I2C Slave Mode (SERCOM I2C) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/Errata/SAM-D09-Series-Family-Errata-DS80000839B.pdf"
+               title="SAM D09 Series Family Silicon Errata and Data Sheet Clarifications "/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/LegacyCollaterals/Atmel-9386-QT4-Xplained-Pro_User-Guide.pdf"
+               title="ATAN0114: Atmel QT4 Xplained Pro User Guide"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/SupportingCollateral/MPLAB_Harmony_v3_Synchronous_Drivers_and_Their_Usage_in_FreeRTOS-Based_Applications_DS90003290A.pdf"
+               title="MPLAB Harmony v3 Synchronous Drivers and Their Usage in FreeRTOS-Based Applications"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/Brochures/32-bit-Brochure-30009904.pdf"
+               title="32-bit MCU Brochure"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42342-USB-Host-Interface-UHI-for-Human-Interface-Device-Mouse-HID-Mouse_ApplicationNote_AT09337.pdf"
+               title="AN_42342 - AT09337: USB Host Interface (UHI) for Human Interface Device Mouse (HID Mouse)"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/50002633B.pdf"
+               title="ASF4 API Reference Manual"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42340-USB-Device-Interface-UID-for-Human-Interface-Device-Keyboard_ApplicationNote_AT09335.pdf"
+               title="AN_42340 - AT09335: USB Device Interface (UDI) for Human Interface Device Keyboard (HID Keyboard)"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42235-Developing-Extension-Boards-for-the-Xplained-Pro-Evaluation-Kits_AP-Note_AT06857.pdf"
+               title="AN_42235 - AT06857: Developing Extension Boards for the Xplained Pro Evaluation Kits"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42189-Connecting-SAMD20E-to-the-AT86RF233-Transceiver_AP-Note_AT04389.pdf"
+               title="AN_42189 - AT04389: Connecting SAMD20E to the AT86RF233 Transceiver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/ProductBrief/Various_Timers_on_SAMDevice_DS90003230A.pdf"
+               title="Various Timers on SAM Devices Tech Brief"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42118-SAM-Serial-USART-Sercom-USART-Driver_ApplicationNote_AT03256.pdf"
+               title="AN_42118 - AT03256: SAM D/R/L/C Serial USART (SERCOM USART) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42126-SAM-RTC-Calendar-RTC-CAL-Driver_ApplicationNote_AT03266.pdf"
+               title="AN_42126 - AT03266: SAM D/R/L/C RTC Calendar (RTC CAL) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42114-SAM-Non-Volatile-Memory-Driver-NVM_ApplicationNote_AT03247.pdf"
+               title="AN_42114 - AT03247: SAM D/R/L/C Non-Volatile Memory (NVM) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42117-SAM-I2C-Bus-Driver-Sercom-I2C_ApplicationNote_AT03250.pdf"
+               title="AN_42117 - AT03250: SAM D/R/L/C I2C Master Mode (SERCOM I2C) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42345-USB-Device-Interface-UDI-for-Vendor-Class-Device_ApplicationNote_AT09340.pdf"
+               title="AN_42345 - AT09340: USB Device Interface (UDI) for Vendor Class Device"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/45047A_AWP002%28D2%29Achieving32bitPerformanceWith8bitSimplicity_060313.pdf"
+               title="Bringing the Best of Microcontroller Innovations to New Cortex-M0+ Devices"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42386-DALI-Stack-for-SAM-D20-D21_ApplicationNote_AT10828.pdf"
+               title="AN_42386 - AT10828: DALI Slave Stack for SAM D20/D21"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42111-SAM-RTC-Count-Driver-RTC-Count_ApplicationNote_AT03249.pdf"
+               title="AN_42111 - AT03249: SAM D/R/L/C RTC Count (RTC COUNT) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/LegacyCollaterals/Atmel-42148-SAM-D20-STK600-RC064SAM-72_User-Guide.pdf"
+               title="STK600-RC064SAM-72 User Guide"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42122-SAM-System-Interrupt-Driver_ApplicationNote_AT03261.pdf"
+               title="AN_42122 - AT03261: SAM D/R/L/C System Interrupt (SYSTEM INTERRUPT) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42341-USB-Device-Interface-UDI-for-Human-Interface-Device-Mouse-HID-Mouse_ApplicationNote_AT09336.pdf"
+               title="AN_42341 - AT09336: USB Device Interface (UDI) for Human Interface Device Mouse (HID Mouse)"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/LegacyCollaterals/Atmel-42458-Waveform-Generator-and-WAV-Audio-Player-using-DAC_Application-Note_AT11493.pdf"
+               title="AN_42458 - AT11493: Waveform Generator and WAV Audio Player using DAC"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/LegacyCollaterals/Atmel-42193-QT1-Xplained-Pro_User-Guide.pdf"
+               title="Atmel QT1 Xplained Pro User Guide"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42115-SAM-Serial-Peripheral-Interface-Driver-Sercom-SPI_ApplicationNote_AT03255.pdf"
+               title="AN_42115 - AT03255: SAM D/R/L/C Serial Peripheral Interface (SERCOM SPI) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42109-SAM-Analog-to-Digital-Converter-ADC-Driver_ApplicationNote_AT03243.pdf"
+               title="AN_42109 - AT03243: SAM D/R Analog to Digital Converter (ADC) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/ProductBrief/90003243A.pdf"
+               title="How to Wakeup Fast From an External Event on Cortex-M0+ Based MCUs"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42257-SAM-Direct-Memory-Access-Controller-Driver-DMAC_ApplicationNote_AT07683.pdf"
+               title="AN_42257 - AT07683: SAM D09/D10/D11/D21/DA1/R/L/C Direct Memory Access Controller (DMAC) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/LegacyCollaterals/Beyond_the_IDE_White_Paper.pdf"
+               title="Beyond the IDE"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42119-SAM-System-Clock-Management-SYSTEM-CLOCK-Driver_ApplicationNote_AT03259.pdf"
+               title="AN_42119 - AT03259: SAM D/R System Clock Management (SYSTEM CLOCK) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42107-SAM-Peripheral-Access-Controller-PAC-Driver_ApplicationNote_AT03229.pdf"
+               title="AN_42107 - AT03229: SAM D/R/L/C Peripheral Access Controller (PAC) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42112-SAM-External-Interrupt-Driver-Extint_ApplicationNote_AT03246.pdf"
+               title="AN_42112 - AT03246: SAM D/R/L/C External Interrupt (EXTINT) Driver"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/SupportingCollateral/Difference_Between_MPLAB_Harmony_PLIBs_and_Drivers_and_When_to_Use_Them_Tech_Brief_DS90003291A.pdf"
+               title="The Difference Between MPLAB Harmony v3 PLIBs and Drivers, and When to Use Them"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42724-Proximetry-Cloud-Based-Smart-Plug-User-Guide_ApplicationNote_AT17284.pdf"
+               title="AN_42724 - AT17284: Proximetry Cloud Based Smart Plug User Guide"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/MISC/QTouch_library_selection_guide.xls"
+               title="QTouch Library Selection Guide"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/LegacyCollaterals/atmel-42195-qtouch-library-peripheral-touch-controller_user-guide.pdf"
+               title="Atmel QTouch General Library Peripheral Touch Controller User Guide"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/SupportingCollateral/How-to-Setup-MPLAB-Harmony-v3-Software-Development-Framework-DS90003232.pdf"
+               title="How to Setup MPLAB Harmony v3 Software Development Framework"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/ReferenceManuals/32-bit-Microcontroller-Collateral-and-Solutions-Reference-Guide-DS70005534.pdf"
+               title="32-bit Microcontroller Collateral and Solutions Reference Guide"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Wearable_Computing_Article.pdf"
+               title="Computers that You Wear Help Your Work and Play"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/MCU_vs_MPU_Article.pdf"
+               title="Microprocessor or Microcontroller"/>
+         <book name="https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/LegacyCollaterals/Atmel-42728-Using-SAM-BA-for-Linux-on-SMART-ARM-based-Microcontrollers_ApplicationNotes_AT15004.pdf"
+               title="AN_42728 - AT15004:Using SAM-BA for Linux on SAM Devices"/>
+         <book name="https://developer.arm.com/documentation/dui0662"
+               title="Cortex-M0+ Devices Generic User Guide"/>
+         <memory name="HMCRAMC0"
+                 start="0x20000000"
+                 size="0x1000"
+                 default="1"
+                 access="rwx"/>
+         <memory name="HPB0" start="0x40000000" size="0x10000" access="rwp"/>
+         <memory name="HPB1" start="0x41000000" size="0x10000" access="rwp"/>
+         <memory name="HPB2" start="0x42000000" size="0x10000" access="rwp"/>
+         <memory name="PPB" start="0xE0000000" size="0x100000" access="rwp"/>
+         <memory name="SCS" start="0xE000E000" size="0x00001000" access="rwp"/>
+         <memory name="PERIPHERALS"
+                 start="0x40000000"
+                 size="0x20000000"
+                 access="rwp"/>
+         <debugport __dp="0">
+            <swd/>
+         </debugport>
+         <trace>
+            <tracebuffer/>
+         </trace>
+         <feature type="NVIC" n="19"/>
+         <feature type="DMA" n="6"/>
+         <feature type="ExtInt" n="8"/>
+         <feature type="ADC" n="5" m="12"/>
+         <feature type="WDT" n="1"/>
+         <feature type="RTC" n="1"/>
+         <feature type="Timer" n="2"/>
+         <feature type="Memory" n="4096" name="HMCRAMC0"/>
+         <feature type="VCC" n="2.4" m="3.63"/>
+         <feature type="Temp" n="-40" m="85"/>
+         <device Dname="ATSAMD09C13A">
+            <processor Dcore="Cortex-M0+"
+                       Dendian="Little-endian"
+                       Dmpu="NO_MPU"
+                       Dfpu="NO_FPU"
+                       Ddsp="NO_DSP"
+                       Dtz="NO_TZ"
+                       Dmve="NO_MVE"
+                       Dclock="48000000"
+                       DcoreVersion="r0p0"/>
+            <debugconfig default="swd" clock="2000000"/>
+            <compile header="include/sam.h" define="__SAMD09C13A__"/>
+            <debug svd="svd/ATSAMD09C13A.svd"/>
+            <memory name="FLASH"
+                    start="0x00000000"
+                    size="0x2000"
+                    access="rx"
+                    default="1"
+                    startup="1"/>
+            <algorithm name="keil/Flash/SAMD09_8.FLM"
+                       start="0x00000000"
+                       size="0x2000"
+                       RAMstart="0x20000000"
+                       RAMsize="0x1000"
+                       default="1"
+                       style="Keil"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
+                             schemaVersion="1.0"
+                             xsi:schemaLocation="http://www.atmel.com/schemas/pack-device-atmel-extension PACK.DEVICE.ATMEL.EXTENSION.xsd"><!--https://schemas.microchip.com/com/microchip/packs/extensions/at/1.0/PACK.DEVICE.ATMEL.EXTENSION.xsd-->
+                  <at:atdf name="atdf/ATSAMD09C13A.atdf"/>
+                  <at:variant ordercode="SAMD09C13A-SSU"
+                              vccmin="2.4"
+                              vccmax="3.63"
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:memory name="FLASH"
+                             start="0x00000000"
+                             size="0x2000"
+                             type="flash"
+                             pagesize="64"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="CAL"
+                             start="0x00800000"
+                             size="0x8"
+                             type="fuses"
+                             rw="R"
+                             address-space="base"/>
+                  <at:memory name="LOCKBIT"
+                             start="0x00802000"
+                             size="0x4"
+                             type="fuses"
+                             rw="R"
+                             address-space="base"/>
+                  <at:memory name="OTP1"
+                             start="0x00806000"
+                             size="0x8"
+                             type="fuses"
+                             rw="R"
+                             address-space="base"/>
+                  <at:memory name="OTP2"
+                             start="0x00806008"
+                             size="0x8"
+                             type="fuses"
+                             rw="R"
+                             address-space="base"/>
+                  <at:memory name="OTP4"
+                             start="0x00806020"
+                             size="0xE0"
+                             type="fuses"
+                             pagesize="64"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="TEMP_LOG"
+                             start="0x00806030"
+                             size="0x8"
+                             type="fuses"
+                             rw="R"
+                             address-space="base"/>
+                  <at:memory name="USER_PAGE"
+                             start="0x00804000"
+                             size="0x100"
+                             type="user_page"
+                             pagesize="64"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="HMCRAMC0"
+                             start="0x20000000"
+                             size="0x1000"
+                             type="ram"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="HPB0"
+                             start="0x40000000"
+                             size="0x10000"
+                             type="io"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="HPB1"
+                             start="0x41000000"
+                             size="0x10000"
+                             type="io"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="HPB2"
+                             start="0x42000000"
+                             size="0x10000"
+                             type="io"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="PPB"
+                             start="0xE0000000"
+                             size="0x100000"
+                             type="io"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="SCS"
+                             start="0xE000E000"
+                             size="0x00001000"
+                             type="io"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="PERIPHERALS"
+                             start="0x40000000"
+                             size="0x20000000"
+                             type="io"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:interface type="swd" name="SWD"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.ice4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.samice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="ARM" Cclass="CMSIS" Cgroup="CORE"/>
+                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="ARM" Cclass="CMSIS" Cgroup="CORE"/>
+                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="ARM-GCC"/>
+                  <at:prerequisite context="compiling" Tcompiler="IAR" component="ARM-IAR"/>
+                  <at:prerequisite context="compiling" Tcompiler="ARMCC" component="ARMCC"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
+                               schemaVersion="1.0"
+                               xsi:schemaLocation="http://crownking/pack-device-microchip-extension PACK.DEVICE.MICROCHIP.EXTENSION.xsd"><!--https://schemas.microchip.com/com/microchip/packs/extensions/mchp/1.0/PACK.DEVICE.MICROCHIP.EXTENSION.xsd-->
+                  <mchp:pic name="edc/ATSAMD09C13A.PIC"/>
+                  <mchp:xc32 name="xc32"/>
+                  <mchp:hwtool type="mplab.mpheader">
+                     <mchp:file name="hwtools/mplab/MPHeader.xml"/>
+                  </mchp:hwtool>
+                  <mchp:hwtool type="mplab.pluginboardsupport">
+                     <mchp:file name="hwtools/mplab/PluginBoardSupport.xml"/>
+                  </mchp:hwtool>
+                  <mchp:hwtool type="sdm">
+                     <mchp:file name="hwtools/sdm/sdmCompilers.xml"/>
+                     <mchp:file name="hwtools/sdm/sdmDebuggerMap.xml"/>
+                     <mchp:file name="hwtools/sdm/sdmICD3.xml"/>
+                     <mchp:file name="hwtools/sdm/sdmICD4.xml"/>
+                     <mchp:file name="hwtools/sdm/sdmICD5.xml"/>
+                     <mchp:file name="hwtools/sdm/sdmICE4.xml"/>
+                     <mchp:file name="hwtools/sdm/sdmRealICE.xml"/>
+                     <mchp:file name="hwtools/sdm/sdmRealICE4.xml"/>
+                     <mchp:file name="hwtools/sdm/sdmSimulator.xml"/>
+                  </mchp:hwtool>
+                  <mchp:hwtool type="persfr">
+                     <mchp:file name="hwtools/persfr/arm32.persfr"/>
+                  </mchp:hwtool>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.20-"/>
+               </mchp:extension>
+            </environment>
+            <description>&lt;p&gt;The low-power, high-performance Microchip's ATSAMD09C13 ARM(R) Cortex(R)-M0+ based flash microcontroller is ideal for a wi...</description>
+            <book name="https://www.microchip.com/en-us/product/ATSAMD09C13A"
+                  title="Device page for ATSAMD09C13A"/>
+            <feature type="IOs" n="12"/>
+            <feature type="Memory" n="8192" name="FLASH"/>
+            <feature type="PackageOther" n="14" name="SOIC"/>
+         </device>
+         <device Dname="ATSAMD09D14A">
+            <processor Dcore="Cortex-M0+"
+                       Dendian="Little-endian"
+                       Dmpu="NO_MPU"
+                       Dfpu="NO_FPU"
+                       Ddsp="NO_DSP"
+                       Dtz="NO_TZ"
+                       Dmve="NO_MVE"
+                       Dclock="48000000"
+                       DcoreVersion="r0p0"/>
+            <debugconfig default="swd" clock="2000000"/>
+            <compile header="include/sam.h" define="__SAMD09D14A__"/>
+            <debug svd="svd/ATSAMD09D14A.svd"/>
+            <memory name="FLASH"
+                    start="0x00000000"
+                    size="0x4000"
+                    access="rx"
+                    default="1"
+                    startup="1"/>
+            <algorithm name="keil/Flash/SAMD09_16.FLM"
+                       start="0x00000000"
+                       size="0x4000"
+                       RAMstart="0x20000000"
+                       RAMsize="0x1000"
+                       default="1"
+                       style="Keil"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
+                             schemaVersion="1.0"
+                             xsi:schemaLocation="http://www.atmel.com/schemas/pack-device-atmel-extension PACK.DEVICE.ATMEL.EXTENSION.xsd"><!--https://schemas.microchip.com/com/microchip/packs/extensions/at/1.0/PACK.DEVICE.ATMEL.EXTENSION.xsd-->
+                  <at:atdf name="atdf/ATSAMD09D14A.atdf"/>
+                  <at:variant ordercode="SAMD09D14A-MU"
+                              vccmin="2.4"
+                              vccmax="3.63"
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:memory name="FLASH"
+                             start="0x00000000"
+                             size="0x4000"
+                             type="flash"
+                             pagesize="64"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="CAL"
+                             start="0x00800000"
+                             size="0x8"
+                             type="fuses"
+                             rw="R"
+                             address-space="base"/>
+                  <at:memory name="LOCKBIT"
+                             start="0x00802000"
+                             size="0x4"
+                             type="fuses"
+                             rw="R"
+                             address-space="base"/>
+                  <at:memory name="OTP1"
+                             start="0x00806000"
+                             size="0x8"
+                             type="fuses"
+                             rw="R"
+                             address-space="base"/>
+                  <at:memory name="OTP2"
+                             start="0x00806008"
+                             size="0x8"
+                             type="fuses"
+                             rw="R"
+                             address-space="base"/>
+                  <at:memory name="OTP4"
+                             start="0x00806020"
+                             size="0xE0"
+                             type="fuses"
+                             pagesize="64"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="TEMP_LOG"
+                             start="0x00806030"
+                             size="0x8"
+                             type="fuses"
+                             rw="R"
+                             address-space="base"/>
+                  <at:memory name="USER_PAGE"
+                             start="0x00804000"
+                             size="0x100"
+                             type="user_page"
+                             pagesize="64"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="HMCRAMC0"
+                             start="0x20000000"
+                             size="0x1000"
+                             type="ram"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="HPB0"
+                             start="0x40000000"
+                             size="0x10000"
+                             type="io"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="HPB1"
+                             start="0x41000000"
+                             size="0x10000"
+                             type="io"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="HPB2"
+                             start="0x42000000"
+                             size="0x10000"
+                             type="io"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="PPB"
+                             start="0xE0000000"
+                             size="0x100000"
+                             type="io"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="SCS"
+                             start="0xE000E000"
+                             size="0x00001000"
+                             type="io"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="PERIPHERALS"
+                             start="0x40000000"
+                             size="0x20000000"
+                             type="io"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:interface type="swd" name="SWD"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.ice4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.samice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="ARM" Cclass="CMSIS" Cgroup="CORE"/>
+                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="ARM" Cclass="CMSIS" Cgroup="CORE"/>
+                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="ARM-GCC"/>
+                  <at:prerequisite context="compiling" Tcompiler="IAR" component="ARM-IAR"/>
+                  <at:prerequisite context="compiling" Tcompiler="ARMCC" component="ARMCC"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
+                               schemaVersion="1.0"
+                               xsi:schemaLocation="http://crownking/pack-device-microchip-extension PACK.DEVICE.MICROCHIP.EXTENSION.xsd"><!--https://schemas.microchip.com/com/microchip/packs/extensions/mchp/1.0/PACK.DEVICE.MICROCHIP.EXTENSION.xsd-->
+                  <mchp:pic name="edc/ATSAMD09D14A.PIC"/>
+                  <mchp:xc32 name="xc32"/>
+                  <mchp:hwtool type="mplab.mpheader">
+                     <mchp:file name="hwtools/mplab/MPHeader.xml"/>
+                  </mchp:hwtool>
+                  <mchp:hwtool type="mplab.pluginboardsupport">
+                     <mchp:file name="hwtools/mplab/PluginBoardSupport.xml"/>
+                  </mchp:hwtool>
+                  <mchp:hwtool type="sdm">
+                     <mchp:file name="hwtools/sdm/sdmCompilers.xml"/>
+                     <mchp:file name="hwtools/sdm/sdmDebuggerMap.xml"/>
+                     <mchp:file name="hwtools/sdm/sdmICD3.xml"/>
+                     <mchp:file name="hwtools/sdm/sdmICD4.xml"/>
+                     <mchp:file name="hwtools/sdm/sdmICD5.xml"/>
+                     <mchp:file name="hwtools/sdm/sdmICE4.xml"/>
+                     <mchp:file name="hwtools/sdm/sdmRealICE.xml"/>
+                     <mchp:file name="hwtools/sdm/sdmRealICE4.xml"/>
+                     <mchp:file name="hwtools/sdm/sdmSimulator.xml"/>
+                  </mchp:hwtool>
+                  <mchp:hwtool type="persfr">
+                     <mchp:file name="hwtools/persfr/arm32.persfr"/>
+                  </mchp:hwtool>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.20-"/>
+               </mchp:extension>
+            </environment>
+            <description>&lt;p&gt;The low-power Microchip's ATSAMD09D14 ARM(R) Cortex(R)-M0+ based Flash microcontroller is ideal for a wide range of home a...</description>
+            <book name="https://www.microchip.com/en-us/product/ATSAMD09D14A"
+                  title="Device page for ATSAMD09D14A"/>
+            <feature type="IOs" n="22"/>
+            <feature type="Memory" n="16384" name="FLASH"/>
+            <feature type="QFN" n="24"/>
+         </device>
+      </family>
+   </devices>
+   <conditions>
+      <condition id="ARMCC">
+         <accept Tcompiler="ARMCC"/>
+      </condition>
+      <condition id="ARMCC Exe">
+         <require condition="ARMCC"/>
+         <accept Toutput="exe"/>
+      </condition>
+      <condition id="ARMCC Lib">
+         <require condition="ARMCC"/>
+         <accept Toutput="lib"/>
+      </condition>
+      <condition id="GCC+CLANG">
+         <accept Tcompiler="GCC"/>
+         <accept Tcompiler="CLANG"/>
+      </condition>
+      <condition id="GCC+CLANG Exe">
+         <require condition="GCC+CLANG"/>
+         <accept Toutput="exe"/>
+      </condition>
+      <condition id="GCC+CLANG Lib">
+         <require condition="GCC+CLANG"/>
+         <accept Toutput="lib"/>
+      </condition>
+      <condition id="IAR">
+         <accept Tcompiler="IAR"/>
+      </condition>
+      <condition id="IAR Exe">
+         <require condition="IAR"/>
+         <accept Toutput="exe"/>
+      </condition>
+      <condition id="IAR Lib">
+         <require condition="IAR"/>
+         <accept Toutput="lib"/>
+      </condition>
+      <condition id="XC">
+         <accept Tcompiler="XC"/>
+      </condition>
+      <condition id="XC Exe">
+         <require condition="XC"/>
+         <accept Toutput="exe"/>
+      </condition>
+      <condition id="XC Lib">
+         <require condition="XC"/>
+         <accept Toutput="lib"/>
+      </condition>
+      <condition id="C">
+         <accept condition="ARMCC"/>
+         <accept condition="GCC+CLANG"/>
+         <accept condition="IAR"/>
+         <accept condition="XC"/>
+      </condition>
+      <condition id="C Exe">
+         <accept condition="ARMCC Exe"/>
+         <accept condition="GCC+CLANG Exe"/>
+         <accept condition="IAR Exe"/>
+         <accept condition="XC Exe"/>
+      </condition>
+      <condition id="C Lib">
+         <accept condition="ARMCC Lib"/>
+         <accept condition="GCC+CLANG Lib"/>
+         <accept condition="IAR Lib"/>
+         <accept condition="XC Lib"/>
+      </condition>
+      <condition id="ATSAMD09C13A">
+         <require Dvendor="Microchip:3" Dname="ATSAMD09C13A"/>
+         <require Cclass="CMSIS" Cgroup="CORE"/>
+      </condition>
+      <condition id="ATSAMD09D14A">
+         <require Dvendor="Microchip:3" Dname="ATSAMD09D14A"/>
+         <require Cclass="CMSIS" Cgroup="CORE"/>
+      </condition>
+   </conditions>
+   <components>
+      <component Cvendor="Microchip"
+                 Cclass="Device"
+                 Cgroup="Startup"
+                 Cversion="2.6.0"
+                 condition="ATSAMD09C13A">
+         <description>Headers and startup code for Microchip ATSAMD09C13A</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/sam.h"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="GCC+CLANG Exe"
+                  category="source"
+                  name="gcc/gcc/startup_samd09c13a.c"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="GCC+CLANG Exe"
+                  category="source"
+                  name="gcc/system_samd09c13a.c"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="GCC+CLANG Exe"
+                  category="linkerScript"
+                  name="gcc/gcc/samd09c13a_flash.ld"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="GCC+CLANG Exe"
+                  category="linkerScript"
+                  name="gcc/gcc/samd09c13a_sram.ld"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="ARMCC Exe"
+                  category="source"
+                  name="armcc/armcc/startup_samd09c13a.c"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="ARMCC Exe"
+                  category="source"
+                  name="armcc/system_samd09c13a.c"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="ARMCC Exe"
+                  category="linkerScript"
+                  name="armcc/armcc/samd09c13a_flash.sct"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="ARMCC Exe"
+                  category="linkerScript"
+                  name="armcc/armcc/samd09c13a_sram.sct"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="IAR Exe"
+                  category="source"
+                  name="iar/iar/startup_samd09c13a.c"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="IAR Exe"
+                  category="source"
+                  name="iar/system_samd09c13a.c"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="IAR Exe"
+                  category="linkerScript"
+                  name="iar/config/linker/Microchip/atsamd09c13a/sram.icf"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="IAR Exe"
+                  category="linkerScript"
+                  name="iar/config/linker/Microchip/atsamd09c13a/flash.icf"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="XC Exe"
+                  category="source"
+                  name="xc32/ATSAMD09C13A/startup_atsamd09c13a.c"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="XC Exe"
+                  category="source"
+                  name="gcc/system_samd09c13a.c"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="XC Exe"
+                  category="linkerScript"
+                  name="xc32/ATSAMD09C13A/ATSAMD09C13A.ld"
+                  version="2.6.0"
+                  attr="config"/>
+         </files>
+      </component>
+      <component Cvendor="Microchip"
+                 Cclass="Device"
+                 Cgroup="Startup"
+                 Cversion="2.6.0"
+                 condition="ATSAMD09D14A">
+         <description>Headers and startup code for Microchip ATSAMD09D14A</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/sam.h"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="GCC+CLANG Exe"
+                  category="source"
+                  name="gcc/gcc/startup_samd09d14a.c"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="GCC+CLANG Exe"
+                  category="source"
+                  name="gcc/system_samd09d14a.c"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="GCC+CLANG Exe"
+                  category="linkerScript"
+                  name="gcc/gcc/samd09d14a_flash.ld"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="GCC+CLANG Exe"
+                  category="linkerScript"
+                  name="gcc/gcc/samd09d14a_sram.ld"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="ARMCC Exe"
+                  category="source"
+                  name="armcc/armcc/startup_samd09d14a.c"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="ARMCC Exe"
+                  category="source"
+                  name="armcc/system_samd09d14a.c"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="ARMCC Exe"
+                  category="linkerScript"
+                  name="armcc/armcc/samd09d14a_flash.sct"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="ARMCC Exe"
+                  category="linkerScript"
+                  name="armcc/armcc/samd09d14a_sram.sct"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="IAR Exe"
+                  category="source"
+                  name="iar/iar/startup_samd09d14a.c"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="IAR Exe"
+                  category="source"
+                  name="iar/system_samd09d14a.c"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="IAR Exe"
+                  category="linkerScript"
+                  name="iar/config/linker/Microchip/atsamd09d14a/sram.icf"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="IAR Exe"
+                  category="linkerScript"
+                  name="iar/config/linker/Microchip/atsamd09d14a/flash.icf"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="XC Exe"
+                  category="source"
+                  name="xc32/ATSAMD09D14A/startup_atsamd09d14a.c"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="XC Exe"
+                  category="source"
+                  name="gcc/system_samd09d14a.c"
+                  version="2.6.0"
+                  attr="config"/>
+            <file condition="XC Exe"
+                  category="linkerScript"
+                  name="xc32/ATSAMD09D14A/ATSAMD09D14A.ld"
+                  version="2.6.0"
+                  attr="config"/>
+         </files>
+      </component>
+   </components>
+   <csolution>
+      <template name="Blank Solution"
+                path="templates/csolution/ATSAMD09C13A"
+                file="Blank.csolution.yml"
+                copy-to="blank"
+                condition="ATSAMD09C13A">
+         <description>Create a basic project with empty main function</description>
+      </template>
+      <template name="Blank Solution"
+                path="templates/csolution/ATSAMD09D14A"
+                file="Blank.csolution.yml"
+                copy-to="blank"
+                condition="ATSAMD09D14A">
+         <description>Create a basic project with empty main function</description>
+      </template>
+   </csolution>
+   <taxonomy>
+      <description Cclass="Device" Cgroup="Startup">Device specific startup components</description>
+   </taxonomy>
+</package>

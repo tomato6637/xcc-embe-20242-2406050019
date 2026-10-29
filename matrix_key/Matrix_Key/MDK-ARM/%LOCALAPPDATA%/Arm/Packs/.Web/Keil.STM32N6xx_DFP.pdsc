@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package schemaVersion="1.7.56" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.56/schema/PACK.xsd">
+  <vendor>Keil</vendor>
+  <name>STM32N6xx_DFP</name>
+  <description overview="Documents/OVERVIEW.md">STMicroelectronics STM32N6 Series Device Support</description>
+  <url>https://www.keil.com/pack/</url>
+  <repository type="git">https://github.com/Open-CMSIS-Pack/STM32N6xx_DFP.git</repository>
+  <license>LICENSE</license>
+  <licenseSets>
+    <licenseSet id="all" default="true" gating="true">
+      <license title="Apache-2.0 License for CMSIS add-ons" name="LICENSE" spdx="Apache-2.0"/>
+    </licenseSet>
+  </licenseSets>
+
+  <releases>
+    <release version="1.2.0" date="2026-05-18" tag="v1.2.0">
+      Updated documentation references
+      Updated Templates:
+      - Made templates board-agnostic
+      - Added DWARF-5 debug information
+      - Updated to CMSIS-Toolbox version 2.13.0
+      Pack Description:
+      - Added NPU device feature type
+      - Added Debug Description for Trace
+      - Added dbgconf file for peripheral freeze register
+    </release>
+    <release version="1.1.0" date="2026-02-04" tag="v1.1.0">
+      Updated documentation references
+      Reworked templates
+      Package Description:
+      - Reorganized memory regions
+      - Shortened device family description
+    </release>
+    <release version="1.0.0" date="2024-12-18" tag="v1.0.0">
+      Prepared for new CMSIS-Toolbox CubeMX integration
+      Initial release of STM32N6 Device Family Pack
+    </release>
+  </releases>
+
+  <keywords>                                                                  <!-- keywords for indexing -->
+    <keyword>ST</keyword>
+    <keyword>Device Support</keyword>
+    <keyword>Device Family Package STMicroelectronics</keyword>
+    <keyword>STM32N6</keyword>
+    <keyword>STM32N6xx</keyword>
+  </keywords>
+
+  <devices>
+    <family Dfamily="STM32N6 Series" Dvendor="STMicroelectronics:13">
+      <processor Dcore="Cortex-M55" DcoreVersion="r1p1" Dfpu="DP_FPU" Dmpu="MPU" Ddsp="DSP" Dmve="FP_MVE" Dtz="TZ" Dendian="Configurable" Dclock="800000000"/>
+      <description>
+High-performance STM32N6 MCUs with Arm Cortex-M55 core, MVE, MPU, cache, DSP, DP-FPU, 3616 DMIPS at 800MHz.
+      </description>
+      <book name="https://developer.arm.com/documentation/101273/latest" title="Cortex-M55 Generic User Guide"/>
+
+      <debugvars configfile="CMSIS/Debug/STM32N6xx.dbgconf" version="1.0.0">
+        // Debug Access Variables, can be modified by user via copies of DBGCONF files as created by uVision. Also see sub-family level.
+        __var DbgMCU_CR        = 0x80000007;   // DBGMCU_CR:       DBGMCU configuration register
+                                               //                  [31] HLT_TSGEN_EN, [28] DBTRGOEN, [21] TRACECLKEN, [20] DBGCKEN, 
+                                               //                  [ 2] DBGSTBY, [ 1] DBGSTOP,  [ 0] DBGSLEEP
+        __var DbgMCU_AHB1_Fzr  = 0x00000000;   // DBGMCU_AHB1FZR:  DBGMCU AHB1 peripheral freeze register
+        __var DbgMCU_AHB5_Fzr  = 0x00000000;   // DBGMCU_AHB5FZR:  DBGMCU AHB5 peripheral freeze register
+        __var DbgMCU_APB1L_Fzr = 0x00000000;   // DBGMCU_APB1LFZR: DBGMCU APB1L peripheral freeze register
+        __var DbgMCU_APB1H_Fzr = 0x00000000;   // DBGMCU_APB1HFZR: DBGMCU APB1H peripheral freeze register
+        __var DbgMCU_APB2_Fzr  = 0x00000000;   // DBGMCU_APB2FZR:  DBGMCU APB2 peripheral freeze register
+        __var DbgMCU_APB4_Fzr  = 0x00000000;   // DBGMCU_APB4FZR:  DBGMCU APB4 peripheral freeze register
+        __var DbgMCU_APB5_Fzr  = 0x00000000;   // DBGMCU_APB5FZR:  DBGMCU APB5 peripheral freeze register
+        __var TraceClk_Pin     = 0x00010003;   // PB3
+        __var TraceD0_Pin      = 0x00040003;   // PE3
+        __var TraceD1_Pin      = 0x00010000;   // PB0
+        __var TraceD2_Pin      = 0x00010006;   // PB6
+        __var TraceD3_Pin      = 0x00010007;   // PB7
+      </debugvars>
+
+      <sequences>
+        <!-- Override for Pre-Defined Sequences -->
+        <sequence name="DebugDeviceUnlock">
+          <block>
+            __var value = 0;
+
+            Sequence("CheckID");
+
+            __ap   = 0;                                         // Switch to System Debug Access Port
+
+            value  = Read32(0x80001004);                        // Read DBGMCU_CR
+            value |= 0x00100000;                                // Enable debug clock: DBGMCU_CR[20] DBGCKEN
+          </block>
+
+          <!-- Enable Trace Clock and hence access to global trace components now -->
+          <control if="__traceout">
+            <block>
+              value |= 0x00200000;                              // DBGMCU_CR[21] TRACECLKEN
+            </block>
+          </control>
+
+          <block info="DbgMCU registers">
+            Write32(0x80001004 , DbgMCU_CR        | value);     // DBGMCU_CR:       Configure MCU Debug
+            Write32(0x80001024 , DbgMCU_AHB1_Fzr         );     // DBGMCU_AHB1FZR:  Configure DBGMCU AHB1 peripheral freeze behavior
+            Write32(0x80001028 , DbgMCU_AHB5_Fzr         );     // DBGMCU_AHB5FZR:  Configure DBGMCU AHB5 peripheral freeze behavior
+            Write32(0x80001010 , DbgMCU_APB1L_Fzr        );     // DBGMCU_APB1LFZR: Configure DBGMCU APB1L peripheral freeze behavior
+            Write32(0x80001014 , DbgMCU_APB1H_Fzr        );     // DBGMCU_APB1HFZR: Configure DBGMCU APB1H peripheral freeze behavior
+            Write32(0x80001018 , DbgMCU_APB2_Fzr         );     // DBGMCU_APB2FZR:  Configure DBGMCU APB2 peripheral freeze behavior
+            Write32(0x8000101C , DbgMCU_APB4_Fzr         );     // DBGMCU_APB4FZR:  Configure DBGMCU APB4 peripheral freeze behavior
+            Write32(0x80001020 , DbgMCU_APB5_Fzr         );     // DBGMCU_APB5FZR:  Configure DBGMCU APB5 peripheral freeze behavior
+          </block>
+        </sequence>
+
+        <sequence name="TraceStart">
+          <block>
+            __var traceSWO    = (__traceout &amp; 0x1) != 0;                               // SWO (asynchronous) Trace Selected?
+            __var traceTPIU   = (__traceout &amp; 0x2) != 0;                               // TPIU (synchronous) Trace Selected?
+          </block>
+
+          <control if="traceSWO">
+            <block>
+              Sequence("EnableTraceSWO");                                                  // Call SWO Trace Setup
+            </block>
+          </control>
+
+          <control if="traceTPIU">
+            <block>
+              Sequence("EnableTraceTPIU");                                                 // Call TPIU Trace Setup
+            </block>
+          </control>
+        </sequence>
+
+        <sequence name="TraceStop">
+          <block>
+            __var traceSWO    = (__traceout &amp; 0x1) != 0;                               // SWO enabled?
+            __var traceTPIU   = (__traceout &amp; 0x2) != 0;                               // Synchronous trace port enabled?
+          </block>
+
+          <control if="traceSWO">
+            <block>
+              Sequence("DisableTraceSWO");
+            </block>
+          </control>
+
+          <control if="traceTPIU">
+            <block>
+              Sequence("DisableTraceTPIU");
+            </block>
+          </control>
+        </sequence>
+
+        <!-- User-Defined Sequences -->
+        <sequence name="CheckID">
+          <block>
+            __var pidr1 = 0;
+            __var pidr2 = 0;
+            __var jep106id = 0;
+            __var ROMTableBase = 0;
+
+            __ap = 0;      // System debug access port (APB-AP)
+
+            ROMTableBase = ReadAP(0xF8) &amp; ~0x3;
+
+            pidr1 = Read32(ROMTableBase + 0x0FE4);
+            pidr2 = Read32(ROMTableBase + 0x0FE8);
+            jep106id = ((pidr2 &amp; 0x7) &lt;&lt; 4 ) | ((pidr1 &gt;&gt; 4) &amp; 0xF);
+          </block>
+
+          <control if="jep106id != 0x20">
+            <block>
+              Query(0, "Not a genuine ST Device! Abort connection", 1);
+              Message(2, "Not a genuine ST Device! Abort connection.");
+            </block>
+          </control>
+        </sequence>
+
+        <sequence name="EnableTraceSWO">
+          <block>
+            Sequence("ConfigureTraceSWOPin");
+                                                                                           // Trace Clock is already enabled in "DebugDeviceUnlock"
+          </block>
+        </sequence>
+
+        <sequence name="DisableTraceSWO">
+          <block>
+            __var value = 0;
+
+            __ap   = 0;                                                                    // Switch to System Debug Access Port
+
+                                                                                           // Disable Trace Clock
+            value      =  Read32(0x80001004);                                              // Read DBGMCU_CR
+            value &amp;= ~0x00200000;                                                      // DBGMCU_CR[21] : clear TRACECLKEN
+            Write32(0x80001004, value);                                                    // Update DBGMCU_CR
+          </block>
+        </sequence>
+
+        <sequence name="EnableTraceTPIU">
+          <block>
+            __var value = 0;
+
+            Sequence("ConfigureTraceTPIUPins");
+                                                                                           // Trace Clock is already enabled in "DebugDeviceUnlock"
+
+            Write32(0xE0081004, 0x00000007);                                               // CSTF Priority Register (CSTF_PRIORITY): Increase ITM priority
+                                                                                           // Configure CoreSight Trace Funnel (CSTF) at 0xE0081000
+            value      =  Read32(0xE0081000);                                              // Read Trace Funnel CONTROL Register
+            value &amp;=  0x00000F00;                                                      // Preserve Hold Time Settings
+            value     |=  0x00000003;                                                      // Enable ITM and ETM slave ports
+            Write32(0xE0081000, value);                                                    // Update Trace Funnel CONTROL Register
+
+                                                                                           // disable ETF and wait until disabled
+            Write32(0xE0082028, 0x00000002);                                               // ETF Mode Register (ETF_MODE): Set to Hardware FIFO mode
+            Write32(0xE0082034, 0x00000000);                                               // ETF Buffer Level Watermark Register (ETF_BUFWM): Set threshold vacancy to 0 (use full buffer)
+            Write32(0xE0082304, 0x00000003);                                               // ETF Formatter and Flush Control Register (ETF_FFCR): Set ENFT and ENTI
+            Write32(0xE0082020, 0x00000001);                                               // ETF ConTrol Register (ETF_CTL): Set TCEN
+          </block>
+        </sequence>
+
+        <sequence name="DisableTraceTPIU">
+          <block>
+            __var value = 0;
+
+            __ap   = 0;                                                                    // Switch to System Debug Access Port
+
+                                                                                           // Disable Trace Clock
+            value      =  Read32(0x80001004);                                              // Read DBGMCU_CR
+            value &amp;= ~0x00200000;                                                      // DBGMCU_CR[21] : clear TRACECLKEN
+            Write32(0x80001004, value);                                                    // Update DBGMCU_CR
+          </block>
+        </sequence>
+
+        <sequence name="ConfigureTraceSWOPin">
+          <block>
+            __var pin     = 0;
+            __var port    = 0;
+            __var portAdr = 0;
+            __var pos     = 0;
+
+            __var SWO_Pin = 0x00010005;                                                    // PB5
+          </block>
+
+          <!-- configure SWO -->
+          <block info="configure SWO">
+            pin     =               ((SWO_Pin            ) &amp; 0x0000FFFF);
+            port    =               ((SWO_Pin &gt;&gt; 16) &amp; 0x0000FFFF);
+            portAdr = 0x56020000 + (((SWO_Pin &gt;&gt; 16) &amp; 0x0000FFFF) * 0x400);
+
+            pos = pin * 2;
+            Write32(0x5602825C,     ((Read32(0x5602825C    )                         ) | (1 &lt;&lt; port)) );  // RCC_AHB4ENR:   IO port clock enable
+            Write32(portAdr + 0x00, ((Read32(portAdr + 0x00) &amp; ~( 3 &lt;&lt; pos)) | (2 &lt;&lt; pos )) );  // GPIOx_MODER:   Set Mode (Alternate Function)
+            Write32(portAdr + 0x08, ((Read32(portAdr + 0x08)                         ) | (3 &lt;&lt; pos )) );  // GPIOx_OSPEEDR: Set Speed (Very High Speed)
+            Write32(portAdr + 0x0C, ((Read32(portAdr + 0x0C) &amp; ~( 3 &lt;&lt; pos))                    ) );  // GPIOx_PUPDR:   Set I/O to no pull-up/pull-down
+          </block>
+          <control if="pin &lt;  8">
+            <block>
+              pos = ((pin    ) &amp; 7) * 4;
+              Write32(portAdr + 0x20, ((Read32(portAdr + 0x20) &amp; ~(15 &lt;&lt; pos))                  ) );  // GPIOx_AFRL:    Alternate Function to AF0
+            </block>
+          </control>
+          <control if="pin &gt;= 8">
+            <block>
+              pos = ((pin - 8) &amp; 7) * 4;
+              Write32(portAdr + 0x24, ((Read32(portAdr + 0x24) &amp; ~(15 &lt;&lt; pos))                  ) );  // GPIOx_AFRH:    Alternate Function to AF0
+            </block>
+          </control>
+        </sequence>
+
+        <sequence name="ConfigureTraceTPIUPins">
+          <block>
+            __var pin     = 0;
+            __var port    = 0;
+            __var portAdr = 0;
+            __var pos     = 0;
+
+            __var width   = (__traceout &amp; 0x003F0000) &gt;&gt; 16;
+          </block>
+
+          <!-- configure TRACECLK -->
+          <block info="configure TRACECLK">
+            pin     =                (TraceClk_Pin            ) &amp; 0x0000FFFF;
+            port    =                (TraceClk_Pin &gt;&gt; 16) &amp; 0x0000FFFF;
+            portAdr = 0x56020000 + (((TraceClk_Pin &gt;&gt; 16) &amp; 0x0000FFFF) * 0x400);
+
+            pos = pin * 2;
+            Write32(0x5602825C,     ((Read32(0x5602825C    )                         ) | (1 &lt;&lt; port)) );  // RCC_AHB4ENR:   IO port clock enable
+            Write32(portAdr + 0x00, ((Read32(portAdr + 0x00) &amp; ~( 3 &lt;&lt; pos)) | (2 &lt;&lt; pos )) );  // GPIOx_MODER:   Set Mode (Alternate Function)
+            Write32(portAdr + 0x08, ((Read32(portAdr + 0x08)                         ) | (3 &lt;&lt; pos )) );  // GPIOx_OSPEEDR: Set Speed (Very High Speed)
+            Write32(portAdr + 0x0C, ((Read32(portAdr + 0x0C) &amp; ~( 3 &lt;&lt; pos))                    ) );  // GPIOx_PUPDR:   Set I/O to no pull-up/pull-down
+          </block>
+          <control if="pin &lt;  8">
+            <block>
+              pos = ((pin    ) &amp; 7) * 4;
+              Write32(portAdr + 0x20, ((Read32(portAdr + 0x20) &amp; ~(15 &lt;&lt; pos))                  ) );  // GPIOx_AFRL:    Alternate Function to AF0
+            </block>
+          </control>
+          <control if="pin &gt;= 8">
+            <block>
+              pos = ((pin - 8) &amp; 7) * 4;
+              Write32(portAdr + 0x24, ((Read32(portAdr + 0x24) &amp; ~(15 &lt;&lt; pos))                  ) );  // GPIOx_AFRH:    Alternate Function to AF0
+            </block>
+          </control>
+
+          <control if="width &gt;= 1" info="TPIU port width 1">
+            <!-- configure TRACED0 -->
+            <block info="configure TRACED0">
+              pin     =                (TraceD0_Pin            ) &amp; 0x0000FFFF;
+              port    =                (TraceD0_Pin &gt;&gt; 16) &amp; 0x0000FFFF;
+              portAdr = 0x56020000 + (((TraceD0_Pin &gt;&gt; 16) &amp; 0x0000FFFF) * 0x400);
+
+              pos = pin * 2;
+              Write32(0x5602825C,     ((Read32(0x5602825C    )                         ) | (1 &lt;&lt; port)) );  // RCC_AHB4ENR:   IO port clock enable
+              Write32(portAdr + 0x00, ((Read32(portAdr + 0x00) &amp; ~( 3 &lt;&lt; pos)) | (2 &lt;&lt; pos )) );  // GPIOx_MODER:   Set Mode (Alternate Function)
+              Write32(portAdr + 0x08, ((Read32(portAdr + 0x08)                         ) | (3 &lt;&lt; pos )) );  // GPIOx_OSPEEDR: Set Speed (Very High Speed)
+              Write32(portAdr + 0x0C, ((Read32(portAdr + 0x0C) &amp; ~( 3 &lt;&lt; pos))                    ) );  // GPIOx_PUPDR:   Set I/O to no pull-up/pull-down
+            </block>
+            <control if="pin &lt;  8">
+              <block>
+                pos = ((pin    ) &amp; 7) * 4;
+                Write32(portAdr + 0x20, ((Read32(portAdr + 0x20) &amp; ~(15 &lt;&lt; pos))                  ) );  // GPIOx_AFRL:    Alternate Function to AF0
+              </block>
+            </control>
+            <control if="pin &gt;= 8">
+              <block>
+                pos = ((pin - 8) &amp; 7) * 4;
+                Write32(portAdr + 0x24, ((Read32(portAdr + 0x24) &amp; ~(15 &lt;&lt; pos))                  ) );  // GPIOx_AFRH:    Alternate Function to AF0
+              </block>
+            </control>
+          </control>
+
+          <control if="width &gt;= 2" info="TPIU port width 2">
+            <!-- configure TRACED1 -->
+            <block info="configure TRACED1">
+              pin     =                (TraceD1_Pin            ) &amp; 0x0000FFFF;
+              port    =                (TraceD1_Pin &gt;&gt; 16) &amp; 0x0000FFFF;
+              portAdr = 0x56020000 + (((TraceD1_Pin &gt;&gt; 16) &amp; 0x0000FFFF) * 0x400);
+
+              pos = pin * 2;
+              Write32(0x5602825C,     ((Read32(0x5602825C    )                         ) | (1 &lt;&lt; port)) );  // RCC_AHB4ENR:   IO port clock enable
+              Write32(portAdr + 0x00, ((Read32(portAdr + 0x00) &amp; ~( 3 &lt;&lt; pos)) | (2 &lt;&lt; pos )) );  // GPIOx_MODER:   Set Mode (Alternate Function)
+              Write32(portAdr + 0x08, ((Read32(portAdr + 0x08)                         ) | (3 &lt;&lt; pos )) );  // GPIOx_OSPEEDR: Set Speed (Very High Speed)
+              Write32(portAdr + 0x0C, ((Read32(portAdr + 0x0C) &amp; ~( 3 &lt;&lt; pos))                    ) );  // GPIOx_PUPDR:   Set I/O to no pull-up/pull-down
+            </block>
+            <control if="pin &lt;  8">
+              <block>
+                pos = ((pin    ) &amp; 7) * 4;
+                Write32(portAdr + 0x20, ((Read32(portAdr + 0x20) &amp; ~(15 &lt;&lt; pos))                  ) );  // GPIOx_AFRL:    Alternate Function to AF0
+              </block>
+            </control>
+            <control if="pin &gt;= 8">
+              <block>
+                pos = ((pin - 8) &amp; 7) * 4;
+                Write32(portAdr + 0x24, ((Read32(portAdr + 0x24) &amp; ~(15 &lt;&lt; pos))                  ) );  // GPIOx_AFRH:    Alternate Function to AF0
+              </block>
+            </control>
+          </control>
+
+          <control if="width &gt;= 4" info="TPIU port width 4">
+            <!-- configure TRACED2 -->
+            <block info="configure TRACED2">
+              pin     =                (TraceD2_Pin            ) &amp; 0x0000FFFF;
+              port    =                (TraceD2_Pin &gt;&gt; 16) &amp; 0x0000FFFF;
+              portAdr = 0x56020000 + (((TraceD2_Pin &gt;&gt; 16) &amp; 0x0000FFFF) * 0x400);
+
+              pos = pin * 2;
+              Write32(0x5602825C,     ((Read32(0x5602825C    )                         ) | (1 &lt;&lt; port)) );  // RCC_AHB4ENR:   IO port clock enable
+              Write32(portAdr + 0x00, ((Read32(portAdr + 0x00) &amp; ~( 3 &lt;&lt; pos)) | (2 &lt;&lt; pos )) );  // GPIOx_MODER:   Set Mode (Alternate Function)
+              Write32(portAdr + 0x08, ((Read32(portAdr + 0x08)                         ) | (3 &lt;&lt; pos )) );  // GPIOx_OSPEEDR: Set Speed (Very High Speed)
+              Write32(portAdr + 0x0C, ((Read32(portAdr + 0x0C) &amp; ~( 3 &lt;&lt; pos))                    ) );  // GPIOx_PUPDR:   Set I/O to no pull-up/pull-down
+            </block>
+            <control if="pin &lt;  8">
+              <block>
+                pos = ((pin    ) &amp; 7) * 4;
+                Write32(portAdr + 0x20, ((Read32(portAdr + 0x20) &amp; ~(15 &lt;&lt; pos))                  ) );  // GPIOx_AFRL:    Alternate Function to AF0
+              </block>
+            </control>
+            <control if="pin &gt;= 8">
+              <block>
+                pos = ((pin - 8) &amp; 7) * 4;
+                Write32(portAdr + 0x24, ((Read32(portAdr + 0x24) &amp; ~(15 &lt;&lt; pos))                  ) );  // GPIOx_AFRH:    Alternate Function to AF0
+              </block>
+            </control>
+
+            <!-- configure TRACED3 -->
+            <block info="configure TRACED3">
+              pin     =                (TraceD3_Pin            ) &amp; 0x0000FFFF;
+              port    =                (TraceD3_Pin &gt;&gt; 16) &amp; 0x0000FFFF;
+              portAdr = 0x56020000 + (((TraceD3_Pin &gt;&gt; 16) &amp; 0x0000FFFF) * 0x400);
+
+              pos = pin * 2;
+              Write32(0x5602825C,     ((Read32(0x5602825C    )                         ) | (1 &lt;&lt; port)) );  // RCC_AHB4ENR:   IO port clock enable
+              Write32(portAdr + 0x00, ((Read32(portAdr + 0x00) &amp; ~( 3 &lt;&lt; pos)) | (2 &lt;&lt; pos )) );  // GPIOx_MODER:   Set Mode (Alternate Function)
+              Write32(portAdr + 0x08, ((Read32(portAdr + 0x08)                         ) | (3 &lt;&lt; pos )) );  // GPIOx_OSPEEDR: Set Speed (Very High Speed)
+              Write32(portAdr + 0x0C, ((Read32(portAdr + 0x0C) &amp; ~( 3 &lt;&lt; pos))                    ) );  // GPIOx_PUPDR:   Set I/O to no pull-up/pull-down
+            </block>
+            <control if="pin &lt;  8">
+              <block>
+                pos = ((pin    ) &amp; 7) * 4;
+                Write32(portAdr + 0x20, ((Read32(portAdr + 0x20) &amp; ~(15 &lt;&lt; pos))                  ) );  // GPIOx_AFRL:    Alternate Function to AF0
+              </block>
+            </control>
+            <control if="pin &gt;= 8">
+              <block>
+                pos = ((pin - 8) &amp; 7) * 4;
+                Write32(portAdr + 0x24, ((Read32(portAdr + 0x24) &amp; ~(15 &lt;&lt; pos))                  ) );  // GPIOx_AFRH:    Alternate Function to AF0
+              </block>
+            </control>
+          </control>
+        </sequence>
+      </sequences>
+
+      <!-- ************************  Subfamily 'STM32N657'  ************************************ -->
+      <subFamily DsubFamily="STM32N657">
+        <debug __ap="1" svd="CMSIS/SVD/STM32N657.svd"/>
+        <compile define="STM32N657xx"/>
+        <book name="https://www.st.com/resource/en/reference_manual/rm0486-stm32n647657xx-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32N647/657xx Reference Manual"/>
+        <book name="https://www.st.com/resource/en/datasheet/stm32n657a0.pdf" title="STM32N6x5xx STM32N6x7xx Data Sheet"/>
+        <feature type="NPU" n="ST Neural-ART" m="600GOPS"/>
+
+        <!-- BootROM copies the FSBL binary into the internal AXISRAM2 -->
+        <memory name="FSBL_CODE_NS"   access="rwx" start="0x24180400" size="0x0003FC00" alias="FSBL_CODE_S" />
+        <memory name="FSBL_CODE_S"    access="rwx" start="0x34180400" size="0x0003FC00" default="1" init="0" startup="1" />
+        <memory name="FSBL_DATA_NS"   access="rwx" start="0x241C0000" size="0x00040000" alias="FSBL_DATA_S" />
+        <memory name="FSBL_DATA_S"    access="rwx" start="0x341C0000" size="0x00040000" default="1" init="0" />
+
+        <memory name="FLEXRAM_NS"     access="rwx" start="0x24000000" size="0x00064000" default="0" init="0" />
+        <memory name="FLEXRAM_S"      access="rwx" start="0x34000000" size="0x00064000" alias="FLEXRAM_NS" />
+        <memory name="AXISRAM1_NS"    access="rwx" start="0x24064000" size="0x0009C000" default="1" init="0" />
+        <memory name="AXISRAM1_S"     access="rwx" start="0x34064000" size="0x0009C000" alias="AXISRAM1_NS" />
+<!--    <memory name="AXISRAM2_NS"    access="rwx" start="0x24100000" size="0x00100000" default="1" init="0" /> -->
+<!--    <memory name="AXISRAM2_S"     access="rwx" start="0x34100000" size="0x00100000" alias="AXISRAM2_NS" /> -->
+        <memory name="AXISRAM3_NS"    access="rwx" start="0x24200000" size="0x00070000" default="0" init="0" />
+        <memory name="AXISRAM3_S"     access="rwx" start="0x34200000" size="0x00070000" alias="AXISRAM3_NS" />
+        <memory name="AXISRAM4_NS"    access="rwx" start="0x24270000" size="0x00070000" default="0" init="0" />
+        <memory name="AXISRAM4_S"     access="rwx" start="0x34270000" size="0x00070000" alias="AXISRAM4_NS" />
+        <memory name="AXISRAM5_NS"    access="rwx" start="0x242E0000" size="0x00070000" default="0" init="0" />
+        <memory name="AXISRAM5_S"     access="rwx" start="0x342E0000" size="0x00070000" alias="AXISRAM5_NS" />
+        <memory name="AXISRAM6_NS"    access="rwx" start="0x24350000" size="0x00070000" default="0" init="0" />
+        <memory name="AXISRAM6_S"     access="rwx" start="0x34350000" size="0x00070000" alias="AXISRAM6_NS" />
+        <memory name="CACHEAXI_NS"    access="rwx" start="0x243C0000" size="0x00040000" default="1" init="0" />
+        <memory name="CACHEAXI_S"     access="rwx" start="0x343C0000" size="0x00040000" alias="CACHEAXI_NS" />
+        <memory name="VENCRAM_NS"     access="rwx" start="0x24400000" size="0x00020000" default="1" init="0" />
+        <memory name="VENCRAM_S"      access="rwx" start="0x34400000" size="0x00020000" alias="VENCRAM_NS" />
+        <memory name="GFXMMU_SLV_NS"  access="rwx" start="0x25000000" size="0x01000000" default="1" init="0" />
+        <memory name="GFXMMU_SLV_S"   access="rwx" start="0x35000000" size="0x01000000" alias="GFXMMU_SLV_NS" />
+        <memory name="AHBSRAM1_NS"    access="rwx" start="0x28000000" size="0x00004000" default="1" init="0" />
+        <memory name="AHBSRAM1_S"     access="rwx" start="0x38000000" size="0x00004000" alias="AHBSRAM1_NS" />
+        <memory name="AHBSRAM2_NS"    access="rwx" start="0x28004000" size="0x00004000" default="1" init="0" />
+        <memory name="AHBSRAM2_S"     access="rwx" start="0x38004000" size="0x00004000" alias="AHBSRAM2_NS" />
+        <memory name="Backup_SRAM_NS" access="rwx" start="0x2C000000" size="0x00002000" default="1" init="0" />
+        <memory name="Backup_SRAM_S"  access="rwx" start="0x3C000000" size="0x00002000" alias="Backup_SRAM_NS" />
+        <memory name="ITCM_NS"        access="rwx" start="0x00000000" size="0x00040000" default="1" init="0" />
+        <memory name="ITCM_S"         access="rwx" start="0x10000000" size="0x00040000" alias="ITCM_NS" />
+        <memory name="DTCM_NS"        access="rwx" start="0x20000000" size="0x00040000" default="1" init="0" />
+        <memory name="DTCM_S"         access="rwx" start="0x30000000" size="0x00040000" alias="ITCM_NS" />
+
+        <!-- ################################### 0MB ############################################ -->
+        <!-- *************************  Device 'STM32N657X0HxQ'   ***************************** -->
+        <device Dname="STM32N657X0HxQ">
+          <feature type="BGA" n="264"/>
+        </device>
+        <!-- *************************  Device 'STM32N657L0HxQ'   ***************************** -->
+        <device Dname="STM32N657L0HxQ">
+          <feature type="BGA" n="223"/>
+        </device>
+        <!-- *************************  Device 'STM32N657B0HxQ'   ***************************** -->
+        <device Dname="STM32N657B0HxQ">
+          <feature type="BGA" n="198"/>
+        </device>
+        <!-- *************************  Device 'STM32N657I0HxQ'   ***************************** -->
+        <device Dname="STM32N657I0HxQ">
+          <feature type="BGA" n="178"/>
+        </device>
+        <!-- *************************  Device 'STM32N657Z0HxQ'   ***************************** -->
+        <device Dname="STM32N657Z0HxQ">
+          <feature type="BGA" n="142"/>
+        </device>
+        <!-- *************************  Device 'STM32N657A0HxQ'   ***************************** -->
+        <device Dname="STM32N657A0HxQ">
+          <feature type="BGA" n="169"/>
+        </device>
+      </subFamily>
+
+      <!-- ************************  Subfamily 'STM32N647'  ************************************ -->
+      <subFamily DsubFamily="STM32N647">
+        <debug __ap="1" svd="CMSIS/SVD/STM32N647.svd"/>
+        <compile define="STM32N647xx"/>
+        <book name="https://www.st.com/resource/en/reference_manual/rm0486-stm32n647657xx-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32N647/657xx Reference Manual"/>
+        <book name="https://www.st.com/resource/en/datasheet/stm32n657a0.pdf" title="STM32N6x5xx STM32N6x7xx Data Sheet"/>
+        <feature type="NPU" n="ST Neural-ART" m="600GOPS"/>
+
+        <!-- BootROM copies the FSBL binary into the internal AXISRAM2 -->
+        <memory name="FSBL_CODE_NS"   access="rwx" start="0x24180400" size="0x0003FC00" default="1" init="0" startup="1" />
+        <memory name="FSBL_CODE_S"    access="rwx" start="0x34180400" size="0x0003FC00" alias="FSBL_CODE_NS" />
+        <memory name="FSBL_DATA_NS"   access="rwx" start="0x241C0000" size="0x00040000" default="1" init="0" />
+        <memory name="FSBL_DATA_S"    access="rwx" start="0x341C0000" size="0x00040000" alias="FSBL_DATA_NS" />
+
+        <memory name="FLEXRAM_NS"     access="rwx" start="0x24000000" size="0x00064000" default="0" init="0" />
+        <memory name="FLEXRAM_S"      access="rwx" start="0x34000000" size="0x00064000" alias="FLEXRAM_NS" />
+        <memory name="AXISRAM1_NS"    access="rwx" start="0x24064000" size="0x0009C000" default="1" init="0" />
+        <memory name="AXISRAM1_S"     access="rwx" start="0x34064000" size="0x0009C000" alias="AXISRAM1_NS" />
+<!--    <memory name="AXISRAM2_NS"    access="rwx" start="0x24100000" size="0x00100000" default="1" init="0" /> -->
+<!--    <memory name="AXISRAM2_S"     access="rwx" start="0x34100000" size="0x00100000" alias="AXISRAM2_NS" /> -->
+        <memory name="AXISRAM3_NS"    access="rwx" start="0x24200000" size="0x00070000" default="0" init="0" />
+        <memory name="AXISRAM3_S"     access="rwx" start="0x34200000" size="0x00070000" alias="AXISRAM3_NS" />
+        <memory name="AXISRAM4_NS"    access="rwx" start="0x24270000" size="0x00070000" default="0" init="0" />
+        <memory name="AXISRAM4_S"     access="rwx" start="0x34270000" size="0x00070000" alias="AXISRAM4_NS" />
+        <memory name="AXISRAM5_NS"    access="rwx" start="0x242E0000" size="0x00070000" default="0" init="0" />
+        <memory name="AXISRAM5_S"     access="rwx" start="0x342E0000" size="0x00070000" alias="AXISRAM5_NS" />
+        <memory name="AXISRAM6_NS"    access="rwx" start="0x24350000" size="0x00070000" default="0" init="0" />
+        <memory name="AXISRAM6_S"     access="rwx" start="0x34350000" size="0x00070000" alias="AXISRAM6_NS" />
+        <memory name="CACHEAXI_NS"    access="rwx" start="0x243C0000" size="0x00040000" default="1" init="0" />
+        <memory name="CACHEAXI_S"     access="rwx" start="0x343C0000" size="0x00040000" alias="CACHEAXI_NS" />
+        <memory name="VENCRAM_NS"     access="rwx" start="0x24400000" size="0x00020000" default="1" init="0" />
+        <memory name="VENCRAM_S"      access="rwx" start="0x34400000" size="0x00020000" alias="VENCRAM_NS" />
+        <memory name="GFXMMU_SLV_NS"  access="rwx" start="0x25000000" size="0x01000000" default="1" init="0" />
+        <memory name="GFXMMU_SLV_S"   access="rwx" start="0x35000000" size="0x01000000" alias="GFXMMU_SLV_NS" />
+        <memory name="AHBSRAM1_NS"    access="rwx" start="0x28000000" size="0x00004000" default="1" init="0" />
+        <memory name="AHBSRAM1_S"     access="rwx" start="0x38000000" size="0x00004000" alias="AHBSRAM1_NS" />
+        <memory name="AHBSRAM2_NS"    access="rwx" start="0x28004000" size="0x00004000" default="1" init="0" />
+        <memory name="AHBSRAM2_S"     access="rwx" start="0x38004000" size="0x00004000" alias="AHBSRAM2_NS" />
+        <memory name="Backup_SRAM_NS" access="rwx" start="0x2C000000" size="0x00002000" default="1" init="0" />
+        <memory name="Backup_SRAM_S"  access="rwx" start="0x3C000000" size="0x00002000" alias="Backup_SRAM_NS" />
+        <memory name="ITCM_NS"        access="rwx" start="0x00000000" size="0x00040000" default="1" init="0" />
+        <memory name="ITCM_S"         access="rwx" start="0x10000000" size="0x00040000" alias="ITCM_NS" />
+        <memory name="DTCM_NS"        access="rwx" start="0x20000000" size="0x00040000" default="1" init="0" />
+        <memory name="DTCM_S"         access="rwx" start="0x30000000" size="0x00040000" alias="ITCM_NS" />
+
+        <!-- ################################### 0MB ############################################ -->
+        <!-- *************************  Device 'STM32N647X0HxQ'   ***************************** -->
+        <device Dname="STM32N647X0HxQ">
+          <feature type="BGA" n="264"/>
+        </device>
+        <!-- *************************  Device 'STM32N647L0HxQ'   ***************************** -->
+        <device Dname="STM32N647L0HxQ">
+          <feature type="BGA" n="223"/>
+        </device>
+        <!-- *************************  Device 'STM32N647B0HxQ'   ***************************** -->
+        <device Dname="STM32N647B0HxQ">
+          <feature type="BGA" n="198"/>
+        </device>
+        <!-- *************************  Device 'STM32N647I0HxQ'   ***************************** -->
+        <device Dname="STM32N647I0HxQ">
+          <feature type="BGA" n="178"/>
+        </device>
+        <!-- *************************  Device 'STM32N647Z0HxQ'   ***************************** -->
+        <device Dname="STM32N647Z0HxQ">
+          <feature type="BGA" n="142"/>
+        </device>
+        <!-- *************************  Device 'STM32N647A0HxQ'   ***************************** -->
+        <device Dname="STM32N647A0HxQ">
+          <feature type="BGA" n="169"/>
+        </device>
+      </subFamily>
+
+      <!-- ************************  Subfamily 'STM32N645'  ************************************ -->
+      <subFamily DsubFamily="STM32N645">
+        <debug __ap="1" svd="CMSIS/SVD/STM32N645.svd"/>
+        <compile define="STM32N645xx"/>
+        <book name="https://www.st.com/resource/en/reference_manual/rm0486-stm32n647657xx-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32N647/657xx Reference Manual"/>
+        <book name="https://www.st.com/resource/en/datasheet/stm32n657a0.pdf" title="STM32N6x5xx STM32N6x7xx Data Sheet"/>
+
+        <!-- BootROM copies the FSBL binary into the internal AXISRAM2 -->
+        <memory name="FSBL_CODE_NS"   access="rwx" start="0x24180400" size="0x0003FC00" default="1" init="0" startup="1" />
+        <memory name="FSBL_CODE_S"    access="rwx" start="0x34180400" size="0x0003FC00" alias="FSBL_CODE_NS" />
+        <memory name="FSBL_DATA_NS"   access="rwx" start="0x241C0000" size="0x00040000" default="1" init="0" />
+        <memory name="FSBL_DATA_N"    access="rwx" start="0x341C0000" size="0x00040000" alias="FSBL_DATA_NS" />
+
+        <memory name="FLEXRAM_NS"     access="rwx" start="0x24000000" size="0x00064000" default="0" init="0" />
+        <memory name="FLEXRAM_S"      access="rwx" start="0x34000000" size="0x00064000" alias="FLEXRAM_NS" />
+        <memory name="AXISRAM1_NS"    access="rwx" start="0x24064000" size="0x0009C000" default="1" init="0" />
+        <memory name="AXISRAM1_S"     access="rwx" start="0x34064000" size="0x0009C000" alias="AXISRAM1_NS" />
+<!--    <memory name="AXISRAM2_NS"    access="rwx" start="0x24100000" size="0x00100000" default="1" init="0" /> -->
+<!--    <memory name="AXISRAM2_S"     access="rwx" start="0x34100000" size="0x00100000" alias="AXISRAM2_NS" /> -->
+        <memory name="AXISRAM3_NS"    access="rwx" start="0x24200000" size="0x00070000" default="0" init="0" />
+        <memory name="AXISRAM3_S"     access="rwx" start="0x34200000" size="0x00070000" alias="AXISRAM3_NS" />
+        <memory name="AXISRAM4_NS"    access="rwx" start="0x24270000" size="0x00070000" default="0" init="0" />
+        <memory name="AXISRAM4_S"     access="rwx" start="0x34270000" size="0x00070000" alias="AXISRAM4_NS" />
+        <memory name="AXISRAM5_NS"    access="rwx" start="0x242E0000" size="0x00070000" default="0" init="0" />
+        <memory name="AXISRAM5_S"     access="rwx" start="0x342E0000" size="0x00070000" alias="AXISRAM5_NS" />
+        <memory name="AXISRAM6_NS"    access="rwx" start="0x24350000" size="0x00070000" default="0" init="0" />
+        <memory name="AXISRAM6_S"     access="rwx" start="0x34350000" size="0x00070000" alias="AXISRAM6_NS" />
+        <memory name="VENCRAM_NS"     access="rwx" start="0x24400000" size="0x00020000" default="1" init="0" />
+        <memory name="VENCRAM_S"      access="rwx" start="0x34400000" size="0x00020000" alias="VENCRAM_NS" />
+        <memory name="GFXMMU_SLV_NS"  access="rwx" start="0x25000000" size="0x01000000" default="1" init="0" />
+        <memory name="GFXMMU_SLV_S"   access="rwx" start="0x35000000" size="0x01000000" alias="GFXMMU_SLV_NS" />
+        <memory name="AHBSRAM1_NS"    access="rwx" start="0x28000000" size="0x00004000" default="1" init="0" />
+        <memory name="AHBSRAM1_S"     access="rwx" start="0x38000000" size="0x00004000" alias="AHBSRAM1_NS" />
+        <memory name="AHBSRAM2_NS"    access="rwx" start="0x28004000" size="0x00004000" default="1" init="0" />
+        <memory name="AHBSRAM2_S"     access="rwx" start="0x38004000" size="0x00004000" alias="AHBSRAM2_NS" />
+        <memory name="Backup_SRAM_NS" access="rwx" start="0x2C000000" size="0x00002000" default="1" init="0" />
+        <memory name="Backup_SRAM_S"  access="rwx" start="0x3C000000" size="0x00002000" alias="Backup_SRAM_NS" />
+        <memory name="ITCM_NS"        access="rwx" start="0x00000000" size="0x00040000" default="1" init="0" />
+        <memory name="ITCM_S"         access="rwx" start="0x10000000" size="0x00040000" alias="ITCM_NS" />
+        <memory name="DTCM_NS"        access="rwx" start="0x20000000" size="0x00040000" default="1" init="0" />
+        <memory name="DTCM_S"         access="rwx" start="0x30000000" size="0x00040000" alias="ITCM_NS" />
+
+        <!-- ################################### 0MB ############################################ -->
+        <!-- *************************  Device 'STM32N645X0HxQ'   ***************************** -->
+        <device Dname="STM32N645X0HxQ">
+          <feature type="BGA" n="264"/>
+        </device>
+        <!-- *************************  Device 'STM32N645L0HxQ'   ***************************** -->
+        <device Dname="STM32N645L0HxQ">
+          <feature type="BGA" n="223"/>
+        </device>
+        <!-- *************************  Device 'STM32N645B0HxQ'   ***************************** -->
+        <device Dname="STM32N645B0HxQ">
+          <feature type="BGA" n="198"/>
+        </device>
+        <!-- *************************  Device 'STM32N645I0HxQ'   ***************************** -->
+        <device Dname="STM32N645I0HxQ">
+          <feature type="BGA" n="178"/>
+        </device>
+        <!-- *************************  Device 'STM32N645Z0HxQ'   ***************************** -->
+        <device Dname="STM32N645Z0HxQ">
+          <feature type="BGA" n="142"/>
+        </device>
+        <!-- *************************  Device 'STM32N645A0HxQ'   ***************************** -->
+        <device Dname="STM32N645A0HxQ">
+          <feature type="BGA" n="169"/>
+        </device>
+      </subFamily>
+
+      <!-- ************************  Subfamily 'STM32N655'  ************************************ -->
+      <subFamily DsubFamily="STM32N655">
+        <debug __ap="1" svd="CMSIS/SVD/STM32N655.svd"/>
+        <compile define="STM32N655xx"/>
+        <book name="https://www.st.com/resource/en/reference_manual/rm0486-stm32n647657xx-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32N647/657xx Reference Manual"/>
+        <book name="https://www.st.com/resource/en/datasheet/stm32n657a0.pdf" title="STM32N6x5xx STM32N6x7xx Data Sheet"/>
+
+        <!-- BootROM copies the FSBL binary into the internal AXISRAM2 -->
+        <memory name="FSBL_CODE_NS"   access="rwx" start="0x24180400" size="0x0003FC00" default="1" init="0" startup="1" />
+        <memory name="FSBL_CODE_S"    access="rwx" start="0x34180400" size="0x0003FC00" alias="FSBL_CODE_NS" />
+        <memory name="FSBL_DATA_NS"   access="rwx" start="0x241C0000" size="0x00040000" default="1" init="0" />
+        <memory name="FSBL_DATA_N"    access="rwx" start="0x341C0000" size="0x00040000" alias="FSBL_DATA_NS" />
+
+        <memory name="FLEXRAM_NS"     access="rwx" start="0x24000000" size="0x00064000" default="0" init="0" />
+        <memory name="FLEXRAM_S"      access="rwx" start="0x34000000" size="0x00064000" alias="FLEXRAM_NS" />
+        <memory name="AXISRAM1_NS"    access="rwx" start="0x24064000" size="0x0009C000" default="1" init="0" />
+        <memory name="AXISRAM1_S"     access="rwx" start="0x34064000" size="0x0009C000" alias="AXISRAM1_NS" />
+<!--    <memory name="AXISRAM2_NS"    access="rwx" start="0x24100000" size="0x00100000" default="1" init="0" /> -->
+<!--    <memory name="AXISRAM2_S"     access="rwx" start="0x34100000" size="0x00100000" alias="AXISRAM2_NS" /> -->
+        <memory name="AXISRAM3_NS"    access="rwx" start="0x24200000" size="0x00070000" default="0" init="0" />
+        <memory name="AXISRAM3_S"     access="rwx" start="0x34200000" size="0x00070000" alias="AXISRAM3_NS" />
+        <memory name="AXISRAM4_NS"    access="rwx" start="0x24270000" size="0x00070000" default="0" init="0" />
+        <memory name="AXISRAM4_S"     access="rwx" start="0x34270000" size="0x00070000" alias="AXISRAM4_NS" />
+        <memory name="AXISRAM5_NS"    access="rwx" start="0x242E0000" size="0x00070000" default="0" init="0" />
+        <memory name="AXISRAM5_S"     access="rwx" start="0x342E0000" size="0x00070000" alias="AXISRAM5_NS" />
+        <memory name="AXISRAM6_NS"    access="rwx" start="0x24350000" size="0x00070000" default="0" init="0" />
+        <memory name="AXISRAM6_S"     access="rwx" start="0x34350000" size="0x00070000" alias="AXISRAM6_NS" />
+        <memory name="VENCRAM_NS"     access="rwx" start="0x24400000" size="0x00020000" default="1" init="0" />
+        <memory name="VENCRAM_S"      access="rwx" start="0x34400000" size="0x00020000" alias="VENCRAM_NS" />
+        <memory name="GFXMMU_SLV_NS"  access="rwx" start="0x25000000" size="0x01000000" default="1" init="0" />
+        <memory name="GFXMMU_SLV_S"   access="rwx" start="0x35000000" size="0x01000000" alias="GFXMMU_SLV_NS" />
+        <memory name="AHBSRAM1_NS"    access="rwx" start="0x28000000" size="0x00004000" default="1" init="0" />
+        <memory name="AHBSRAM1_S"     access="rwx" start="0x38000000" size="0x00004000" alias="AHBSRAM1_NS" />
+        <memory name="AHBSRAM2_NS"    access="rwx" start="0x28004000" size="0x00004000" default="1" init="0" />
+        <memory name="AHBSRAM2_S"     access="rwx" start="0x38004000" size="0x00004000" alias="AHBSRAM2_NS" />
+        <memory name="Backup_SRAM_NS" access="rwx" start="0x2C000000" size="0x00002000" default="1" init="0" />
+        <memory name="Backup_SRAM_S"  access="rwx" start="0x3C000000" size="0x00002000" alias="Backup_SRAM_NS" />
+        <memory name="ITCM_NS"        access="rwx" start="0x00000000" size="0x00040000" default="1" init="0" />
+        <memory name="ITCM_S"         access="rwx" start="0x10000000" size="0x00040000" alias="ITCM_NS" />
+        <memory name="DTCM_NS"        access="rwx" start="0x20000000" size="0x00040000" default="1" init="0" />
+        <memory name="DTCM_S"         access="rwx" start="0x30000000" size="0x00040000" alias="ITCM_NS" />
+
+        <!-- ################################### 0MB ############################################ -->
+        <!-- *************************  Device 'STM32N655X0HxQ'   ***************************** -->
+        <device Dname="STM32N655X0HxQ">
+
+          <feature type="BGA" n="264"/>
+        </device>
+        <!-- *************************  Device 'STM32N655L0HxQ'   ***************************** -->
+        <device Dname="STM32N655L0HxQ">
+          <feature type="BGA" n="223"/>
+        </device>
+        <!-- *************************  Device 'STM32N655B0HxQ'   ***************************** -->
+        <device Dname="STM32N655B0HxQ">
+          <feature type="BGA" n="198"/>
+        </device>
+        <!-- *************************  Device 'STM32N655I0HxQ'   ***************************** -->
+        <device Dname="STM32N655I0HxQ">
+          <feature type="BGA" n="178"/>
+        </device>
+        <!-- *************************  Device 'STM32N655Z0HxQ'   ***************************** -->
+        <device Dname="STM32N655Z0HxQ">
+          <feature type="BGA" n="142"/>
+        </device>
+        <!-- *************************  Device 'STM32N655A0HxQ'   ***************************** -->
+        <device Dname="STM32N655A0HxQ">
+          <feature type="BGA" n="169"/>
+        </device>
+      </subFamily>
+
+    </family>
+
+  </devices>
+
+  <conditions>
+    <!-- Device Conditions -->
+    <condition id="STM32N6">
+      <description>STMicroelectronics STM32N6 Series devices</description>
+      <require Dvendor="STMicroelectronics:13" Dname="STM32N6*"/>
+    </condition>
+
+    <!-- Device + CMSIS Conditions -->
+    <condition id="STM32N6 CMSIS">
+      <description>STMicroelectronics STM32N6 Device and CMSIS-CORE</description>
+      <require condition="STM32N6"/>
+      <require Cclass="CMSIS" Cgroup="CORE"/>
+    </condition>
+
+  </conditions>
+
+  <components>
+    <!-- CubeMX Generator -->
+    <component generator="CubeMX" Cclass="Device" Cgroup="CubeMX" Cversion="1.0.0" condition="STM32N6 CMSIS">
+      <description>Configuration via STM32CubeMX</description>
+      <RTE_Components_h>
+        #define RTE_DEVICE_CUBE_MX
+        #define CMSIS_device_header "stm32n6xx.h"
+      </RTE_Components_h>
+      <files>
+        <file category="doc" name="https://open-cmsis-pack.github.io/cmsis-toolbox/CubeMX"/>
+      </files>
+    </component>
+  </components>
+
+  <csolution>
+    <!-- CubeMX Basic CMSIS Solution template -->
+    <template name="FSBL" path="Templates/FSBL" file="CubeMX.csolution.yml" condition="STM32N6">
+      <description>Create a CubeMX basic solution with secure project</description>
+    </template>
+    <!-- CubeMX FSBL_LRUN CMSIS Solution template -->
+    <template name="FSBL_LRUN" path="Templates/FSBL_LRUN" file="CubeMX.csolution.yml" condition="STM32N6">
+      <description>Create a CubeMX FSBL_LRUN solution with secure project</description>
+    </template>
+    <!-- CubeMX FSBL_XIP CMSIS Solution template -->
+    <template name="FSBL_XIP" path="Templates/FSBL_XIP" file="CubeMX.csolution.yml" condition="STM32N6">
+      <description>Create a CubeMX FSBL_XIP solution with secure project</description>
+    </template>
+  </csolution>
+
+</package>

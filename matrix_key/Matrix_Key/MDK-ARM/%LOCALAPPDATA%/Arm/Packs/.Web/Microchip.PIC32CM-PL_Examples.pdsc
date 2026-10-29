@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <package schemaVersion="1.7.37" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+  xs:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.37/schema/PACK.xsd">
+  <vendor>Microchip</vendor>
+  <name>PIC32CM-PL_Examples</name>
+  <description overview="OVERVIEW.md">
+    Examples and BSP for Microchip PIC32CM-PL device family.
+  </description>
+  <url>https://packs.download.microchip.com/</url>
+  <license>LICENSE.txt</license>
+  <licenseSets>
+    <licenseSet id="all" default="true" gating="true">
+      <license name="LICENSE.txt" title="Apache 2.0 License"/>
+    </licenseSet>
+  </licenseSets>
+  <releases>
+    <release version="1.0.3" date="2026-06-23" tag="1.0.3">
+      Updated CMSIS-Driver_PIC32CM-PL package dependency
+    </release>
+    <release version="1.0.2" date="2026-06-02" tag="1.0.2">
+      Added OVERVIEW.md file
+    </release>
+    <release version="1.0.1" date="2026-06-01" tag="1.0.1" deprecated="2026-06-02">
+      Initial release of PIC32CM-PL Examples pack.
+    </release>
+  </releases>
+  <keywords>
+    <keyword>Microchip</keyword>
+    <keyword>CMSIS</keyword>
+    <keyword>PIC32CM-PL</keyword>
+    <keyword>Examples</keyword>
+  </keywords>
+  <requirements>
+    <packages>
+      <package vendor="ARM" name="CMSIS" version="6.2.0-0"/>
+      <package vendor="Microchip" name="PIC32CM-PL_DFP"/>
+      <package vendor="Microchip" name="CMSIS-Driver_PIC32CM-PL" version="1.3.4:2.0.0-0"/>
+    </packages>
+  </requirements>
+  <boards>
+    <board vendor="Microchip" name="PIC32CM6408PL10048-CNANO" revision="Rev 1" salesContact="https://www.microchip.com/en-us/about/contact-us.html" orderForm="https://www.microchip.com/en-us/development-tool/ev10p22a.html">
+      <description>Microchip Curiosity Nano Board for PIC32CM6408PL10048</description>
+      <image small="Images/PIC32CM-PL10-CNANO-small.png" large="Images/PIC32CM-PL10-CNANO-large.png" bottom="Images/PIC32CM-PL10-CNANO-bottom.png" public="true"/>
+      <book category="overview" name="https://www.microchip.com/en-us/development-tool/ev10p22a.html" title="PIC32CM PL10 Curiosity Nano board"/>
+      <book category="manual" name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/UserGuides/PIC32CM-PL10-UserGuide-DS50004003.pdf" title="User Manual" public="true"/>
+      <book category="manual" name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/BoardDesignFiles/Curiosity-Nano-Explorer-Pinouts.pdf" title="Curiosity Nano Pinout" public="true"/>
+      <book category="schematic" name="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/BoardDesignFiles/PIC32CM-PL10-Curiosity-Nano-Schematics.pdf" title="Curiosity Nano Schematics" public="true"/>
+      <mountedDevice deviceIndex="0" Dvendor="Microchip:3" Dname="PIC32CM6408PL10048"/>
+      <compatibleDevice deviceIndex="0" Dvendor="Microchip:3" Dname="PIC32CM6408PL10048"/>
+    </board>
+  </boards>
+  <examples>
+    <example name="CNANO MCHP Driver Example" folder="Examples/CNANO_MCHP_Driver_Example" doc="README.md">
+      <description>CNANO MCHP Driver Example</description>
+      <board name="PIC32CM6408PL10048-CNANO" vendor="Microchip"/>
+      <project>
+        <environment name="csolution" load="CNANO_MCHP_Driver_Example.csolution.yml"/>
+        <environment name="iar" load="IAR/CNANO_MCHP_Driver_Example.ewp"/>
+        <environment name="uv" load="Keil/CNANO_MCHP_Driver_Example.uvprojx"/>
+      </project>
+    </example>
+    <example name="CNANO MCHP Blinky Example" folder="Examples/CNANO_MCHP_Blinky_Example" doc="README.md">
+      <description>CNANO MCHP Blinky Example</description>
+      <board name="PIC32CM6408PL10048-CNANO" vendor="Microchip"/>
+      <project>
+        <environment name="csolution" load="CNANO_MCHP_Blinky_Example.csolution.yml"/>
+        <environment name="iar" load="IAR/CNANO_MCHP_Blinky_Example.ewp"/>
+        <environment name="uv" load="Keil/CNANO_MCHP_Blinky_Example.uvprojx"/>
+      </project>
+    </example>
+    <example name="CNANO MCHP FreeRTOS Example" folder="Examples/CNANO_MCHP_FreeRTOS_Example" doc="README.md">
+      <description>CNANO MCHP FreeRTOS Example</description>
+      <board name="PIC32CM6408PL10048-CNANO" vendor="Microchip"/>
+      <project>
+        <environment name="csolution" load="CNANO_MCHP_FreeRTOS_Example.csolution.yml"/>
+        <environment name="iar" load="IAR/CNANO_MCHP_FreeRTOS_Example.ewp"/>
+        <environment name="uv" load="Keil/CNANO_MCHP_FreeRTOS_Example.uvprojx"/>
+      </project>
+    </example>
+    <example name="CNANO MCHP RTX RTOS Example" folder="Examples/CNANO_MCHP_RTX_RTOS_Example" doc="README.md">
+      <description>CNANO MCHP RTX RTOS Example</description>
+      <board name="PIC32CM6408PL10048-CNANO" vendor="Microchip"/>
+      <project>
+        <environment name="csolution" load="CNANO_MCHP_RTX_RTOS_Example.csolution.yml"/>
+        <environment name="iar" load="IAR/CNANO_MCHP_RTX_RTOS_Example.ewp"/>
+        <environment name="uv" load="Keil/CNANO_MCHP_RTX_RTOS_Example.uvprojx"/>
+      </project>
+    </example>
+    <example name="CNANO Explorer ADC ProxLight Example" folder="Examples/CNANO_Explorer_ADC_ProxLight_Example" doc="README.md">
+      <description>NANO Explorer ADC ProxLight Example</description>
+      <board name="PIC32CM6408PL10048-CNANO" vendor="Microchip"/>
+      <project>
+        <environment name="csolution" load="CNANO_Explorer_ADC_ProxLight_Example.csolution.yml"/>
+        <environment name="iar" load="IAR/CNANO_Explorer_ADC_ProxLight_Example.ewp"/>
+        <environment name="uv" load="Keil/CNANO_Explorer_ADC_ProxLight_Example.uvprojx"/>
+      </project>
+    </example>
+  </examples>
+
+  <components>
+
+  </components>
+</package>

@@ -1,0 +1,25 @@
+--cpu=Cortex-M4.fp.sp
+"matrix_key\startup_stm32f407xx.o"
+"matrix_key\main.o"
+"matrix_key\gpio.o"
+"matrix_key\stm32f4xx_it.o"
+"matrix_key\stm32f4xx_hal_msp.o"
+"matrix_key\key.o"
+"matrix_key\stm32f4xx_hal_rcc.o"
+"matrix_key\stm32f4xx_hal_rcc_ex.o"
+"matrix_key\stm32f4xx_hal_flash.o"
+"matrix_key\stm32f4xx_hal_flash_ex.o"
+"matrix_key\stm32f4xx_hal_flash_ramfunc.o"
+"matrix_key\stm32f4xx_hal_gpio.o"
+"matrix_key\stm32f4xx_hal_dma_ex.o"
+"matrix_key\stm32f4xx_hal_dma.o"
+"matrix_key\stm32f4xx_hal_pwr.o"
+"matrix_key\stm32f4xx_hal_pwr_ex.o"
+"matrix_key\stm32f4xx_hal_cortex.o"
+"matrix_key\stm32f4xx_hal.o"
+"matrix_key\stm32f4xx_hal_exti.o"
+"matrix_key\system_stm32f4xx.o"
+--strict --scatter "Matrix_Key\Matrix_Key.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "Matrix_Key.map" -o Matrix_Key\Matrix_Key.axf

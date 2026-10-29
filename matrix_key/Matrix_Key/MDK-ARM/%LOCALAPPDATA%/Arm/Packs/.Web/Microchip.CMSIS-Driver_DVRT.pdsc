@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <package schemaVersion="1.7.37" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+  xs:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.37/schema/PACK.xsd">
+  <vendor>Microchip</vendor>
+  <name>CMSIS-Driver_DVRT</name>
+  <description overview="OVERVIEW.md">
+    Data Visualizer Run Time (DVRT) Middleware for CMSIS
+  </description>
+  <url>https://packs.download.microchip.com/</url>
+  <license>LICENSE.txt</license>
+  <licenseSets>
+    <licenseSet id="all" default="true" gating="true">
+      <license name="LICENSE.txt" title="Apache 2.0 License"/>
+    </licenseSet>
+  </licenseSets>
+  <releases>
+    <release version="1.0.4" date="2026-06-17" tag="1.0.4">
+      Updated OVERVIEW.md file
+    </release>
+    <release version="1.0.2" date="2026-06-02" tag="1.0.2">
+      Added OVERVIEW.md file
+    </release>
+    <release version="1.0.1" date="2026-06-01" tag="1.0.1">
+      Initial release of DVRT middleware for CMSIS.
+      Features:
+      - Bidirectional variable streaming with MPLAB Data Visualizer
+      - CMSIS-Driver USART interface (interrupt-driven ring buffer RX)
+      - Periodic processing via DVRT_Process() (SysTick or main loop)
+      - Runtime monitoring of volatile global variables
+    </release>
+  </releases>
+  <keywords>
+    <keyword>Microchip</keyword>
+    <keyword>DVRT</keyword>
+    <keyword>Data Visualizer</keyword>
+    <keyword>CMSIS</keyword>
+    <keyword>MCHP-PLIB</keyword>
+    <keyword>Middleware</keyword>
+  </keywords>
+  <taxonomy>
+    <description Cclass="Middleware">
+      Middleware components for CMSIS applications
+    </description>
+  </taxonomy>
+  <conditions>
+    <condition id="DVRT Requirements">
+      <description>Requirements for DVRT Middleware</description>
+      <require Cclass="CMSIS" Cgroup="CORE"/>
+    </condition>
+  </conditions>
+  <requirements>
+    <packages>
+      <package vendor="ARM" name="CMSIS" version="6.2.0-0"/>
+      <package vendor="Microchip" name="PIC32CM-PL_DFP"/>
+      <package vendor="Microchip" name="CMSIS-Driver_PIC32CM-PL" version="1.3.1:1.999.999-0"/>
+    </packages>
+  </requirements>
+  <examples>
+    <example name="CNANO MCHP Driver DVRT Example" folder="Examples/examples_gsp_dvrt" doc="README.md">
+      <description>CNANO MCHP Driver DVRT Example</description>
+      <board name="PIC32CM6408PL10048-CNANO" vendor="Microchip"/>
+      <project>
+        <environment name="csolution" load="CNANO_MCHP_Driver_DVRT_Example.csolution.yml"/>
+      </project>
+    </example>
+  </examples>
+
+  <components>
+
+      <component Cvendor="Microchip" Cclass="Middleware" Cgroup="DVRT" Csub="Core" Cversion="0.0.8" condition="DVRT Requirements">
+        <description>Data Visualizer Run Time (DVRT) Core Middleware</description>
+        <RTE_Components_h>
+          #define RTE_Middleware_DVRT              /* DVRT Middleware */
+        </RTE_Components_h>
+        <files>
+          <file category="doc" name="Documentation/html/group__dvrt__interface__gr.html" />
+          <file category="header" name="middleware/Include/dvrt.h" />
+          <file category="header" name="middleware/Include/dvrt_local.h" />
+          <file category="header" name="middleware/Include/dvrt_usart_driver.h" />
+          <file category="source" name="middleware/Source/dvrt_usart_adapter.c" />
+          <file category="source" name="middleware/Source/dvrt.c" />
+          <file category="source" name="middleware/Template/configure_dvrt.c" attr="template" select="DVRT Example Template" />
+        </files>
+      </component>
+  </components>
+</package>

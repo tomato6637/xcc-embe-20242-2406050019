@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd" schemaVersion="1.4">
+  <name>HVP-MCXA346_BSP</name>
+  <vendor>NXP</vendor>
+  <description>Board Support Pack for HVP-MCXA346</description>
+  <url>https://mcuxpresso.nxp.com/cmsis_pack/repo/</url>
+  <license>Licenses.txt</license>
+  <releases>
+    <release version="26.09.00" date="2026-09-29">NXP CMSIS Packs based on MCUXpresso SDK 26.09.00</release>
+  </releases>
+  <keywords>
+    <keyword>Board Support Pack</keyword>
+  </keywords>
+  <requirements>
+    <packages>
+      <package name="MCXA346_DFP" vendor="NXP" version="26.09.00"/>
+      <package name="CMSIS" vendor="ARM" version="6.1.0"/>
+    </packages>
+    <languages>
+      <language name="C" version="99"/>
+    </languages>
+  </requirements>
+  <boards>
+    <board vendor="NXP" name="HVP-MCXA346">
+      <description>HVP-MCXA346</description>
+      <mountedDevice Dname="MCXA346VLL" Dvendor="NXP:11"/>
+      <compatibleDevice Dname="MCXA346VLH" Dvendor="NXP:11"/>
+      <compatibleDevice Dname="MCXA346VLQ" Dvendor="NXP:11"/>
+      <compatibleDevice Dname="MCXA346VPN" Dvendor="NXP:11"/>
+    </board>
+  </boards>
+  <conditions>
+    <condition id="device_id.MCXA346.internal_condition">
+      <accept Dname="MCXA346VLH" Dvendor="NXP:11"/>
+      <accept Dname="MCXA346VLL" Dvendor="NXP:11"/>
+      <accept Dname="MCXA346VLQ" Dvendor="NXP:11"/>
+      <accept Dname="MCXA346VPN" Dvendor="NXP:11"/>
+    </condition>
+    <condition id="device.MCXA346.internal_condition">
+      <accept Dname="MCXA346VLH" Dvendor="NXP:11"/>
+      <accept Dname="MCXA346VLL" Dvendor="NXP:11"/>
+      <accept Dname="MCXA346VLQ" Dvendor="NXP:11"/>
+      <accept Dname="MCXA346VPN" Dvendor="NXP:11"/>
+    </condition>
+    <condition id="board.project_template.condition_id">
+      <require condition="allOf.component.lpuart_adapter, driver.lpuart, driver.gpio, driver.reset, driver.clock, driver.mcx_spc, driver.port, device_id=MCXA346, device.startup, board=hvpmcxa346, anyOf=allOf=component.serial_manager, component.serial_manager_uart, utility.assert, utility.debug_console, utility.debug_console_template_config, allOf=utility.assert_lite, utility.debug_console_lite.internal_condition"/>
+    </condition>
+    <condition id="allOf.component.lpuart_adapter, driver.lpuart, driver.gpio, driver.reset, driver.clock, driver.mcx_spc, driver.port, device_id=MCXA346, device.startup, board=hvpmcxa346, anyOf=allOf=component.serial_manager, component.serial_manager_uart, utility.assert, utility.debug_console, utility.debug_console_template_config, allOf=utility.assert_lite, utility.debug_console_lite.internal_condition">
+      <require Cclass="Device" Cgroup="SDK Drivers" Csub="lpuart_adapter"/>
+      <require Cclass="Device" Cgroup="SDK Drivers" Csub="lpuart"/>
+      <require Cclass="Device" Cgroup="SDK Drivers" Csub="gpio"/>
+      <require Cclass="Device" Cgroup="SDK Drivers" Csub="reset"/>
+      <require Cclass="Device" Cgroup="SDK Drivers" Csub="clock"/>
+      <require Cclass="Device" Cgroup="SDK Drivers" Csub="mcx_spc"/>
+      <require Cclass="Device" Cgroup="SDK Drivers" Csub="port"/>
+      <require condition="device_id.MCXA346.internal_condition"/>
+      <require Cclass="Device" Cgroup="Startup" Csub=""/>
+      <require condition="board.hvpmcxa346.internal_condition"/>
+      <require condition="anyOf.allOf=component.serial_manager, component.serial_manager_uart, utility.assert, utility.debug_console, utility.debug_console_template_config, allOf=utility.assert_lite, utility.debug_console_lite.internal_condition"/>
+    </condition>
+    <condition id="board.hvpmcxa346.internal_condition">
+      <accept condition="device.MCXA346.internal_condition"/>
+    </condition>
+    <condition id="anyOf.allOf=component.serial_manager, component.serial_manager_uart, utility.assert, utility.debug_console, utility.debug_console_template_config, allOf=utility.assert_lite, utility.debug_console_lite.internal_condition">
+      <accept condition="allOf.component.serial_manager, component.serial_manager_uart, utility.assert, utility.debug_console, utility.debug_console_template_config.internal_condition"/>
+      <accept condition="allOf.utility.assert_lite, utility.debug_console_lite.internal_condition"/>
+    </condition>
+    <condition id="allOf.component.serial_manager, component.serial_manager_uart, utility.assert, utility.debug_console, utility.debug_console_template_config.internal_condition">
+      <require Cclass="Device" Cgroup="SDK Utilities" Csub="serial_manager"/>
+      <require Cclass="Device" Cgroup="SDK Utilities" Csub="serial_manager_uart"/>
+      <require Cclass="Device" Cgroup="SDK Utilities" Csub="assert"/>
+      <require Cclass="Device" Cgroup="SDK Utilities" Csub="debug_console"/>
+      <require Cclass="Device" Cgroup="SDK Utilities" Csub="debug console template config"/>
+    </condition>
+    <condition id="allOf.utility.assert_lite, utility.debug_console_lite.internal_condition">
+      <require Cclass="Device" Cgroup="SDK Utilities" Csub="assert_lite"/>
+      <require Cclass="Device" Cgroup="SDK Utilities" Csub="debug_console_lite"/>
+    </condition>
+  </conditions>
+  <examples>
+    <example name="hello_world" folder="boards/hvpmcxa346/demo_apps/hello_world" doc="readme.md">
+      <description>The HelloWorld demo prints the "Hello World" string to the terminal using the SDK UART drivers and repeat what user input. The purpose of this demo is to show how to use the UART, and to provide a simple project for debugging and further development.</description>
+      <board name="HVP-MCXA346" vendor="NXP" Dvendor="NXP:11"/>
+      <project>
+        <environment name="uv" load="mdk/hello_world.uvprojx"/>
+        <environment name="iar" load="iar/hello_world.ewp"/>
+      </project>
+      <attributes/>
+    </example>
+  </examples>
+  <components>
+    <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="hvpmcxa346" Cversion="1.0.0" condition="board.project_template.condition_id">
+      <description>Board_project_template hvpmcxa346</description>
+      <files>
+        <file category="header" name="boards/hvpmcxa346/project_template/board.h" projectpath="board"/>
+        <file category="sourceC" name="boards/hvpmcxa346/project_template/board.c" projectpath="board"/>
+        <file category="include" name="boards/hvpmcxa346/project_template/"/>
+      </files>
+    </component>
+  </components>
+</package>

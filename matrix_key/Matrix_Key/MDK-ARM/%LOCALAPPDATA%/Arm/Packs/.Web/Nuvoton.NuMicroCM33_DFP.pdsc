@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package schemaVersion="1.2" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd">
+  <vendor>Nuvoton</vendor>
+  <url>https://github.com/OpenNuvoton/cmsis-packs/raw/master/Nuvoton_DFP/</url>
+  <name>NuMicroCM33_DFP</name>
+  <description>Nuvoton ARM Cortex-M NuMicroCM33 Family Device Support</description>
+
+  <releases>
+    <release version="1.0.3" date="2026-10-14">
+      Update CM3031 part no.
+    </release>
+    <release version="1.0.2" date="2026-08-04">
+      Add stddriver files.
+    </release>
+    <release version="1.0.1" date="2026-04-09">
+      Add CM3031 part no.
+    </release>
+    <release version="1.0.0" date="2025-07-15">
+      Initial Version.
+    </release>
+  </releases>
+
+  <keywords>
+    <!-- keywords for indexing -->
+    <keyword>Nuvoton</keyword>
+    <keyword>Device Support</keyword>
+    <keyword>Device Family Package Nuvoton</keyword>
+    <keyword>NuMicroCM33</keyword>
+  </keywords>
+
+  <devices>
+    <!-- generated, do not modify this section! -->
+    <family Dfamily="NuMicro M33 Family" Dvendor="Nuvoton:18">
+      <!-- *************************  Subfamily 'CM3031'  ***************************** -->
+      <subFamily DsubFamily="CM3031">
+        <processor  Dcore="Cortex-M33" Dfpu="SP_FPU" Ddsp="DSP" Dtz="TZ" Dendian="Configurable" Dclock="180000000"/>
+        <compile    header="Device/CM3031/Include/cm3031.h"/>
+        <description>The NuMicro CM3031 series is a 32-bit microcontroller based on Arm Cortex-M33F core.</description>
+        <!-- *************************  Device 'CM3034HS8AE'  ***************************** -->
+        <device Dname="CM3034HS8AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x80000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>          
+		  <memory     id="IRAM1"    start="0x20000000"  size="0x50000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_512.FLM"        start="0x00000000"  size="0x80000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_512.FLM"          start="0x10000000"  size="0x80000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFP" n="128"/>
+        </device>
+        <!-- *************************  Device 'CM3034HN8AE'  ***************************** -->
+        <device Dname="CM3034HN8AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x80000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x50000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_512.FLM"        start="0x00000000"  size="0x80000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_512.FLM"          start="0x10000000"  size="0x80000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFP" n="64"/>
+        </device>
+        <!-- *************************  Device 'CM3034HL8AE'  ***************************** -->
+        <device Dname="CM3034HL8AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x80000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x50000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_512.FLM"        start="0x00000000"  size="0x80000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_512.FLM"          start="0x10000000"  size="0x80000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFP" n="48"/>
+        </device>
+        <!-- *************************  Device 'CM3034HL3AE'  ***************************** -->
+        <device Dname="CM3034HL3AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x80000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x50000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_512.FLM"        start="0x00000000"  size="0x80000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_512.FLM"          start="0x10000000"  size="0x80000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFN" n="48"/>
+        </device>
+        <!-- *************************  Device 'CM3033HS8AE'  ***************************** -->
+        <device Dname="CM3033HS8AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x80000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x50000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_512.FLM"        start="0x00000000"  size="0x80000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_512.FLM"          start="0x10000000"  size="0x80000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFP" n="128"/>
+        </device>
+        <!-- *************************  Device 'CM3033HN8AE'  ***************************** -->
+        <device Dname="CM3033HN8AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x80000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x50000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_512.FLM"        start="0x00000000"  size="0x80000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_512.FLM"          start="0x10000000"  size="0x80000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFP" n="64"/>
+        </device>
+        <!-- *************************  Device 'CM3033HL8AE'  ***************************** -->
+        <device Dname="CM3033HL8AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x80000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x50000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_512.FLM"        start="0x00000000"  size="0x80000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_512.FLM"          start="0x10000000"  size="0x80000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFP" n="48"/>
+        </device>
+        <!-- *************************  Device 'CM3033HL3AE'  ***************************** -->
+        <device Dname="CM3033HL3AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x80000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x50000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_512.FLM"        start="0x00000000"  size="0x80000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_512.FLM"          start="0x10000000"  size="0x80000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFN" n="48"/>
+        </device>
+        <!-- *************************  Device 'CM3034GN8AE'  ***************************** -->
+        <device Dname="CM3034GN8AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x40000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x18000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_256.FLM"        start="0x00000000"  size="0x40000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_256.FLM"          start="0x10000000"  size="0x40000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFP" n="64"/>
+        </device>
+        <!-- *************************  Device 'CM3034GL3AE'  ***************************** -->
+        <device Dname="CM3034GL3AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x40000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x18000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_256.FLM"        start="0x00000000"  size="0x40000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_256.FLM"          start="0x10000000"  size="0x40000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFN" n="48"/>
+        </device>
+        <!-- *************************  Device 'CM3034GL8AE'  ***************************** -->
+        <device Dname="CM3034GL8AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x40000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x18000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_256.FLM"        start="0x00000000"  size="0x40000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_256.FLM"          start="0x10000000"  size="0x40000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFP" n="48"/>
+        </device>
+        <!-- *************************  Device 'CM3034GJ3AE'  ***************************** -->
+        <device Dname="CM3034GJ3AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x40000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x18000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_256.FLM"        start="0x00000000"  size="0x40000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_256.FLM"          start="0x10000000"  size="0x40000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFN" n="33"/>
+        </device>
+        <!-- *************************  Device 'CM3033GN8AE'  ***************************** -->
+        <device Dname="CM3033GN8AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x40000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x18000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_256.FLM"        start="0x00000000"  size="0x40000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_256.FLM"          start="0x10000000"  size="0x40000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFP" n="64"/>
+        </device>
+        <!-- *************************  Device 'CM3033GL3AE'  ***************************** -->
+        <device Dname="CM3033GL3AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x40000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x18000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_256.FLM"        start="0x00000000"  size="0x40000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_256.FLM"          start="0x10000000"  size="0x40000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFN" n="48"/>
+        </device>
+        <!-- *************************  Device 'CM3033GL8AE'  ***************************** -->
+        <device Dname="CM3033GL8AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x40000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x18000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_256.FLM"        start="0x00000000"  size="0x40000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_256.FLM"          start="0x10000000"  size="0x40000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFP" n="48"/>
+        </device>
+        <!-- *************************  Device 'CM3033GJ3AE'  ***************************** -->
+        <device Dname="CM3033GJ3AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x40000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x18000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_256.FLM"        start="0x00000000"  size="0x40000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_256.FLM"          start="0x10000000"  size="0x40000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFN" n="33"/>
+        </device>
+        <!-- *************************  Device 'CM3033EN8AE'  ***************************** -->
+        <device Dname="CM3033EN8AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x20000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x8000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_128.FLM"        start="0x00000000"  size="0x20000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_128.FLM"          start="0x10000000"  size="0x20000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFP" n="64"/>
+        </device>
+        <!-- *************************  Device 'CM3033EL8AE'  ***************************** -->
+        <device Dname="CM3033EL8AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x20000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x8000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_128.FLM"        start="0x00000000"  size="0x20000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_128.FLM"          start="0x10000000"  size="0x20000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFP" n="48"/>
+        </device>
+        <!-- *************************  Device 'CM3033EL3AE'  ***************************** -->
+        <device Dname="CM3033EL3AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x20000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x8000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_128.FLM"        start="0x00000000"  size="0x20000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_128.FLM"          start="0x10000000"  size="0x20000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFN" n="48"/>
+        </device>
+        <!-- *************************  Device 'CM3033EJ3AE'  ***************************** -->
+        <device Dname="CM3033EJ3AE">
+          <debug      svd="SVD/Nuvoton/CM3031.svd"/>
+          <memory     id="IROM1"    start="0x00000000"  size="0x20000"     startup="1"   default="1"/>
+          <memory     id="IROM2"    start="0x0F100000"  size="0x2000"     startup="0"   default="0"/>
+          <memory     id="IRAM1"    start="0x20000000"  size="0x8000"     init="0"   default="1"/>
+          <algorithm  name  ="Flash/CM3031_AP_128.FLM"        start="0x00000000"  size="0x20000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_LD_8.FLM"        start="0x0F100000"  size="0x2000"  RAMstart="0x20000000"  RAMsize="0x4000"  default="1"/>
+          <algorithm  name  ="Flash/CM3031_NS_128.FLM"          start="0x10000000"  size="0x20000"  RAMstart="0x30000000"  RAMsize="0x4000"  default="1"/>
+          <feature type="QFN" n="33"/>
+        </device>
+      </subFamily>
+    </family>
+  </devices>
+
+  <conditions>
+    <!-- conditions are dependecy rules that can apply to a component or an individual file -->
+    <condition id="Compiler ARM">
+      <!-- conditions selecting ARM Compiler -->
+      <require Tcompiler="ARMCC"/>
+    </condition>
+
+    <condition id="M33NuMicro CM3031 Device">
+      <description>Nuvoton M33NuMicro CM3031 Series devices</description>
+      <accept Dvendor="Nuvoton:18"  Dname="CM303[34][EGH][SNLJ][38]AE"/>
+    </condition>
+  </conditions>
+
+  <components>
+    <!-- *************************  Startup file  ***************************** -->
+    <component Cclass="Device" Cgroup="Startup" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <!-- Cversion is necessary -->
+      <description>System Startup for Nuvoton CM3031 Series</description>
+      <RTE_Components_h>
+        <!-- the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+      <files>
+        <!-- header path -->
+        <file category="include" name="Device/CM3031/StdDriver/inc/"/>
+        <file category="include" name="Device/CM3031/Include/"/>
+        <file category="header"  name="Device/CM3031/Include/cm3031.h"/>
+        <file category="header"  name="Device/CM3031/Include/NuMicro.h"/>
+        <file category="header"  name="Device/CM3031/Include/system_cm3031.h"/>
+        <!-- startup/system files -->
+        <file category="source"  name="Device/CM3031/Source/startup_cm3031.c" attr="config" version="0.00.001"/>
+        <file category="source"  name="Device/CM3031/Source/system_cm3031.c" attr="config" version="0.00.001"/>
+        <!-- retarget files -->
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/retarget.c" attr="config" version="0.00.001"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="ACMP" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>ACMP driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/acmp.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/acmp.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="BPWM" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>BPWM driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/bpwm.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/bpwm.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="CANFD" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>CANFD driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/canfd.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/canfd.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="CLK" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>CLK driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/clk.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/clk.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="CRC" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>CRC driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/crc.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/crc.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="EADC" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>EADC driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/eadc.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/eadc.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="EBI" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>EBI driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/ebi.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/ebi.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="ECAP" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>ECAP driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/ecap.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/ecap.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="ELLSI" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>ELLSI driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/ellsi.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/ellsi.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="EPWM" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>EPWM driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/epwm.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/epwm.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="EQEI" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>EQEI driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/eqei.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/eqei.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="FMC" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>FMC driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/fmc.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/fmc.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="GPIO" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>GPIO driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/gpio.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/gpio.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="HSUSBD" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>HSUSBD driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/hsusbd.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/hsusbd.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="I2C" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>I2C driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/i2c.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/i2c.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="I2S" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>I2S driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/i2s.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/i2s.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="I3C" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>I3C driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/i3c.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/i3c.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="LLSI" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>LLSI driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/llsi.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/llsi.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="PDCI" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>PDCI driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/pdci.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/pdci.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="PDMA" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>PDMA driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/pdma.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/pdma.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="QSPI" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>QSPI driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/qspi.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/qspi.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="RTC" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>RTC driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/rtc.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/rtc.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="SDH" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>SDH driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/sdh.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/sdh.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="SPI" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>SPI driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/spi.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/spi.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="SYS" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>SYS driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/sys.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/sys.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="TIMER" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>TIMER driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/timer.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/timer.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="TIMER_PWM" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>TIMER_PWM driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/timer_pwm.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/timer_pwm.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="UART" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>UART driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/uart.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/uart.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="USCI_I2C" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>USCI_I2C driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/usci_i2c.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/usci_i2c.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="USCI_SPI" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>USCI_SPI driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/usci_spi.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/usci_spi.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="USCI_UART" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>USCI_UART driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/usci_uart.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/usci_uart.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="WDT" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>WDT driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/wdt.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/wdt.c"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="StdDriver" Csub="WWDT" Cversion="0.00.001" condition="M33NuMicro CM3031 Device">
+      <description>WWDT driver for Nuvoton CM3031 series</description>
+      <files>
+        <file category="header" name="Device/CM3031/StdDriver/inc/wwdt.h"/>
+        <file category="sourceC" name="Device/CM3031/StdDriver/src/wwdt.c"/>
+      </files>
+    </component>
+  </components>
+</package>

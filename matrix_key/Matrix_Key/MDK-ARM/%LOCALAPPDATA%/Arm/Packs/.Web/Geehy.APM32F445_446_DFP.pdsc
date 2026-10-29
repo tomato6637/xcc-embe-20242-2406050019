@@ -1,0 +1,514 @@
+<?xml version="1.0"?>
+<package xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="file:/C:/Users/apex/AppData/Local/Arm/Packs/ARM/CMSIS/5.8.0/CMSIS/Utilities/PACK.xsd" schemaVersion="1.7.1">
+    <vendor>Geehy</vendor>
+    <name>APM32F445_446_DFP</name>
+    <description>Geehy G32A SDK APM32F445_446 Device Support</description>
+    <url>https://global.geehy.com/uploads/tool/</url>
+    <supportContact>https://global.geehy.com/design/software</supportContact>
+    <releases>
+        <release version="1.0.0" date="2026-01-31">      First Release version of APM32F445_446 Device Family Pack.</release>
+    </releases>
+    <keywords>
+        <!-- keywords for indexing -->
+        <keyword>Geehy</keyword>
+        <keyword>Device Support</keyword>
+        <keyword>Device Family Package</keyword>
+        <keyword>G32A</keyword>
+    </keywords>
+    <requirements>
+        <compilers>
+            <compiler name="ARMCC" version="6.4.0"/>
+            <compiler name="GCC" version="9.0.0"/>
+        </compilers>
+        <languages>
+            <language name="C" version="99"/>
+        </languages>
+    </requirements>
+    <devices>
+        <family Dfamily="APM32F445_446 Series" Dvendor="Geehy:163">
+            <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="FPU" Dmpu="NO_MPU" Dendian="Little-endian"/>
+            <description>
+                The Geehy G32A product series of 32-bit automotive microcontrollers provides a highly integrated, low-power, safe and secure single-chip solution.
+                The combination of fast CPU with configurable low-power modes and the low-leakage technology process will not force any compromises on performance relative to low-power.
+                The ARM Cortex M4 core architecture includes an IEEE-754 compliant single precision Floating Point Unit (FPU) with DSP functions unleashing the full potential of model-based design flows.
+            </description>
+            <!-- ******************************  Subfamily 'APM32F445'  ****************************** -->
+            <subFamily DsubFamily="APM32F445">
+                <debug svd="SVD/APM32F445.svd"/>
+                <!-- ******************************  Device 'G32A14xx'  ****************************** -->
+                <!-- *********************** -->
+                <!--112MHz LQFP100-->
+                <device Dname="APM32F445CET7">
+                    <processor Dclock="112000000"/>
+                    <memory id="IROM1" start="0x00000000" size="0x00080000" default="1" startup="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00007000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x1FFF8000" size="0x00008000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F445_P512_8KB_SEC.FLM" start="0x00000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F445_446_SRAM.FLM" start="0x1FFF8000" size="0x00010000"/>
+                    <feature type="QFP" n="48"/>
+                </device>
+                <device Dname="APM32F445CCT7">
+                    <processor Dclock="112000000"/>
+                    <memory id="IROM1" start="0x00000000" size="0x00040000" default="1" startup="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00007000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x1FFF8000" size="0x00008000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F445_P256_8KB_SEC.FLM" start="0x00000000" size="0x00040000" default="1"/>
+                    <algorithm name="Flash/APM32F445_446_SRAM.FLM" start="0x1FFF8000" size="0x00008000"/>
+                    <feature type="QFP" n="48"/>
+                </device>
+                <device Dname="APM32F445RET7">
+                    <processor Dclock="112000000"/>
+                    <memory id="IROM1" start="0x00000000" size="0x00080000" default="1" startup="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00007000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x1FFF8000" size="0x00008000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F445_P512_8KB_SEC.FLM" start="0x00000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F445_446_SRAM.FLM" start="0x1FFF8000" size="0x00008000"/>
+                    <feature type="QFP" n="64"/>
+                </device>
+                <device Dname="APM32F445RCT7">
+                    <processor Dclock="112000000"/>
+                    <memory id="IROM1" start="0x00000000" size="0x00040000" default="1" startup="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00007000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x1FFF8000" size="0x00008000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F445_P256_8KB_SEC.FLM" start="0x00000000" size="0x00040000" default="1"/>
+                    <algorithm name="Flash/APM32F445_446_SRAM.FLM" start="0x1FFF8000" size="0x00008000"/>
+                    <feature type="QFP" n="64"/>
+                </device>
+                <device Dname="APM32F445VET7">
+                    <processor Dclock="112000000"/>
+                    <memory id="IROM1" start="0x00000000" size="0x00080000" default="1" startup="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00007000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x1FFF8000" size="0x00008000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F445_P512_8KB_SEC.FLM" start="0x00000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F445_446_SRAM.FLM" start="0x1FFF8000" size="0x00008000"/>
+                    <feature type="QFP" n="100"/>
+                </device>
+                <device Dname="APM32F445VCT7">
+                    <processor Dclock="112000000"/>
+                    <memory id="IROM1" start="0x00000000" size="0x00040000" default="1" startup="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00007000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x1FFF8000" size="0x00008000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F445_P256_8KB_SEC.FLM" start="0x00000000" size="0x00040000" default="1"/>
+                    <algorithm name="Flash/APM32F445_446_SRAM.FLM" start="0x1FFF8000" size="0x00008000"/>
+                    <feature type="QFP" n="100"/>
+                </device>
+            </subFamily>
+            <!-- ******************************  Subfamily 'APM32F446'  ****************************** -->
+            <subFamily DsubFamily="APM32F446">
+                <debug svd="SVD/APM32F446.svd"/>
+                <!-- ******************************  Device 'G32A14xx'  ****************************** -->
+                <!-- *********************** -->
+                <!--112MHz LQFP100-->
+                <device Dname="APM32F446RGT7">
+                    <processor Dclock="112000000"/>
+                    <memory id="IROM1" start="0x00000000" size="0x00100000" default="1" startup="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x0000F000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x1FFF0000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F446_P1024_8KB_SEC.FLM" start="0x00000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F445_446_SRAM.FLM" start="0x1FFF0000" size="0x00010000"/>
+                    <feature type="QFP" n="64"/>
+                </device>
+                <device Dname="APM32F446VGT7">
+                    <processor Dclock="112000000"/>
+                    <memory id="IROM1" start="0x00000000" size="0x00100000" default="1" startup="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x0000F000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x1FFF0000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F446_P1024_8KB_SEC.FLM" start="0x00000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F445_446_SRAM.FLM" start="0x1FFF0000" size="0x00010000"/>
+                    <feature type="QFP" n="100"/>
+                </device>
+            </subFamily>
+        </family>
+    </devices>
+    <conditions>
+        <!-- Device Conditions -->
+        <condition id="APM32F445_446">
+            <description>Geehy APM32F445_446 devices</description>
+            <accept Dvendor="Geehy:163" Dname="APM32F44*"/>
+        </condition>
+        <condition id="APM32F445_64">
+            <description>Geehy APM32F445 device with 64K RAM</description>
+            <accept Dvendor="Geehy:163" Dname="APM32F445*"/>
+        </condition>
+        <condition id="APM32F446_128">
+            <description>Geehy APM32F446 device with 128K RAM</description>
+            <accept Dvendor="Geehy:163" Dname="APM32F446*"/>
+        </condition>
+        <!-- Device + Compiler Conditions (ARM) -->
+        <condition id="APM32F445_ARM">
+            <description>Geehy APM32F445 device and ARM compiler</description>
+            <require condition="APM32F445_64"/>
+            <require Tcompiler="ARMCC" Toptions="AC6"/>
+        </condition>
+        <condition id="APM32F445_64_ARM">
+            <description>Geehy APM32F445 device with 64K RAM and ARM compiler</description>
+            <require condition="APM32F445_64"/>
+            <require Tcompiler="ARMCC" Toptions="AC6"/>
+        </condition>
+        <condition id="APM32F446_ARM">
+            <description>Geehy APM32F446 device and ARM compiler</description>
+            <require condition="APM32F446_128"/>
+            <require Tcompiler="ARMCC" Toptions="AC6"/>
+        </condition>
+        <condition id="APM32F446_128_ARM">
+            <description>Geehy APM32F446 device with 128K RAM and ARM compiler</description>
+            <require condition="APM32F446_128"/>
+            <require Tcompiler="ARMCC" Toptions="AC6"/>
+        </condition>
+        <!-- Device + CMSIS Conditions -->
+        <condition id="APM32F445_446_CMSIS">
+            <description>Geehy APM32F445_446 devices and CMSIS-CORE</description>
+            <accept condition="APM32F445_446"/>
+            <require Cclass="CMSIS" Cgroup="CORE"/>
+        </condition>
+        <!--G32A1xx Standard Peripherals-->
+        <condition id="APM32F445_446 STDPERIPH">
+            <description>APM32F445_446 Standard Peripherals</description>
+            <require condition="APM32F445_446_CMSIS"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework"/>
+        </condition>
+        <condition id="APM32F445_446 STDPERIPH CLOCK">
+            <description>Geehy Semiconductor APM32F445_446 with Standard Peripherals Drivers Framework and CLOCK</description>
+            <require condition="APM32F445_446_CMSIS"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CLOCK"/>
+        </condition>
+        <condition id="APM32F445_446 STDPERIPH LPUART_LIN">
+            <description>Geehy Semiconductor APM32F445_446 with Standard Peripherals Drivers Framework and CLOCK and LPUART_LIN</description>
+            <require condition="APM32F445_446_CMSIS"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CLOCK"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="LPUART"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="LIN"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DMA"/>
+        </condition>
+        <condition id="APM32F445_446 STDPERIPH DMA">
+            <description>Geehy Semiconductor APM32F445_446 with Standard Peripherals Drivers Framework and CLOCK and DMA</description>
+            <require condition="APM32F445_446_CMSIS"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CLOCK"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DMA"/>
+        </condition>
+    </conditions>
+    <components>
+        <!-- StartUp -->
+        <component Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="APM32F445_446_CMSIS">
+            <description>System Startup for APM32F445_446 Series</description>
+            <files>
+                <!-- include folders -->
+                <file category="header" name="Device\Device\Geehy\APM32F445_446\device.h"/>
+                <file category="header" name="Device\Device\Geehy\APM32F445_446\APM32F445\apm32f445.h"/>
+                <file category="header" name="Device\Device\Geehy\APM32F445_446\APM32F445\apm32f445_features.h"/>
+                <file category="header" name="Device\Device\Geehy\APM32F445_446\APM32F446\apm32f446.h"/>
+                <file category="header" name="Device\Device\Geehy\APM32F445_446\APM32F446\apm32f446_features.h"/>
+                <file category="header" name="Device\Device\Geehy\APM32F445_446\common\apm_core_cm4.h"/>
+                <!-- generates warning in PackCheck because name is not CMSIS conform -->
+                <file category="include" name="Device\Device\Geehy\APM32F445_446"/>
+                <file category="include" name="Device\Device\Geehy\APM32F445_446\common"/>
+                <file category="include" name="Device\Device\Geehy\APM32F445_446\APM32F445"/>
+                <file category="include" name="Device\Device\Geehy\APM32F445_446\APM32F446"/>
+                <!-- startup files (general) -->
+                <file category="source" name="Device\Device\Geehy\APM32F445_446\common\startup.c"/>
+                <file category="header" name="Device\Device\Geehy\APM32F445_446\common\startup.h"/>
+                <!-- system files -->
+                <file category="source" name="Device\Device\Geehy\APM32F445_446\common\system_apm32f445_446.c" attr="config" version="1.0.0"/>
+                <file category="header" name="Device\Device\Geehy\APM32F445_446\common\system_apm32f445_446.h" attr="config" version="1.0.0"/>
+                <!-- startup files (ARM specific) -->
+                <file category="source" condition="APM32F445_ARM" name="Device\Device\Geehy\APM32F445_446\APM32F445\startup\armc\startup_apm32f445.S" attr="config" version="1.0.0"/>
+                <file category="source" condition="APM32F446_ARM" name="Device\Device\Geehy\APM32F445_446\APM32F446\startup\armc\startup_apm32f446.S" attr="config" version="1.0.0"/>
+                <!-- linker scripts (ARM)-->
+                <file category="linkerScript" condition="APM32F445_64_ARM" name="Device\Device\Geehy\APM32F445_446\APM32F445\linker\armc\apm32f445xC_64_flash.sct" attr="config" version="1.0.0"/>
+                <file category="linkerScript" condition="APM32F445_64_ARM" name="Device\Device\Geehy\APM32F445_446\APM32F445\linker\armc\apm32f445xE_64_flash.sct" attr="config" version="1.0.0"/>
+                <file category="linkerScript" condition="APM32F445_64_ARM" name="Device\Device\Geehy\APM32F445_446\APM32F445\linker\armc\apm32f445_64_ram.sct" attr="config" version="1.0.0"/>
+                <file category="linkerScript" condition="APM32F446_128_ARM" name="Device\Device\Geehy\APM32F445_446\APM32F446\linker\armc\apm32f446xG_128_flash.sct" attr="config" version="1.0.0"/>
+                <file category="linkerScript" condition="APM32F446_128_ARM" name="Device\Device\Geehy\APM32F445_446\APM32F446\linker\armc\apm32f446_128_ram.sct" attr="config" version="1.0.0"/>
+            </files>
+        </component>
+        <!--APM32F445_446_PeripheralLibrary-->
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH">
+            <description>Standard Peripherals Drivers Framework</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_FRAMEWORK</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\Device\Geehy\APM32F445_446\common\callbacks.h"/>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_interrupt.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_interrupt.c"/>
+                <file category="header" name="Middlewares\osif\osif.h"/>
+                <file category="source" name="Middlewares\osif\osif.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="ADC" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH CLOCK">
+            <description>ADC driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_ADC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_adc.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_adc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CLOCK" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH">
+            <description>CLOCK driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_CLOCK</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_clock.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_clock.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="COMP" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH">
+            <description>COMP driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_COMP</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_comp.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_comp.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CRC" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH">
+            <description>CRC driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_CRC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_crc.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_crc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CSEC" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH">
+            <description>CSEC driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_CSEC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_csec.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_csec.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DMA" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH">
+            <description>DMA driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_DMA</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_dma.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_dma.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="EINJ" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH">
+            <description>EINJ driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_EINJ</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_einj.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_einj.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="EREP" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH">
+            <description>EREP driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_EREP</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_erep.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_erep.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="EWDT" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH">
+            <description>EWDT driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_EWDT</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_ewdt.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_ewdt.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="FLASH" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH">
+            <description>FLASH driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_FLASH</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_flash.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_flash.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CAN" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH DMA">
+            <description>CAN driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_CAN</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_can.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_can.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CFGTMR" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH CLOCK">
+            <description>CFGTMR driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_CFGTMR</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_cfgtmr.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_cfgtmr.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CFGIO" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH DMA">
+            <description>CFGIO driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_CFGIO</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_cfgio_common.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_cfgio_common.c"/>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_cfgio_i2c.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_cfgio_i2c.c"/>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_cfgio_spi.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_cfgio_spi.c"/>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_cfgio_uart.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_cfgio_uart.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="PINS" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH">
+            <description>PINS driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_PINS</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_pins.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_pins.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="LPI2C" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH DMA">
+            <description>LPI2C driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_LPI2C</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_lpi2c.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_lpi2c.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="LPITMR" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH CLOCK">
+            <description>LPITMR driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_LPITMR</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_lpitmr.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_lpitmr.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="LPSPI" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH DMA">
+            <description>LPSPI driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_LPSPI</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_lpspi.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_lpspi.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="MPU" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH">
+            <description>MPU driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_MPU</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_mpu.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_mpu.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="PDU" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH CLOCK">
+            <description>PDU driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_PDU</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_pdu.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_pdu.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="POWER" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH">
+            <description>POWER driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_POWER</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_power.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_power.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="RTC" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH CLOCK">
+            <description>RTC driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_RTC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_rtc.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_rtc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="LPTMR" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH">
+            <description>LPTMR driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_LPTMR</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_lptmr.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_lptmr.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="LPUART" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH DMA">
+            <description>LPUART driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_LPUART</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_lpuart.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_lpuart.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="LIN" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH LPUART_LIN">
+            <description>LIN driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_LIN</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_lin.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_lin.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="TMC" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH">
+            <description>TMC driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_TMC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_tmc.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_tmc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="WDT" Cversion="1.0.0" condition="APM32F445_446 STDPERIPH CLOCK">
+            <description>WDT driver for APM32F445_446</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_WDT</RTE_Components_h>
+            <files>
+                <file category="header" name="Device\APM32F445_446_StdPeriphDriver\inc\apm32f445_446_wdt.h"/>
+                <file category="source" name="Device\APM32F445_446_StdPeriphDriver\src\apm32f445_446_wdt.c"/>
+            </files>
+        </component>
+    </components>
+    <boards>
+        <board name="APM32F445EVAL" vendor="Gheey" revision="Ver 1.0">
+            <description>Geehy APM32F445 Development Board</description>
+            <mountedDevice deviceIndex="0" Dvendor="Geehy:163" Dname="APM32F445UAxxxLLx"/>
+            <compatibleDevice deviceIndex="0" Dvendor="Geehy:163" Dname="APM32F445"/>
+            <feature type="ODbg" n="1" name="Onboard open-standard serial and debug adaptor (OpenSDA)"/>
+            <feature type="PWR" n="5" name="USB Powered"/>
+            <feature type="Button" n="4" name="Push-buttons: Reset, OpenSDA Reset, 2x User"/>
+            <feature type="Button" n="2" name="2x capacitive touch"/>
+            <feature type="LED" n="1" name="RGB LED"/>
+            <feature type="Poti" n="1" name="Potentiometer for voltage and analog measurement"/>
+            <debugInterface adapter="JTAG/SW" connector="10 pin Cortex debug (0.05 inch connector)"/>
+            <debugInterface adapter="JTAG/SW" connector="SDA 10 pin Cortex debug (0.05 inch connector)"/>
+        </board>
+        <board name="APM32F446EVAL" vendor="Gheey" revision="Ver 1.0">
+            <description>Geehy APM32F446 Development Board</description>
+            <mountedDevice deviceIndex="0" Dvendor="Geehy:163" Dname="APM32F446UAxxxLLx"/>
+            <compatibleDevice deviceIndex="0" Dvendor="Geehy:163" Dname="APM32F446"/>
+            <feature type="ODbg" n="1" name="Onboard open-standard serial and debug adaptor (OpenSDA)"/>
+            <feature type="PWR" n="5" name="USB Powered"/>
+            <feature type="Button" n="4" name="Push-buttons: Reset, OpenSDA Reset, 2x User"/>
+            <feature type="Button" n="2" name="2x capacitive touch"/>
+            <feature type="LED" n="1" name="RGB LED"/>
+            <feature type="Poti" n="1" name="Potentiometer for voltage and analog measurement"/>
+            <debugInterface adapter="JTAG/SW" connector="10 pin Cortex debug (0.05 inch connector)"/>
+            <debugInterface adapter="JTAG/SW" connector="SDA 10 pin Cortex debug (0.05 inch connector)"/>
+        </board>
+    </boards>
+    <examples>
+        <!--G32A1445EVAL example information-->
+        <example name="APM32F445EVAL-Blinky" doc="readme.txt" folder="Boards\Geehy\APM32F445EVAL\Blinky">
+            <description>APM32F445EVAL Blinky example</description>
+            <board name="APM32F445EVAL" vendor="Geehy"/>
+            <project>
+                <environment name="uv" load="APM32F445EVAL-Blinky.uvprojx"/>
+            </project>
+            <attributes>
+                <component Cclass="CMSIS" Cgroup="CORE"/>
+                <component Cclass="Device" Cgroup="Startup"/>
+                <category>Getting Started</category>
+                <keyword>LED</keyword>
+                <keyword>APM32F445</keyword>
+            </attributes>
+        </example>
+        <!--G32A1465EVAL example information-->
+        <example name="APM32F446EVAL-Blinky" doc="readme.txt" folder="Boards\Geehy\APM32F446EVAL\Blinky">
+            <description>APM32F446EVAL Blinky example</description>
+            <board name="APM32F446EVAL" vendor="Geehy"/>
+            <project>
+                <environment name="uv" load="APM32F446EVAL-Blinky.uvprojx"/>
+            </project>
+            <attributes>
+                <component Cclass="CMSIS" Cgroup="CORE"/>
+                <component Cclass="Device" Cgroup="Startup"/>
+                <category>Getting Started</category>
+                <keyword>LED</keyword>
+                <keyword>APM32F446</keyword>
+            </attributes>
+        </example>
+    </examples>
+</package>

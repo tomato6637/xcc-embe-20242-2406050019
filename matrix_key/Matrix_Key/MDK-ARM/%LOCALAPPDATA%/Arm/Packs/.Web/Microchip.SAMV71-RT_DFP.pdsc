@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         schemaVersion="1.7.57"
+         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.57/schema/PACK.xsd">
+   <vendor>Microchip</vendor>
+   <url>https://packs.download.microchip.com/</url>
+   <name>SAMV71-RT_DFP</name>
+   <description overview="./OVERVIEW.md">Microchip SAMV71-RT Series Device Support</description>
+   <supportContact>https://www.microchip.com/en-us/support</supportContact>
+   <license>LICENSE.txt</license>
+   <licenseSets>
+      <licenseSet id="all" default="true" gating="false">
+         <license name="LICENSE.txt"
+                  title="Apache License, Version 2.0"
+                  spdx="Apache-2.0"
+                  url="https://www.apache.org/licenses/LICENSE-2.0"/>
+      </licenseSet>
+   </licenseSets>
+   <releases>
+      <release version="1.3.152" date="2026-06-20">
+				- CMSIS System Initialization is now included as default. Define DISABLE_CMSIS_INIT to not include.
+				- Added ARMCC scatter/linker scripts.
+				- Updated CMSIS flash loaders.
+				- Updated scripts for EDBG and Jlink tools.
+			</release>
+      <release version="1.2.125" date="2025-01-27">
+                - Revert defines of TCx_IRQn to TCx_CH0_IRQn introduced in the DFP version 1.1.123.
+            </release>
+      <release version="1.1.123" date="2025-01-02">
+                - Extended wait time for flash to be ready for debuggers pending on py scripts.
+            </release>
+      <release version="1.0.120" date="2023-09-20">Initial release.</release>
+   </releases>
+   <keywords>
+      <keyword>Microchip</keyword>
+      <keyword>Device Family Package Microchip</keyword>
+      <keyword>Device Support</keyword>
+      <keyword>SAMV71-RT</keyword>
+   </keywords>
+   <requirements>
+      <packages>
+         <package vendor="ARM" name="CMSIS"/>
+      </packages>
+   </requirements>
+   <devices>
+      <family Dfamily="SAMV71-RT" Dvendor="Microchip:3">
+         <debugvars configfile="keil/Debug/SAMx7.dbgconf" version="1.0.0">
+        // Debug Access Variables
+        __var TracePCK3 = 0x00000000;                                               // Trace Clock Source Selection and Prescaler
+      </debugvars>
+         <sequences>
+            <sequence name="TraceStart">
+               <block>
+            __var traceSWO    = (__traceout &amp; 0x1) != 0;                        // SWO Trace Selected?
+            __var traceTPIU   = (__traceout &amp; 0x2) != 0;                        // TPIU Trace Selected?
+          </block>
+               <control if="traceSWO">
+                  <block>
+              Sequence("EnableTraceSWO");                                           // Call SWO Trace Setup
+            </block>
+               </control>
+               <control if="traceTPIU">
+                  <block>
+              Sequence("EnableTraceTPIU");                                          // Call TPIU Trace Setup
+            </block>
+               </control>
+            </sequence>
+            <sequence name="EnableTraceSWO">
+               <block>
+            Write32(0x400E06E4, 0x504D4300);                                        // Disable PMC write protection
+            Write32(0x400E064C, TracePCK3);                                         // Select clock source and prescaler for PCK3
+            Write32(0x400E0600, (1 &lt;&lt; 11));                                   // Enable PCK3
+          </block>
+            </sequence>
+            <sequence name="EnableTraceTPIU">
+               <block>
+            __var width = (__traceout &amp; 0x003F0000) &gt;&gt; 16;                // TPIU Port Width
+            __var val   = 0;
+          </block>
+               <control if="width == 1">
+                  <block>
+              // 1-Bit TPIU Trace Setup
+              val = 0x00000010;                                                     // TRACED[0]
+            </block>
+               </control>
+               <control if="width == 2">
+                  <block>
+              // 2-Bit TPIU Trace Setup
+              val = 0x00000030;                                                     // TRACED[0..1]
+            </block>
+               </control>
+               <control if="width == 4">
+                  <block>
+              // 4-Bit TPIU Trace Setup
+              val = 0x000000F0;                                                     // TRACED[0..3]
+            </block>
+               </control>
+               <block>
+            // Write Trace Configuration to Target
+            Write32(0x400E06E4, 0x504D4300);                                        // Disable PMC write protection
+            Write32(0x400E064C, TracePCK3);                                         // Select clock source and prescaler for PCK3
+            Write32(0x400E0600, (1 &lt;&lt; 11));                                   // Enable PCK3
+            Write32(0x400E0610, (1 &lt;&lt; 16));                                   // Enable PIOD clock
+     
+            Write32(0x400E14E4, 0x50494F00);                                        // Disable PIOD write protection
+            Write32(0x400E1404, (val | 0x00000100));                                // Disable PIOD PD[4..8]
+            Write32(0x400E1470, ((Read32(0x400E1470) &amp; ~val) | 0x00000100));    // Set Peripheral Select registers
+            Write32(0x400E1474, ((Read32(0x400E1474) |      val) | 0x00000100));    // TRACED[0..3] to alternate peripheral C and TRACECLK to alternate peripheral D
+          </block>
+            </sequence>
+         </sequences>
+         <environment name="microchip">
+            <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
+                            schemaVersion="1.0"
+                            xsi:schemaLocation="http://crownking/pack-device-microchip-extension PACK.DEVICE.MICROCHIP.EXTENSION.xsd"><!--https://schemas.microchip.com/com/microchip/packs/extensions/mchp/1.0/PACK.DEVICE.MICROCHIP.EXTENSION.xsd-->
+               <mchp:prerequisite component="MPLAB X IDE" version="[5.50-"/>
+               <mchp:prerequisite component="MPLAB X IPE" version="[5.10-"/>
+               <mchp:prerequisite component="MPLAB XC32" version="[4.10-"/>
+            </mchp:extension>
+         </environment>
+         <book name="https://www.microchip.com/en-us/product/ATSAMV71Q21RT"
+               title="Device page for ATSAMV71Q21RT"/>
+         <book name="https://www.microchip.com/en-us/product/ATSAMV71Q21RT#Documentation"
+               title="Datasheet"/>
+         <book name="https://developer.arm.com/documentation/dui0646"
+               title="Arm Cortex-M7 Devices Generic User Guide"/>
+         <compile header="include/sam.h" define="__SAMV71Q21RT__"/>
+         <memory name="IFLASH"
+                 start="0x00400000"
+                 size="0x00200000"
+                 access="rx"
+                 default="1"
+                 startup="1"/>
+         <memory name="ITCM"
+                 start="0x00000000"
+                 size="0x00020000"
+                 default="1"
+                 access="rwx"/>
+         <memory name="DTCM" start="0x20000000" size="0x00020000" access="rwx"/>
+         <memory name="IRAM" start="0x20400000" size="0x00060000" access="rwx"/>
+         <memory name="PERIPHERALS"
+                 start="0x40000000"
+                 size="0x20000000"
+                 access="rwp"/>
+         <memory name="SYSTEM" start="0xE0000000" size="0x10000000" access="rwp"/>
+         <memory name="GPNVM_ARMCC"
+                 start="0x1FFFFFF0"
+                 size="0x00000010"
+                 access="w"/>
+         <memory name="GPNVM_XC32"
+                 start="0xD0000000"
+                 size="0x00000010"
+                 access="w"/>
+         <debugport __dp="0">
+            <jtag/>
+            <swd/>
+         </debugport>
+         <trace>
+            <serialwire/>
+            <traceport width="0xB"/>
+         </trace>
+         <algorithm name="keil/Flash/ATSAMx7_2048.FLM"
+                    start="0x00400000"
+                    size="0x00200000"
+                    RAMstart="0x20400000"
+                    RAMsize="0x00060000"
+                    default="1"
+                    style="Keil"/>
+         <algorithm name="keil/Flash/ATSAMx7_GPNVM_KEIL.FLM"
+                    start="0x1FFFFFF0"
+                    size="0x00000010"
+                    RAMstart="0x20400000"
+                    RAMsize="0x00060000"
+                    default="1"
+                    style="Keil"/>
+         <algorithm name="keil/Flash/ATSAMx7_GPNVM_MCHP.FLM"
+                    start="0xD0000000"
+                    size="0x00000010"
+                    RAMstart="0x20400000"
+                    RAMsize="0x00060000"
+                    default="1"
+                    style="Keil"/>
+         <feature type="NVIC" n="74"/>
+         <feature type="RNG" n="1"/>
+         <feature type="WDT" n="1"/>
+         <feature type="SPI" n="2"/>
+         <feature type="USART" n="8"/>
+         <feature type="USBOTG" n="1" name="High-Speed USB OTG"/>
+         <feature type="ETH" n="1"/>
+         <feature type="RTC" n="1"/>
+         <feature type="Timer" n="4"/>
+         <feature type="Crypto" n="128" name="AES Hardware Accelerator"/>
+         <feature type="Memory" n="131072" name="ITCM"/>
+         <feature type="Memory" n="2.097152E6" name="IFLASH"/>
+         <feature type="Memory" n="131072" name="DTCM"/>
+         <feature type="Memory" n="393216" name="IRAM"/>
+         <feature type="VCC" n="1.62" m="3.6"/>
+         <feature type="Temp" n="-40" m="105"/>
+         <feature type="QFP" n="144"/>
+         <device Dname="ATSAMV71Q21RT">
+            <processor Dcore="Cortex-M7"
+                       Dendian="Little-endian"
+                       Dmpu="MPU"
+                       Dfpu="DP_FPU"
+                       Ddsp="NO_DSP"
+                       Dtz="NO_TZ"
+                       Dmve="NO_MVE"
+                       Dclock="300000000"
+                       DcoreVersion="r1p1"/>
+            <debugconfig default="swd" clock="2000000"/>
+            <debug svd="svd/ATSAMV71Q21RT.svd"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
+                             schemaVersion="1.0"
+                             xsi:schemaLocation="http://www.atmel.com/schemas/pack-device-atmel-extension PACK.DEVICE.ATMEL.EXTENSION.xsd"><!--https://schemas.microchip.com/com/microchip/packs/extensions/at/1.0/PACK.DEVICE.ATMEL.EXTENSION.xsd-->
+                  <at:atdf name="atdf/ATSAMV71Q21RT.atdf"/>
+                  <at:variant ordercode="ATSAMV71Q21B-DHB"
+                              vccmin="1.62"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="+105"/>
+                  <at:variant ordercode="ATSAMV71Q21B-H8X"
+                              vccmin="1.62"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="+105"/>
+                  <at:memory name="PERIPHERALS"
+                             start="0x40000000"
+                             size="0x20000000"
+                             type="io"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="SYSTEM"
+                             start="0xE0000000"
+                             size="0x10000000"
+                             type="io"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="QSPIMEM"
+                             start="0x80000000"
+                             size="0x20000000"
+                             type="other"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="AXIMX"
+                             start="0xA0000000"
+                             size="0x00100000"
+                             type="other"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="ITCM"
+                             start="0x00000000"
+                             size="0x00020000"
+                             type="ram"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="IFLASH"
+                             start="0x00400000"
+                             size="0x00200000"
+                             type="flash"
+                             pagesize="512"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="IROM"
+                             start="0x00800000"
+                             size="0x00004000"
+                             type="rom"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="DTCM"
+                             start="0x20000000"
+                             size="0x00020000"
+                             type="ram"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="IRAM"
+                             start="0x20400000"
+                             size="0x00060000"
+                             type="ram"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="EBI_CS0"
+                             start="0x60000000"
+                             size="0x01000000"
+                             type="other"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="EBI_CS1"
+                             start="0x61000000"
+                             size="0x01000000"
+                             type="other"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="EBI_CS2"
+                             start="0x62000000"
+                             size="0x01000000"
+                             type="other"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="EBI_CS3"
+                             start="0x63000000"
+                             size="0x01000000"
+                             type="other"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="SDRAM_CS"
+                             start="0x70000000"
+                             size="0x10000000"
+                             type="other"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:interface type="samjtag" name="JTAG"/>
+                  <at:interface type="swd" name="SWD"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.ice4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.samice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="ARM" Cclass="CMSIS" Cgroup="CORE"/>
+                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="ARM" Cclass="CMSIS" Cgroup="CORE"/>
+                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="ARM-GCC"/>
+                  <at:prerequisite context="compiling" Tcompiler="IAR" component="ARM-IAR"/>
+                  <at:prerequisite context="compiling" Tcompiler="ARMCC" component="ARMCC"/>
+                  <at:prerequisite component="MPLAB XC32" version="[4.10-"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
+                               schemaVersion="1.0"
+                               xsi:schemaLocation="http://crownking/pack-device-microchip-extension PACK.DEVICE.MICROCHIP.EXTENSION.xsd"><!--https://schemas.microchip.com/com/microchip/packs/extensions/mchp/1.0/PACK.DEVICE.MICROCHIP.EXTENSION.xsd-->
+                  <mchp:pic name="edc/ATSAMV71Q21RT.PIC"/>
+                  <mchp:xc32 name="xc32"/>
+                  <mchp:hwtool type="mplab.nmmrs">
+                     <mchp:file name="hwtools/mplab/16bit.NMMRs.xml"/>
+                     <mchp:file name="hwtools/mplab/32bit.NMMRs.xml"/>
+                     <mchp:file name="hwtools/mplab/8bit.NMMRs.xml"/>
+                     <mchp:file name="hwtools/mplab/arm.32bit.NMMRs.xml"/>
+                     <mchp:file name="hwtools/mplab/avr.8bit.NMMRs.xml"/>
+                  </mchp:hwtool>
+                  <mchp:hwtool type="mplab.devicesupport">
+                     <mchp:file name="hwtools/mplab/mplab.deviceSupport"/>
+                  </mchp:hwtool>
+                  <mchp:hwtool type="mplab.mpheader">
+                     <mchp:file name="hwtools/mplab/MPHeader.xml"/>
+                  </mchp:hwtool>
+                  <mchp:hwtool type="mplab.pluginboardsupport">
+                     <mchp:file name="hwtools/mplab/PluginBoardSupport.xml"/>
+                  </mchp:hwtool>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.50-"/>
+                  <mchp:prerequisite component="MPLAB XC32" version="[4.10-"/>
+               </mchp:extension>
+            </environment>
+            <description>Cortex-M7 Microcontroller, 2.0MB Flash, 640KB SRAM, 300 MHz</description>
+         </device>
+      </family>
+   </devices>
+   <conditions>
+      <condition id="ARMCC">
+         <accept Tcompiler="ARMCC"/>
+      </condition>
+      <condition id="ARMCC Exe">
+         <require condition="ARMCC"/>
+         <accept Toutput="exe"/>
+      </condition>
+      <condition id="ARMCC Lib">
+         <require condition="ARMCC"/>
+         <accept Toutput="lib"/>
+      </condition>
+      <condition id="GCC+CLANG">
+         <accept Tcompiler="GCC"/>
+         <accept Tcompiler="CLANG"/>
+      </condition>
+      <condition id="GCC+CLANG Exe">
+         <require condition="GCC+CLANG"/>
+         <accept Toutput="exe"/>
+      </condition>
+      <condition id="GCC+CLANG Lib">
+         <require condition="GCC+CLANG"/>
+         <accept Toutput="lib"/>
+      </condition>
+      <condition id="IAR">
+         <accept Tcompiler="IAR"/>
+      </condition>
+      <condition id="IAR Exe">
+         <require condition="IAR"/>
+         <accept Toutput="exe"/>
+      </condition>
+      <condition id="IAR Lib">
+         <require condition="IAR"/>
+         <accept Toutput="lib"/>
+      </condition>
+      <condition id="XC">
+         <accept Tcompiler="XC"/>
+      </condition>
+      <condition id="XC Exe">
+         <require condition="XC"/>
+         <accept Toutput="exe"/>
+      </condition>
+      <condition id="XC Lib">
+         <require condition="XC"/>
+         <accept Toutput="lib"/>
+      </condition>
+      <condition id="C">
+         <accept condition="ARMCC"/>
+         <accept condition="GCC+CLANG"/>
+         <accept condition="IAR"/>
+         <accept condition="XC"/>
+      </condition>
+      <condition id="C Exe">
+         <accept condition="ARMCC Exe"/>
+         <accept condition="GCC+CLANG Exe"/>
+         <accept condition="IAR Exe"/>
+         <accept condition="XC Exe"/>
+      </condition>
+      <condition id="C Lib">
+         <accept condition="ARMCC Lib"/>
+         <accept condition="GCC+CLANG Lib"/>
+         <accept condition="IAR Lib"/>
+         <accept condition="XC Lib"/>
+      </condition>
+      <condition id="ATSAMV71Q21RT">
+         <require Dvendor="Microchip:3" Dname="ATSAMV71Q21RT"/>
+         <require Cclass="CMSIS" Cgroup="CORE"/>
+      </condition>
+   </conditions>
+   <components>
+      <component Cvendor="Microchip"
+                 Cclass="Device"
+                 Cgroup="Startup"
+                 Cversion="1.3.0"
+                 condition="ATSAMV71Q21RT">
+         <description>Headers and startup code for Microchip ATSAMV71Q21RT</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/sam.h"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="GCC+CLANG Exe"
+                  category="source"
+                  name="gcc/gcc/startup_samv71q21rt.c"
+                  version="1.3.0"
+                  attr="config"/>
+            <file condition="GCC+CLANG Exe"
+                  category="source"
+                  name="gcc/system_samv71q21rt.c"
+                  version="1.3.0"
+                  attr="config"/>
+            <file condition="GCC+CLANG Exe"
+                  category="linkerScript"
+                  name="gcc/gcc/samv71q21rt_flash.ld"
+                  version="1.3.0"
+                  attr="config"/>
+            <file condition="GCC+CLANG Exe"
+                  category="linkerScript"
+                  name="gcc/gcc/samv71q21rt_sram.ld"
+                  version="1.3.0"
+                  attr="template"
+                  select="SRAM linker script"/>
+            <file condition="GCC+CLANG Exe"
+                  category="linkerScript"
+                  name="gcc/gcc/samv71q21rt_itcm.ld"
+                  version="1.3.0"
+                  attr="template"
+                  select="samv71q21rt_itcm"/>
+            <file condition="GCC+CLANG Exe"
+                  category="linkerScript"
+                  name="gcc/gcc/samv71q21rt_dtcm.ld"
+                  version="1.3.0"
+                  attr="template"
+                  select="samv71q21rt_dtcm"/>
+            <file condition="GCC+CLANG Exe"
+                  category="linkerScript"
+                  name="gcc/gcc/samv71q21rt_ebi_cs0.ld"
+                  version="1.3.0"
+                  attr="template"
+                  select="samv71q21rt_ebi_cs0"/>
+            <file condition="GCC+CLANG Exe"
+                  category="linkerScript"
+                  name="gcc/gcc/samv71q21rt_ebi_cs1.ld"
+                  version="1.3.0"
+                  attr="template"
+                  select="samv71q21rt_ebi_cs1"/>
+            <file condition="GCC+CLANG Exe"
+                  category="linkerScript"
+                  name="gcc/gcc/samv71q21rt_ebi_cs2.ld"
+                  version="1.3.0"
+                  attr="template"
+                  select="samv71q21rt_ebi_cs2"/>
+            <file condition="GCC+CLANG Exe"
+                  category="linkerScript"
+                  name="gcc/gcc/samv71q21rt_ebi_cs3.ld"
+                  version="1.3.0"
+                  attr="template"
+                  select="samv71q21rt_ebi_cs3"/>
+            <file condition="GCC+CLANG Exe"
+                  category="linkerScript"
+                  name="gcc/gcc/samv71q21rt_sdram_cs.ld"
+                  version="1.3.0"
+                  attr="template"
+                  select="samv71q21rt_sdram_cs"/>
+            <file condition="GCC+CLANG Exe"
+                  category="linkerScript"
+                  name="gcc/gcc/samv71q21rt_qspimem.ld"
+                  version="1.3.0"
+                  attr="template"
+                  select="samv71q21rt_qspimem"/>
+            <file condition="ARMCC Exe"
+                  category="source"
+                  name="armcc/armcc/startup_samv71q21rt.c"
+                  version="1.3.0"
+                  attr="config"/>
+            <file condition="ARMCC Exe"
+                  category="source"
+                  name="armcc/system_samv71q21rt.c"
+                  version="1.3.0"
+                  attr="config"/>
+            <file condition="ARMCC Exe"
+                  category="linkerScript"
+                  name="armcc/armcc/samv71q21rt_flash.sct"
+                  version="1.3.0"
+                  attr="config"/>
+            <file condition="ARMCC Exe"
+                  category="linkerScript"
+                  name="armcc/armcc/samv71q21rt_sram.sct"
+                  version="1.3.0"
+                  attr="template"
+                  select="SRAM linker script"/>
+            <file condition="ARMCC Exe"
+                  category="linkerScript"
+                  name="armcc/armcc/samv71q21rt_itcm.sct"
+                  version="1.3.0"
+                  attr="template"
+                  select="samv71q21rt_itcm"/>
+            <file condition="ARMCC Exe"
+                  category="linkerScript"
+                  name="armcc/armcc/samv71q21rt_dtcm.sct"
+                  version="1.3.0"
+                  attr="template"
+                  select="samv71q21rt_dtcm"/>
+            <file condition="ARMCC Exe"
+                  category="linkerScript"
+                  name="armcc/armcc/samv71q21rt_ebi_cs0.sct"
+                  version="1.3.0"
+                  attr="template"
+                  select="samv71q21rt_ebi_cs0"/>
+            <file condition="ARMCC Exe"
+                  category="linkerScript"
+                  name="armcc/armcc/samv71q21rt_ebi_cs1.sct"
+                  version="1.3.0"
+                  attr="template"
+                  select="samv71q21rt_ebi_cs1"/>
+            <file condition="ARMCC Exe"
+                  category="linkerScript"
+                  name="armcc/armcc/samv71q21rt_ebi_cs2.sct"
+                  version="1.3.0"
+                  attr="template"
+                  select="samv71q21rt_ebi_cs2"/>
+            <file condition="ARMCC Exe"
+                  category="linkerScript"
+                  name="armcc/armcc/samv71q21rt_ebi_cs3.sct"
+                  version="1.3.0"
+                  attr="template"
+                  select="samv71q21rt_ebi_cs3"/>
+            <file condition="ARMCC Exe"
+                  category="linkerScript"
+                  name="armcc/armcc/samv71q21rt_sdram_cs.sct"
+                  version="1.3.0"
+                  attr="template"
+                  select="samv71q21rt_sdram_cs"/>
+            <file condition="ARMCC Exe"
+                  category="linkerScript"
+                  name="armcc/armcc/samv71q21rt_qspimem.sct"
+                  version="1.3.0"
+                  attr="template"
+                  select="samv71q21rt_qspimem"/>
+            <file condition="IAR Exe"
+                  category="source"
+                  name="iar/iar/startup_samv71q21rt.c"
+                  version="1.3.0"
+                  attr="config"/>
+            <file condition="IAR Exe"
+                  category="source"
+                  name="iar/system_samv71q21rt.c"
+                  version="1.3.0"
+                  attr="config"/>
+            <file condition="IAR Exe"
+                  category="linkerScript"
+                  name="iar/config/linker/Microchip/atsamv71q21rt/sram.icf"
+                  version="1.3.0"
+                  attr="template"
+                  select="SRAM linker script"/>
+            <file condition="IAR Exe"
+                  category="linkerScript"
+                  name="iar/config/linker/Microchip/atsamv71q21rt/flash.icf"
+                  version="1.3.0"
+                  attr="config"/>
+            <file condition="IAR Exe"
+                  category="linkerScript"
+                  name="iar/config/linker/Microchip/atsamv71q21rt/itcm.icf"
+                  version="1.3.0"
+                  attr="template"
+                  select="itcm"/>
+            <file condition="IAR Exe"
+                  category="linkerScript"
+                  name="iar/config/linker/Microchip/atsamv71q21rt/dtcm.icf"
+                  version="1.3.0"
+                  attr="template"
+                  select="dtcm"/>
+            <file condition="IAR Exe"
+                  category="linkerScript"
+                  name="iar/config/linker/Microchip/atsamv71q21rt/ebi_cs0.icf"
+                  version="1.3.0"
+                  attr="template"
+                  select="ebi_cs0"/>
+            <file condition="IAR Exe"
+                  category="linkerScript"
+                  name="iar/config/linker/Microchip/atsamv71q21rt/ebi_cs1.icf"
+                  version="1.3.0"
+                  attr="template"
+                  select="ebi_cs1"/>
+            <file condition="IAR Exe"
+                  category="linkerScript"
+                  name="iar/config/linker/Microchip/atsamv71q21rt/ebi_cs2.icf"
+                  version="1.3.0"
+                  attr="template"
+                  select="ebi_cs2"/>
+            <file condition="IAR Exe"
+                  category="linkerScript"
+                  name="iar/config/linker/Microchip/atsamv71q21rt/ebi_cs3.icf"
+                  version="1.3.0"
+                  attr="template"
+                  select="ebi_cs3"/>
+            <file condition="IAR Exe"
+                  category="linkerScript"
+                  name="iar/config/linker/Microchip/atsamv71q21rt/sdram_cs.icf"
+                  version="1.3.0"
+                  attr="template"
+                  select="sdram_cs"/>
+            <file condition="IAR Exe"
+                  category="linkerScript"
+                  name="iar/config/linker/Microchip/atsamv71q21rt/qspimem.icf"
+                  version="1.3.0"
+                  attr="template"
+                  select="qspimem"/>
+            <file condition="XC Exe"
+                  category="source"
+                  name="xc32/ATSAMV71Q21RT/startup_atsamv71q21rt.c"
+                  version="1.3.0"
+                  attr="config"/>
+            <file condition="XC Exe"
+                  category="source"
+                  name="gcc/system_samv71q21rt.c"
+                  version="1.3.0"
+                  attr="config"/>
+            <file condition="XC Exe"
+                  category="linkerScript"
+                  name="xc32/ATSAMV71Q21RT/ATSAMV71Q21RT.ld"
+                  version="1.3.0"
+                  attr="config"/>
+         </files>
+      </component>
+   </components>
+   <csolution>
+      <template name="Blank Solution"
+                path="templates/csolution/ATSAMV71Q21RT"
+                file="Blank.csolution.yml"
+                copy-to="blank"
+                condition="ATSAMV71Q21RT">
+         <description>Create a basic project with empty main function</description>
+      </template>
+   </csolution>
+   <taxonomy>
+      <description Cclass="Device" Cgroup="Startup">Device specific startup components</description>
+   </taxonomy>
+</package>

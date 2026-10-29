@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.0.0" xs:noNamespaceSchemaLocation="PACK.xsd">
+  <name>TLE994x_5x_DFP</name>
+  <vendor>Infineon</vendor>
+  <description overview="documents/readme.md">Announcement for Infineon TLE994x_5x Series Device Support. Please download the full pack from Infineon Developer Center.</description>
+  <url>https://itools.infineon.com/cmsis_packs/TLE994x_5x/</url>
+  <supportContact>https://www.infineon.com/support</supportContact>
+  <requirements>
+    <packages>
+      <package vendor="ARM" name="CMSIS" version="6.1.0"/>
+    </packages>
+  </requirements>
+  <releases>
+    <release version="2.2.0-announcement" date="2026-10-09">
+      - Announcement for TLE994x_5x_DFP Pack 2.2.0
+      - Please download the full pack from Infineon Developer Center    
+
+      - Add interrupt enable and node pointer configuration to LINUART init function
+      - Add SCU sleep and stop mode request APIs
+      - Add missing ifx_syslib_unique_id_get API
+      - Fix 32-bit overflow in ADC12 counts-to-mV conversion
+      - Fix GCC placement of SysLib wait routines in RAM, accept volatile base pointer in ifx_syslib_wait_for
+      - Fix MISRA violations and preprocessor guards in ADC12, BDRV, CCU7, GPIO
+      - Fix minor issues in drivers (refer to individual changelogs)
+      - Assert GPIO writes to input-only pads
+      - Example project related changes
+        - Add CMSIS Solution projects for VS Code with Device Configurator support, including a user guide in Getting Started section of documentation
+        - Add new example 1000tp-erase-write
+        - Add ULINK debug.ini in getting-started example projects
+        - Update example projects to use public status-returning init functions and Device Configurator 5.80
+      - Device Configurator personality related changes
+        - Fix ADC12 calibration mismatch validation, sample time warnings and rename sequencer software gate unlock control
+        - Adjust BDRV DSM filter time options and defaults
+        - Fix GPT12 DRCs, fix-it actions and block diagram signal labels, and add hertz units for timer values
+        - Add LINUART interrupt configuration, overflow units (ticks, us, Hz) and fix counter threshold register encoding
+        - Add MON any-edge interrupt configuration
+        - Fix generated SCU NMI handler API calls
+        - Use public status-returning init functions and expose init structure macros in generated code
+        - Generate interrupt and connection settings only for available nodes and signals (GPIO, GPT12, PMU, SSC)
+    </release>
+  </releases>
+  <keywords>
+    <keyword>Infineon</keyword>
+    <keyword>Cortex-M</keyword>
+    <keyword>TLE994x_5x</keyword>
+    <keyword>TLE9944EQA40</keyword>
+    <keyword>TLE9944EQW40</keyword>
+    <keyword>TLE9954EQA40</keyword>
+    <keyword>TLE9954EQW40</keyword>
+    <keyword>TLE9954QSA40</keyword>
+    <keyword>TLE9954QSW40</keyword>
+  </keywords>
+  <devices>
+    <family Dfamily="TLE994x_5x Series" Dvendor="Infineon:7">
+      <processor Dcore="Cortex-M23" Dfpu="NO_FPU" Dmpu="MPU" Dtz="TZ" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="40000000" DcoreVersion="r1p0"/>
+      <description>Microcontroller with LIN and NFET Driver for BLDC applications</description>
+      <book name="documents/readme.md" title="Installation help"/>
+      <device Dname="TLE9944EQA40">
+        <memory name="Flash" access="rx" start="0x12000000" size="0x12000"/>
+        <memory name="DSRAM" access="rwx" start="0x18000000" size="0x1800"/>
+      </device>
+      <device Dname="TLE9944EQW40">
+        <memory name="Flash" access="rx" start="0x12000000" size="0x12000"/>
+        <memory name="DSRAM" access="rwx" start="0x18000000" size="0x1800"/>
+      </device>
+      <device Dname="TLE9954EQA40">
+        <memory name="Flash" access="rx" start="0x12000000" size="0x12000"/>
+        <memory name="DSRAM" access="rwx" start="0x18000000" size="0x1800"/>
+      </device>
+      <device Dname="TLE9954EQW40">
+        <memory name="Flash" access="rx" start="0x12000000" size="0x12000"/>
+        <memory name="DSRAM" access="rwx" start="0x18000000" size="0x1800"/>
+      </device>
+      <device Dname="TLE9954QSA40">
+        <memory name="Flash" access="rx" start="0x12000000" size="0x12000"/>
+        <memory name="DSRAM" access="rwx" start="0x18000000" size="0x1800"/>
+      </device>
+      <device Dname="TLE9954QSW40">
+        <memory name="Flash" access="rx" start="0x12000000" size="0x12000"/>
+        <memory name="DSRAM" access="rwx" start="0x18000000" size="0x1800"/>
+      </device>
+    </family>
+  </devices>
+</package>

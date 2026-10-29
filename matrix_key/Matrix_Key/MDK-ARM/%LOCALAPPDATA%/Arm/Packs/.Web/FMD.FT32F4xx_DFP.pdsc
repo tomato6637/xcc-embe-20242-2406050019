@@ -1,0 +1,635 @@
+<?xml version="1.0"?>
+<package xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.4" xs:noNamespaceSchemaLocation="PACK.xsd">
+    <vendor>FMD</vendor>
+    <name>FT32F4xx_DFP</name>
+    <description>FremontMicro FT32F4 Series Device Support, Drivers and Examples</description>
+    <url>https://www.fremontmicro.com/upload/tools/pack/</url>
+    <releases>
+        <release version="1.0.3" date="2026-08-18">1. Changed the selection, adding FT32F407RE.
+2. Fixed existing bugs.
+3. Updated SVD files.</release><release version="1.0.2" date="2026-05-20">1.Update the maximum clock setting's flash lantency to 9.
+2.Fixed the issue of setting register bits in some ADC functions.</release><release version="1.0.1" date="2026-04-17">1. Fixed DMA channel priority configuration issue
+2. Fixed FS Device data endpoint PID alternation issue
+3. Fixed FS Device ZLP packet sending issue
+4. Fixed FS Host EP0 endpoint packet splitting function
+5. Recalibrated SVD files</release><release version="1.0.0" date="2025-10-28">First Release version of FT32F4 Device Family Pack.</release>
+    </releases>
+    <keywords>
+        <!-- keywords for indexing -->
+        <keyword>FMD</keyword>
+        <keyword>Device Support</keyword>
+        <keyword>Device Family Package FremontMicro</keyword>
+        <keyword>FT32F4</keyword>
+        
+    </keywords>
+    <devices>
+        <family Dfamily="FT32F4 Series" Dvendor="FMD:169">
+            <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="1" Dmpu="1" Dendian="Little-endian"/>
+            <book name="Documents/Cortex-M4 Devices Generic User Guide.pdf" title="Cortex-M4 Generic User Guide"/>
+            <description>
+The FT32F4 family incorporates high-speed embedded memories and an extensive range of enhanced I/Os and peripherals connected to two APB buses, three AHB buses and a 32-bit multi-AHB bus matrix.
+- 64-Kbyte of CCM (core coupled memory) data RAM
+- On-the-go USB with PHY
+- Timer with quadrature (incremental) encoder input
+- 5 V-tolerant I/Os
+- True random number generator
+- RTC: subsecond accuracy, hardware calendar
+- 96-bit unique ID
+			</description>
+            <feature type="WDT" n="2"/>
+            <feature type="RTC" n="32768"/>
+            <feature type="CAN" n="4"/>
+            <feature type="USBD" n="2"/>
+            <feature type="VCC" n="1.80" m="3.60"/>
+            <feature type="Temp" n="-40" m="85"/>
+            <feature type="Temp" n="-40" m="105"/>
+            <!-- ************************  Subfamily 'FT32F405'  **************************** -->
+            <subFamily DsubFamily="FT32F405">
+                <processor Dclock="210000000"/>
+                <debug svd="SVD/FT32F405x.svd"/>
+                <!--book name="Documents/DATASHEET.pdf" title="FT32F4"/-->
+                <feature type="Timer" n="18" m="16"/>
+                <feature type="DAC" n="2" m="12"/>
+                <feature type="SPI" n="3" m="48000000"/>
+                <feature type="I2C" n="3"/>
+                <feature type="USART" n="4" m="10500000"/>
+                <feature type="UART" n="3" m="10500000"/>
+                <feature type="USBOTG" n="2"/>
+                <feature type="SDIO" n="1" m="8" name="Secure Digital IO"/>
+                <!--feature type="AUDIO"  n="1"/>
+				<feature type="EQEP"   n="1"/>
+				<feature type="ECAP"   n="1"/-->
+                <!-- *************************  Device 'FT32F405REA2'  ***************************** -->
+                <device Dname="FT32F405REA2">
+                    <memory id="IROM1" start="0x08000000" size="0x00080000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/FT32F4xx_512.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/FT32F4xx_OPT.FLM" start="0x1FFF0800" size="0x00000010" default="0"/>
+                    <feature type="IOs" n="51"/>
+                    <feature type="ADC" n="16" m="12"/>
+					<!--feature type="LQFP"  n="64"/-->
+                </device>
+                <!-- *************************  Device 'FT32F405VEA2'  ***************************** -->
+                <device Dname="FT32F405VEA2">
+                    <memory id="IROM1" start="0x08000000" size="0x00080000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/FT32F4xx_512.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/FT32F4xx_OPT.FLM" start="0x1FFF0800" size="0x00000010" default="0"/>
+                    <feature type="IOs" n="82"/>
+                    <feature type="ADC" n="24" m="12"/>
+					<!--feature type="LQFP"  n="100"/-->
+                </device><!-- *************************  Device 'FT32F405RDA2'  ***************************** --><device Dname="FT32F405RDA2">
+                    <memory id="IROM1" start="0x08000000" size="0x00060000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/FT32F4xx_384.FLM" start="0x08000000" size="0x00060000" default="1"/>
+                    <algorithm name="Flash/FT32F4xx_OPT.FLM" start="0x1FFF0800" size="0x00000010" default="0"/>
+                    <feature type="IOs" n="82"/>
+                    <feature type="ADC" n="24" m="12"/>
+					<!--feature type="LQFP"  n="100"/-->
+                </device>
+			</subFamily>
+            <!-- ************************  Subfamily 'FT32F407'  **************************** -->
+            <subFamily DsubFamily="FT32F407">
+                <processor Dclock="210000000"/>
+                <debug svd="SVD/FT32F407x.svd"/>
+                <!--book name="Documents/DATASHEET.pdf" title="FT32F4"/-->
+                <feature type="Timer" n="18" m="16"/>
+                <feature type="DAC" n="2" m="12"/>
+                <feature type="SPI" n="3" m="48000000"/>
+				<feature type="I2S" n="2"/>
+				<!--feature type="QSPI"   n="1"/-->
+				<feature type="I2C" n="3"/>
+                <feature type="USART" n="4" m="10500000"/>
+                <feature type="UART" n="2" m="10500000"/>
+                <feature type="USBOTG" n="3"/>
+                <feature type="SDIO" n="1" m="8" name="Secure Digital IO"/>
+                <!--feature type="AUDIO"  n="1"/>
+				<feature type="EQEP"   n="1"/>
+				<feature type="ECAP"   n="1"/-->
+                <!-- *************************  Device 'FT32F407VEA2'  ***************************** -->
+                <device Dname="FT32F407VEA2">
+                    <memory id="IROM1" start="0x08000000" size="0x00080000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/FT32F4xx_512.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/FT32F4xx_OPT.FLM" start="0x1FFF0800" size="0x00000010" default="0"/>
+                    <feature type="IOs" n="82"/>
+                    <feature type="ADC" n="24" m="12"/>
+					<!--feature type="LQFP"  n="100"/-->
+                </device>
+                <!-- *************************  Device 'FT32F407VDA2'  ***************************** -->
+                <device Dname="FT32F407VDA2">
+                    <memory id="IROM1" start="0x08000000" size="0x00060000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/FT32F4xx_384.FLM" start="0x08000000" size="0x00060000" default="1"/>
+                    <algorithm name="Flash/FT32F4xx_OPT.FLM" start="0x1FFF0800" size="0x00000010" default="0"/>
+                    <feature type="IOs" n="82"/>
+                    <feature type="ADC" n="24" m="12"/>
+					<!--feature type="LQFP"    n="100"/-->
+                </device><!-- *************************  Device 'FT32F407REA2'  ***************************** --><device Dname="FT32F407REA2">
+                    <memory id="IROM1" start="0x08000000" size="0x00080000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/FT32F4xx_512.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/FT32F4xx_OPT.FLM" start="0x1FFF0800" size="0x00000010" default="0"/>
+                    <feature type="IOs" n="51"/>
+                    <feature type="ADC" n="16" m="12"/>
+					<!--feature type="LQFP"  n="64"/-->
+                </device>
+            </subFamily>
+        </family>
+    </devices>
+    <!--FT32F4xx conditions-->
+    <conditions>
+        <!-- conditions selecting Compiler -->
+        <condition id="Compiler ARMCC">
+            <require Tcompiler="ARMCC"/>
+        </condition>
+        <!--FT32F405xx Device Conditions-->
+        <condition id="FT32F405xx">
+            <description>FremontMicro FT32F405xx Series devices</description>
+            <require Dvendor="FMD:169" Dname="FT32F405*"/>
+        </condition>
+        <!--FT32F407xx Device Conditions-->
+        <condition id="FT32F407xx">
+            <description>FremontMicro FT32F407xx Series devices</description>
+            <require Dvendor="FMD:169" Dname="FT32F407*"/>
+        </condition>
+        <!--FT32F40x ARMCC Conditions -->
+        <condition id="FT32F40x ARMCC">
+            <description>filter for FT32F40x Device and the ARM compiler</description>
+            <accept condition="FT32F405xx"/>
+            <accept condition="FT32F407xx"/>
+            <require Tcompiler="ARMCC"/>
+        </condition>
+        <!--FT32F4xx CMSIS Conditions -->
+        <condition id="FT32F4xx CMSIS">
+            <description>FremontMicro FT32F4xx Device with CMSIS</description>
+            <accept condition="FT32F405xx"/>
+            <accept condition="FT32F407xx"/>
+            <require Cclass="CMSIS" Cgroup="CORE"/>
+        </condition>		
+        <!--FT32F4xx STDPERIPH Conditions -->
+        <condition id="FT32F4xx STDPERIPH">
+            <description>FremontMicro FT32F4xx with Standard Peripherals Drivers Framework</description>
+            <require condition="FT32F4xx CMSIS"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework"/>
+        </condition>
+        <!--FT32F4xx STDPERIPH RCM Conditions-->
+        <condition id="FT32F4xx STDPERIPH RCC">
+            <description>FMD Semiconductor FT32F4xx with Standard Peripherals Drivers Framework and RCC</description>
+            <require condition="FT32F4xx CMSIS"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="RCC"/>
+        </condition>
+    </conditions>
+    <!--FT32F4xx Standard Peripherals Drivers-->
+    <components>
+        <!--Startup-->
+        <component Cclass="Device" Cgroup="Startup" Cversion="1.0.3" condition="FT32F4xx CMSIS">
+            <description>System Startup for FremontMicro FT32F4xx device series</description>
+			<RTE_Components_h>
+		      #define RTE_DEVICE_STARTUP_FT32F4XX    /* Device Startup for FT32F4 */
+		    </RTE_Components_h>
+            <files>
+                <!--  include folder -->
+                <file category="include" name="Device/FT32F4xx/Include"/><file category="include" name="Device/CMSIS"/>
+                
+                <!-- startup files -->
+                <file category="source" name="Device/FT32F4xx/source/arm/startup_ft32f407xe.s" attr="config" version="1.0.3" condition="FT32F40x ARMCC"/><file category="source" name="Device/FT32F4xx/source/arm/ft32f407xe_opt.s" attr="config" version="1.0.3" condition="FT32F40x ARMCC"/>
+                <!-- system file -->
+                <file category="source" name="Device/FT32F4xx/source/system_ft32f4xx.c" attr="config" version="1.0.3"/>
+                <!-- device configuration required by drivers at the moment -->
+            </files>
+        </component>
+        <!-- START: FremontMicro Standard Peripherals Drivers -->
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework" Cversion="1.0.3" condition="FT32F4xx STDPERIPH">
+            <description>Standard Peripherals Drivers Framework</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_FRAMEWORK</RTE_Components_h>
+            <files>
+                <file category="include" name="StdPeriph_Driver/inc/"/>
+                <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_misc.h"/>
+                <file category="source" name="StdPeriph_Driver/src/ft32f4xx_misc.c"/>
+				
+                
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="ADC" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+            <description>Analog-to-digital converter (ADC) driver for FT32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_ADC</RTE_Components_h>
+            <files>
+                <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_adc.h"/>
+                <file category="source" name="StdPeriph_Driver/src/ft32f4xx_adc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="COMP" Cversion="1.0.3" condition="FT32F4xx STDPERIPH ">
+         <description>Comparator (COMP) driver for FT32F4xx</description>
+         <RTE_Components_h>
+           #define RTE_DEVICE_COMP
+         </RTE_Components_h>
+         <files>
+           <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_comp.h"/>
+           <file category="source" name="StdPeriph_Driver/src/ft32f4xx_comp.c"/>
+         </files>
+        </component>
+		<component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CRC" Cversion="1.0.3" condition="FT32F4xx STDPERIPH">
+            <description>CRC calculation unit (CRC) driver for FT32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_CRC</RTE_Components_h>
+            <files>
+                <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_crc.h"/>
+                <file category="source" name="StdPeriph_Driver/src/ft32f4xx_crc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CRS" Cversion="1.0.3" condition="FT32F4xx STDPERIPH">
+            <description>CRS driver for FT32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_CRS</RTE_Components_h>
+            <files>
+				<file category="header" name="StdPeriph_Driver/inc/ft32f4xx_crs.h"/>
+				<file category="source" name="StdPeriph_Driver/src/ft32f4xx_crs.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DAC" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+            <description>Digital-to-analog converter (DAC) driver for FT32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_DAC</RTE_Components_h>
+            <files>
+                <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_dac.h"/>
+                <file category="source" name="StdPeriph_Driver/src/ft32f4xx_dac.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DBGMCU" Cversion="1.0.3" condition="FT32F4xx STDPERIPH">
+            <description>MCU debug component (DBGMCU) driver for FT32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_DBGMCU</RTE_Components_h>
+            <files>
+                <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_debug.h"/>
+                <file category="source" name="StdPeriph_Driver/src/ft32f4xx_debug.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DMA" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+            <description>DMA controller (DMA) driver for FT32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_DMA</RTE_Components_h>
+            <files>
+                <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_dma.h"/>
+                <file category="source" name="StdPeriph_Driver/src/ft32f4xx_dma.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="ECAP" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+         <description>ECAP driver for FT32F4xx</description>
+         <RTE_Components_h>
+           #define RTE_DEVICE_ECAP
+         </RTE_Components_h>
+         <files>
+          <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_ecap.h"/>
+          <file category="source" name="StdPeriph_Driver/src/ft32f4xx_ecap.c"/>
+         </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="EPWM" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>EPWM driver for FT32F4xx</description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_EPWM
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_epwm.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_epwm.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="EQEP" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>EQEP driver for FT32F4xx</description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_EQEP
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_eqep.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_eqep.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="ETH" Cversion="1.0.3" condition="FT32F4xx STDPERIPH">
+          <description>ETH driver for FT32F4xx</description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_ETH
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_eth.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_eth.c"/>
+          </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="EXTI" Cversion="1.0.3" condition="FT32F4xx STDPERIPH">
+          <description>External interrupt/event controller (EXTI) driver for FT32F4xx</description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_EXTI
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_exti.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_exti.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="FDCAN" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>FDCAN driver for FT32F4xx</description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_FDCAN
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_fdcan.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_fdcan.c"/>
+          </files>
+      </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Flash" Cversion="1.0.3" condition="FT32F4xx STDPERIPH">
+          <description>Embedded Flash memory driver for FT32F4xx</description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_FLASH
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_flash.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_flash.c"/>
+          </files>
+        </component>
+		<component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="FMC" Cversion="1.0.3" condition="FT32F4xx STDPERIPH">
+            <description>Flash memory controller driver for FT32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_FMC</RTE_Components_h>
+            <files>
+                <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_fmc.h"/>
+                <file category="source" name="StdPeriph_Driver/src/ft32f4xx_fmc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="GPIO" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+            <description>General-purpose I/O (GPIO) driver for FT32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_GPIO</RTE_Components_h>
+            <files>
+                <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_gpio.h"/>
+                <file category="source" name="StdPeriph_Driver/src/ft32f4xx_gpio.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="HCD_FS" Cversion="1.0.3" condition="FT32F4xx STDPERIPH">
+          <description>HCD_FS driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_HCD_FS
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_hcd_fs.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_hcd_fs.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="HCD_HS" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>HCD_HS driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_HCD_HS
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_hcd_hs.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_hcd_hs.c"/>
+          </files>
+        </component>
+		<component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="I2C" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+            <description>Inter-integrated circuit (I2C) interface driver for FT32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_I2C</RTE_Components_h>
+            <files>
+                <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_i2c.h"/>
+                <file category="source" name="StdPeriph_Driver/src/ft32f4xx_i2c.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="I2S" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>I2S interface driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_I2S
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_i2s.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_i2s.c"/>
+          </files>
+		</component>
+		<component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="IWDG" Cversion="1.0.3" condition="FT32F4xx STDPERIPH">
+          <description>Independent watchdog (IWDG) driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_IWDG
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_iwdg.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_iwdg.c"/>
+          </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="LPTIM" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>LPTIM driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_LPTIM
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_lptim.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_lptim.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="MISC" Cversion="1.0.3" condition="FT32F4xx STDPERIPH">
+          <description>MISC driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_MISC
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_misc.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_misc.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="OPAMP" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>OPAMP driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_OPAMP
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_opamp.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_opamp.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="PCD_EX_HS" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>PCD_EX_HS driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_PCD_EX_HS
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_pcd_ex_hs.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_pcd_ex_hs.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="PCD_FS" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>PCD_FS driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_PCD_FS
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_pcd_fs.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_pcd_fs.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="PCD_HS" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>PCD_HS driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_PCD_HS
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_pcd_hs.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_pcd_hs.c"/>
+          </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="PWR" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>Power controller (PWR) driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_PWR
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_pwr.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_pwr.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="QSPI" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>QSPI driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_QSPI
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_qspi.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_qspi.c"/>
+          </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="RCC" Cversion="1.0.3" condition="FT32F4xx STDPERIPH">
+          <description>Reset and clock control (RCC) driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_RCC
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_rcc.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_rcc.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="RNG" Cversion="1.0.3" condition="FT32F4xx STDPERIPH">
+          <description>RNG driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_RNG
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_rng.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_rng.c"/>
+          </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="RTC" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>Real-time clock (RTC) driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_RTC
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_rtc.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_rtc.c"/>
+          </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="SDIO" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>Secure digital (SDIO) interface driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_SDIO
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_sdio.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_sdio.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="SPDIF" Cversion="1.0.3" condition="FT32F4xx STDPERIPH">
+          <description>SPDIF driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_SPDIF
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_spdif.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_spdif.c"/>
+          </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="SPI" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>Serial peripheral interface (SPI) driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_SPI
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_spi.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_spi.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="SSI" Cversion="1.0.3" condition="FT32F4xx STDPERIPH">
+          <description>SSI driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_SSI
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_ssi.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_ssi.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="SYSCFG" Cversion="1.0.3" condition="FT32F4xx STDPERIPH">
+          <description>SYSCFG driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_SYSCFG
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_syscfg.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_syscfg.c"/>
+          </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="TIM" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>Timers (TIM) driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_TIM
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_tim.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_tim.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="UART" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>UART driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_UART
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_uart.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_uart.c"/>
+          </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="USART" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>Universal synchronous asynchronous receiver transmitter (USART) driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_USART
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_usart.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_usart.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="USB_FS" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>USB_FS driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_USB_FS
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_usb_fs.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_usb_fs.c"/>
+          </files>
+        </component>
+	    <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="USB_HS" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>USB_HS driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_USB_HS
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_usb_hs.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_usb_hs.c"/>
+          </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="WWDG" Cversion="1.0.3" condition="FT32F4xx STDPERIPH RCC">
+          <description>Window watchdog (WWDG) driver for FT32F4xx  </description>
+          <RTE_Components_h>
+            #define RTE_DEVICE_WWDG
+          </RTE_Components_h>
+          <files>
+            <file category="header" name="StdPeriph_Driver/inc/ft32f4xx_wwdg.h"/>
+            <file category="source" name="StdPeriph_Driver/src/ft32f4xx_wwdg.c"/>
+          </files>
+        </component>
+    <!-- END: FremontMicro Standard Peripherals Drivers -->
+    </components> 
+</package>

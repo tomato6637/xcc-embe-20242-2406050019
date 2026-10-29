@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         schemaVersion="1.7.46"
+         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.46/schema/PACK.xsd">
+   <vendor>Microchip</vendor>
+   <url>https://packs.download.microchip.com/</url>
+   <name>SAMRH71_DFP</name>
+   <description overview="./OVERVIEW.md">Microchip SAMRH71 Series Device Support</description>
+   <supportContact>https://www.microchip.com/en-us/support</supportContact>
+   <license>LICENSE.txt</license>
+   <licenseSets>
+      <licenseSet id="all" default="true" gating="false">
+         <license name="LICENSE.txt"
+                  title="Apache License, Version 2.0"
+                  spdx="Apache-2.0"
+                  url="https://www.apache.org/licenses/LICENSE-2.0"/>
+      </licenseSet>
+   </licenseSets>
+   <releases>
+      <release version="2.8.290" date="2026-02-18">
+		        - CMSIS flash loaders.
+	  </release>
+      <release version="2.7.288" date="2026-02-12">
+				- CMSIS System Initialization is now included as default. Define DISABLE_CMSIS_INIT to not include.
+				- Adds ARMCC scatter/linker script.
+				- DEVXML-7483 Interrupt handler in startup_(device).c changed: SVCall_Handler changed -&gt; SVC_Handler and NonMaskableInt_Handler -&gt; NMI_Handler.
+				- MPLABX-8879 Fix to resume debugger after breakpoint in ITCM memory.
+			</release>
+      <release version="2.6.253" date="2023-06-08">
+                    - Defined and enabled ITM support in device xml
+                    - Updated debug and programming scripts
+            </release>
+      <release version="2.5.142" date="2022-03-17">
+                - Headers minor version increased to v2.1.0.
+                - Changed integer constant literal macros from _Ux_ to _UNITxx_ (where xx is 32, 16 or 8) (MISRA C2012:R12.2).
+            </release>
+      <release version="2.4.127" date="2021-09-01">Fixed J-Link connecton issue.</release>
+      <release version="2.3.124" date="2021-07-02">Adjusted PIO value group names. Updated startup source code. Updated header files. Added instance headers. Updated MPLABX debug scripts. Updated XC32 content.</release>
+      <release version="2.2.112" date="2021-01-26">Added instance headers. Added FIFO information to FLEXCOM instances. Replaced WDT1 with RSWDT.</release>
+      <release version="2.1.105" date="2020-09-24">Added read device ID. Updated MPLAB X debug scripts. Fixed reading/writing configbits. Fixed extra prefix 'b' in comments of header files. Setup prerequisite for MPLAB v5.45 or newer.</release>
+      <release version="2.0.89" date="2020-04-28">Removed revision B device. Updated XC32 startup code. Updated MPLAB X debug scripts.</release>
+      <release version="1.2.79" date="2020-02-18">Updated data file for revision B device. Updated XC32 content. Updated MPLAB X debug scripts.</release>
+      <release version="1.1.67" date="2020-01-20">Added revision C device.</release>
+      <release version="1.0.42" date="2019-10-18">Initial release</release>
+   </releases>
+   <keywords>
+      <keyword>Microchip</keyword>
+      <keyword>Device Family Package Microchip</keyword>
+      <keyword>Device Support</keyword>
+      <keyword>SAMRH71</keyword>
+   </keywords>
+   <requirements>
+      <packages>
+         <package vendor="ARM" name="CMSIS"/>
+      </packages>
+   </requirements>
+   <devices>
+      <family Dfamily="SAMRH71" Dvendor="Microchip:3">
+         <processor Dcore="Cortex-M7"
+                    Dendian="Little-endian"
+                    Dmpu="MPU"
+                    Dfpu="DP_FPU"
+                    Ddsp="NO_DSP"
+                    Dtz="NO_TZ"
+                    Dmve="NO_MVE"
+                    Dclock="100000000"
+                    DcoreVersion="r1p1"/>
+         <environment name="microchip">
+            <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
+                            schemaVersion="1.0"
+                            xsi:schemaLocation="http://crownking/pack-device-microchip-extension PACK.DEVICE.MICROCHIP.EXTENSION.xsd"><!--https://schemas.microchip.com/com/microchip/packs/extensions/mchp/1.0/PACK.DEVICE.MICROCHIP.EXTENSION.xsd-->
+               <mchp:prerequisite component="MPLAB X IDE" version="[5.50-"/>
+               <mchp:prerequisite component="MPLAB X IPE" version="[5.10-"/>
+            </mchp:extension>
+         </environment>
+         <device Dname="ATSAMRH71F20B">
+            <deprecated>2020-03-26</deprecated>
+            <memory start="0" size="0xFFFFFFFF" id="IRAM1" startup="1"/>
+         </device>
+         <device Dname="ATSAMRH71F20C">
+            <processor Dcore="Cortex-M7"
+                       Dendian="Little-endian"
+                       Dmpu="MPU"
+                       Dfpu="DP_FPU"
+                       Ddsp="NO_DSP"
+                       Dtz="NO_TZ"
+                       Dmve="NO_MVE"
+                       Dclock="100000000"
+                       DcoreVersion="r1p1"/>
+            <debugconfig default="swd" clock="2000000"/>
+            <compile header="samrh71c/include/sam.h" define="__SAMRH71F20C__"/>
+            <debug svd="samrh71c/svd/ATSAMRH71F20C.svd"/>
+            <memory name="IFLASH"
+                    start="0x10000000"
+                    size="0x00020000"
+                    access="rx"
+                    default="1"
+                    startup="1"/>
+            <memory name="ITCM"
+                    start="0x00000000"
+                    size="0x00020000"
+                    default="1"
+                    access="rwx"/>
+            <memory name="DTCM" start="0x20000000" size="0x00040000" access="rwx"/>
+            <memory name="FlexRAM"
+                    start="0x21000000"
+                    size="0x000C0000"
+                    access="rwx"/>
+            <memory name="PERIPHERALS"
+                    start="0x40000000"
+                    size="0x20000000"
+                    access="rwp"/>
+            <memory name="SYSTEM" start="0xE0000000" size="0x10000000" access="rwp"/>
+            <debugport __dp="0">
+               <jtag/>
+               <swd/>
+            </debugport>
+            <trace>
+               <serialwire/>
+               <traceport/>
+            </trace>
+            <algorithm name="samrh71c/keil/Flash/ATSAMRH71F20C_FLASH.FLM"
+                       start="0x10000000"
+                       size="0x00020000"
+                       RAMstart="0x21000000"
+                       RAMsize="0xC0000"
+                       default="1"
+                       style="Keil"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
+                             schemaVersion="1.0"
+                             xsi:schemaLocation="http://www.atmel.com/schemas/pack-device-atmel-extension PACK.DEVICE.ATMEL.EXTENSION.xsd"><!--https://schemas.microchip.com/com/microchip/packs/extensions/at/1.0/PACK.DEVICE.ATMEL.EXTENSION.xsd-->
+                  <at:atdf name="samrh71c/atdf/ATSAMRH71F20C.atdf"/>
+                  <at:variant ordercode="ATSAMRH71F20C-7GB-E"
+                              vccmin="1.62"
+                              vccmax="3.6"
+                              tempmin="+25"
+                              tempmax="+25"/>
+                  <at:variant ordercode="ATSAMRH71F20C-7GB-MQ"
+                              vccmin="1.62"
+                              vccmax="3.6"
+                              tempmin="-55"
+                              tempmax="+125"/>
+                  <at:variant ordercode="ATSAMRH71F20C-7GB-SV"
+                              vccmin="1.62"
+                              vccmax="3.6"
+                              tempmin="-55"
+                              tempmax="+125"/>
+                  <at:memory name="PERIPHERALS"
+                             start="0x40000000"
+                             size="0x20000000"
+                             type="io"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="SYSTEM"
+                             start="0xE0000000"
+                             size="0x10000000"
+                             type="io"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="QSPIMEM"
+                             start="0x18000000"
+                             size="0x08000000"
+                             type="other"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="AXIMX"
+                             start="0x22000000"
+                             size="0x00100000"
+                             type="other"
+                             rw="RW"
+                             address-space="base"/>
+                  <at:memory name="ITCM"
+                             start="0x00000000"
+                             size="0x00020000"
+                             type="ram"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="IFLASH"
+                             start="0x10000000"
+                             size="0x00020000"
+                             type="flash"
+                             pagesize="256"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="DTCM"
+                             start="0x20000000"
+                             size="0x00040000"
+                             type="ram"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="FlexRAM"
+                             start="0x21000000"
+                             size="0x000C0000"
+                             type="ram"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:memory name="EBI_CSHEMC"
+                             start="0x60000000"
+                             size="0x80000000"
+                             type="other"
+                             rw="RW"
+                             exec="true"
+                             address-space="base"/>
+                  <at:interface type="samjtag" name="JTAG"/>
+                  <at:interface type="swd" name="SWD"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.ice4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.samice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="ARM" Cclass="CMSIS" Cgroup="CORE"/>
+                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="ARM" Cclass="CMSIS" Cgroup="CORE"/>
+                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="ARM-GCC"/>
+                  <at:prerequisite context="compiling" Tcompiler="IAR" component="ARM-IAR"/>
+                  <at:prerequisite context="compiling" Tcompiler="ARMCC" component="ARMCC"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
+                               schemaVersion="1.0"
+                               xsi:schemaLocation="http://crownking/pack-device-microchip-extension PACK.DEVICE.MICROCHIP.EXTENSION.xsd"><!--https://schemas.microchip.com/com/microchip/packs/extensions/mchp/1.0/PACK.DEVICE.MICROCHIP.EXTENSION.xsd-->
+                  <mchp:pic name="samrh71c/edc/ATSAMRH71F20C.PIC"/>
+                  <mchp:xc32 name="samrh71c/xc32"/>
+                  <mchp:hwtool type="mplab.mpheader">
+                     <mchp:file name="samrh71c/hwtools/mplab/MPHeader.xml"/>
+                  </mchp:hwtool>
+                  <mchp:hwtool type="mplab.pluginboardsupport">
+                     <mchp:file name="samrh71c/hwtools/mplab/PluginBoardSupport.xml"/>
+                  </mchp:hwtool>
+                  <mchp:hwtool type="sdm">
+                     <mchp:file name="samrh71c/hwtools/sdm/sdmCompilers.xml"/>
+                     <mchp:file name="samrh71c/hwtools/sdm/sdmDebuggerMap.xml"/>
+                     <mchp:file name="samrh71c/hwtools/sdm/sdmICD3.xml"/>
+                     <mchp:file name="samrh71c/hwtools/sdm/sdmICD4.xml"/>
+                     <mchp:file name="samrh71c/hwtools/sdm/sdmICD5.xml"/>
+                     <mchp:file name="samrh71c/hwtools/sdm/sdmICE4.xml"/>
+                     <mchp:file name="samrh71c/hwtools/sdm/sdmRealICE.xml"/>
+                     <mchp:file name="samrh71c/hwtools/sdm/sdmRealICE4.xml"/>
+                     <mchp:file name="samrh71c/hwtools/sdm/sdmSimulator.xml"/>
+                  </mchp:hwtool>
+                  <mchp:hwtool type="persfr">
+                     <mchp:file name="samrh71c/hwtools/persfr/arm32.persfr"/>
+                  </mchp:hwtool>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.50-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/en-us/product/ATSAMRH71F20C"
+                  title="Device page for ATSAMRH71F20C"/>
+            <book name="https://www.microchip.com/en-us/product/ATSAMRH71F20C#Documentation"
+                  title="Datasheet"/>
+            <book name="https://developer.arm.com/documentation/dui0646"
+                  title="Arm Cortex-M7 Devices Generic User Guide"/>
+            <feature type="NVIC" n="75"/>
+            <feature type="WDT" n="1"/>
+            <feature type="MPSerial" n="10"/>
+            <feature type="Memory" n="131072" name="ITCM"/>
+            <feature type="Memory" n="131072" name="IFLASH"/>
+            <feature type="Memory" n="262144" name="DTCM"/>
+            <feature type="Memory" n="786432" name="FlexRAM"/>
+            <feature type="VCC" n="1.62" m="3.6"/>
+            <feature type="Temp" n="-55" m="125"/>
+            <feature type="QFP" n="256"/>
+         </device>
+      </family>
+   </devices>
+   <conditions>
+      <condition id="ARMCC">
+         <accept Tcompiler="ARMCC"/>
+      </condition>
+      <condition id="ARMCC Exe">
+         <require condition="ARMCC"/>
+         <accept Toutput="exe"/>
+      </condition>
+      <condition id="ARMCC Lib">
+         <require condition="ARMCC"/>
+         <accept Toutput="lib"/>
+      </condition>
+      <condition id="GCC">
+         <accept Tcompiler="GCC"/>
+      </condition>
+      <condition id="GCC Exe">
+         <require condition="GCC"/>
+         <accept Toutput="exe"/>
+      </condition>
+      <condition id="GCC Lib">
+         <require condition="GCC"/>
+         <accept Toutput="lib"/>
+      </condition>
+      <condition id="IAR">
+         <accept Tcompiler="IAR"/>
+      </condition>
+      <condition id="IAR Exe">
+         <require condition="IAR"/>
+         <accept Toutput="exe"/>
+      </condition>
+      <condition id="IAR Lib">
+         <require condition="IAR"/>
+         <accept Toutput="lib"/>
+      </condition>
+      <condition id="XC">
+         <accept Tcompiler="XC"/>
+      </condition>
+      <condition id="XC Exe">
+         <require condition="XC"/>
+         <accept Toutput="exe"/>
+      </condition>
+      <condition id="XC Lib">
+         <require condition="XC"/>
+         <accept Toutput="lib"/>
+      </condition>
+      <condition id="C">
+         <accept condition="ARMCC"/>
+         <accept condition="GCC"/>
+         <accept condition="IAR"/>
+         <accept condition="XC"/>
+      </condition>
+      <condition id="C Exe">
+         <accept condition="ARMCC Exe"/>
+         <accept condition="GCC Exe"/>
+         <accept condition="IAR Exe"/>
+         <accept condition="XC Exe"/>
+      </condition>
+      <condition id="C Lib">
+         <accept condition="ARMCC Lib"/>
+         <accept condition="GCC Lib"/>
+         <accept condition="IAR Lib"/>
+         <accept condition="XC Lib"/>
+      </condition>
+      <condition id="ATSAMRH71F20C">
+         <require Dvendor="Microchip:3" Dname="ATSAMRH71F20C"/>
+         <require Cclass="CMSIS" Cgroup="CORE"/>
+      </condition>
+   </conditions>
+   <components>
+      <component Cvendor="Microchip"
+                 Cclass="Device"
+                 Cgroup="Startup"
+                 Cversion="2.8.0"
+                 condition="ATSAMRH71F20C">
+         <description>Headers and startup code for Microchip ATSAMRH71F20C</description>
+         <files>
+            <file condition="C" category="include" name="samrh71c/include/"/>
+            <file condition="C" category="header" name="samrh71c/include/sam.h"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="samrh71c/templates/main.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="samrh71c/templates/main.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="samrh71c/templates/library.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="samrh71c/templates/library.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="GCC Exe"
+                  category="source"
+                  name="samrh71c/gcc/gcc/startup_samrh71f20c.c"
+                  version="2.8.0"
+                  attr="config"/>
+            <file condition="GCC Exe"
+                  category="source"
+                  name="samrh71c/gcc/system_samrh71f20c.c"
+                  version="2.8.0"
+                  attr="config"/>
+            <file condition="GCC Exe"
+                  category="linkerScript"
+                  name="samrh71c/gcc/gcc/samrh71f20c_flash.ld"
+                  version="2.8.0"
+                  attr="config"/>
+            <file condition="GCC Exe"
+                  category="linkerScript"
+                  name="samrh71c/gcc/gcc/samrh71f20c_sram.ld"
+                  version="2.8.0"
+                  attr="config"/>
+            <file condition="ARMCC Exe"
+                  category="source"
+                  name="samrh71c/armcc/armcc/startup_samrh71f20c.c"
+                  version="2.8.0"
+                  attr="config"/>
+            <file condition="ARMCC Exe"
+                  category="source"
+                  name="samrh71c/armcc/system_samrh71f20c.c"
+                  version="2.8.0"
+                  attr="config"/>
+            <file condition="ARMCC Exe"
+                  category="linkerScript"
+                  name="samrh71c/armcc/armcc/samrh71f20c_flash.sct"
+                  version="2.8.0"
+                  attr="config"/>
+            <file condition="IAR Exe"
+                  category="source"
+                  name="samrh71c/iar/iar/startup_samrh71f20c.c"
+                  version="2.8.0"
+                  attr="config"/>
+            <file condition="IAR Exe"
+                  category="source"
+                  name="samrh71c/iar/system_samrh71f20c.c"
+                  version="2.8.0"
+                  attr="config"/>
+            <file condition="IAR Exe"
+                  category="linkerScript"
+                  name="samrh71c/iar/config/linker/Microchip/atsamrh71f20c/sram.icf"
+                  version="2.8.0"
+                  attr="config"/>
+            <file condition="IAR Exe"
+                  category="linkerScript"
+                  name="samrh71c/iar/config/linker/Microchip/atsamrh71f20c/flash.icf"
+                  version="2.8.0"
+                  attr="config"/>
+            <file condition="XC Exe"
+                  category="source"
+                  name="samrh71c/xc32/ATSAMRH71F20C/startup_atsamrh71f20c.c"
+                  version="2.8.0"
+                  attr="config"/>
+            <file condition="XC Exe"
+                  category="source"
+                  name="samrh71c/gcc/system_samrh71f20c.c"
+                  version="2.8.0"
+                  attr="config"/>
+            <file condition="XC Exe"
+                  category="linkerScript"
+                  name="samrh71c/xc32/ATSAMRH71F20C/ATSAMRH71F20C.ld"
+                  version="2.8.0"
+                  attr="config"/>
+         </files>
+      </component>
+   </components>
+   <taxonomy>
+      <description Cclass="Device" Cgroup="Startup">Device specific startup components</description>
+   </taxonomy>
+</package>

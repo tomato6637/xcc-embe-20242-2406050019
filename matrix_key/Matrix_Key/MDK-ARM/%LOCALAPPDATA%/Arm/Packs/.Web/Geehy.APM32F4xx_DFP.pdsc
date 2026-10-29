@@ -1,0 +1,1754 @@
+<?xml version="1.0"?>
+<package xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.5" xs:noNamespaceSchemaLocation="PACK.xsd">
+    <vendor>Geehy</vendor>
+    <name>APM32F4xx_DFP</name>
+    <description>Geehy Semiconductor APM32F4 Series Device Support, Drivers and Examples</description>
+    <url>https://global.geehy.com/uploads/tool/</url>
+    <supportContact>https://global.geehy.com/design/software</supportContact>
+    <releases>
+        
+        <release version="1.0.12" date="2026-06-25">Update url.</release>
+<release version="1.0.11" date="2025-12-31"> Add APM32F423 Devices.</release>
+        <release version="1.0.10" date="2025-11-24"> Update CMSIS.</release>
+        <release version="1.0.9" date="2025-06-27"> Add APM32F425CG Devices.</release>
+        <release version="1.0.8" date="2025-02-15"> Add APM32F425 Devices.</release>
+        <release version="1.0.7" date="2024-12-27"> Add APM32F402 Devices.</release>
+        <release version="1.0.6" date="2024-12-11"> Add APM32F403 Devices.</release>
+        <release version="1.0.5" date="2024-04-20"> Add APM32F427 Devices.</release>
+        <release version="1.0.4" date="2023-07-31"> Add APM32F411 Devices.</release>
+        <release version="1.0.3" date="2023-03-08"> Update APM32F465 Devices for 1.0.3.</release>
+        <release version="1.0.2" date="2022-06-25"> Update Library for 1.0.2.</release>
+        <release version="1.0.1" date="2022-02-25"> Update Library for 1.0.1.</release>
+        <release version="1.0.0" date="2021-09-14"> First Release version of APM32F4 Device Family Pack.</release>
+    </releases>
+    <keywords>
+        <!-- keywords for indexing -->
+        <keyword>Geehy</keyword>
+        <keyword>Device Support</keyword>
+        <keyword>Device Family Package Geehy Semiconductor</keyword>
+        <keyword>APM32F4</keyword>
+        <keyword>APM32</keyword>
+    </keywords>
+    <devices>
+        <family Dfamily="APM32F4 Series" Dvendor="Geehy:163">
+            <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="1" Dmpu="1" Dendian="Little-endian"/>
+            <book name="Documents/dui0553a_cortex_m4_dgug.pdf" title="Cortex-M4 Generic User Guide"/>
+            <description>Geehy Semiconductor APM32F4 Series Device Support, Drivers, Libraries and Examples</description>
+            <feature type="WDT" n="2"/>
+            <feature type="RTC" n="32768"/>
+            <feature type="CAN" n="2"/>
+            <feature type="USBD" n="2"/>
+            <feature type="VCC" n="2.00" m="3.60"/>
+            <feature type="Temp" n="-40" m="85"/>
+            <feature type="Temp" n="-40" m="105"/>
+            <!-- ************************  Subfamily 'APM32F405'  **************************** -->
+            <subFamily DsubFamily="APM32F405">
+                <processor Dclock="168000000"/>
+                <debug svd="SVD/APM32F40x.svd"/>
+                <book name="Documents/DATASHEET.pdf" title="APM32F4"/>
+                <feature type="Timer" n="12" m="16"/>
+                <feature type="DAC" n="2" m="12"/>
+                <feature type="SPI" n="3" m="37500000"/>
+                <feature type="USART" n="4" m="10500000"/>
+                <feature type="UART" n="2" m="10500000"/>
+                <feature type="USBOTG" n="3"/>
+                <feature type="CAN" n="2"/>
+                <feature type="SDIO" n="1" m="8" name="Secure Digital IO"/>
+                <feature type="ETH" n="1" m="100000000"/>
+                <feature type="VCC" n="1.80" m="3.60"/>
+                <feature type="Camera" n="1" m="14"/>
+                <!-- *************************  Device 'APM32F405RG'  ***************************** -->
+                <device Dname="APM32F405RG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="51"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F405VG'  ***************************** -->
+                <device Dname="APM32F405VG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="82"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F405ZG'  ***************************** -->
+                <device Dname="APM32F405ZG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="114"/>
+                    <feature type="ADC" n="24" m="12"/>
+                </device>
+            </subFamily>
+            <!-- ************************  Subfamily 'APM32F407'  **************************** -->
+            <subFamily DsubFamily="APM32F407">
+                <processor Dclock="168000000"/>
+                <debug svd="SVD/APM32F40x.svd"/>
+                <book name="Documents/DATASHEET.pdf" title="APM32F4"/>
+                <feature type="Timer" n="12" m="16"/>
+                <feature type="DAC" n="2" m="12"/>
+                <feature type="SPI" n="3" m="37500000"/>
+                <feature type="USART" n="4" m="10500000"/>
+                <feature type="UART" n="2" m="10500000"/>
+                <feature type="USBOTG" n="3"/>
+                <feature type="CAN" n="2"/>
+                <feature type="SDIO" n="1" m="8" name="Secure Digital IO"/>
+                <feature type="ETH" n="1" m="100000000"/>
+                <feature type="VCC" n="1.80" m="3.60"/>
+                <feature type="Camera" n="1" m="14"/>
+                <!-- *************************  Device 'APM32F407RE'  ***************************** -->
+                <device Dname="APM32F407RE">
+                    <memory id="IROM1" start="0x08000000" size="0x00080000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_512.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="51"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F407VE'  ***************************** -->
+                <device Dname="APM32F407VE">
+                    <memory id="IROM1" start="0x08000000" size="0x00080000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_512.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="82"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F407ZE'  ***************************** -->
+                <device Dname="APM32F407ZE">
+                    <memory id="IROM1" start="0x08000000" size="0x00080000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_512.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="114"/>
+                    <feature type="ADC" n="24" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F407IE'  ***************************** -->
+                <device Dname="APM32F407IE">
+                    <memory id="IROM1" start="0x08000000" size="0x00080000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_512.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="140"/>
+                    <feature type="ADC" n="24" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F407RG'  ***************************** -->
+                <device Dname="APM32F407RG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="51"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F407VG'  ***************************** -->
+                <device Dname="APM32F407VG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="82"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F407ZG'  ***************************** -->
+                <device Dname="APM32F407ZG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="114"/>
+                    <feature type="ADC" n="24" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F407IG'  ***************************** -->
+                <device Dname="APM32F407IG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="140"/>
+                    <feature type="ADC" n="24" m="12"/>
+                </device>
+            </subFamily>
+            <!-- ************************  Subfamily 'APM32F415'  **************************** -->
+            <subFamily DsubFamily="APM32F415">
+                <processor Dclock="168000000"/>
+                <debug svd="SVD/APM32F41x.svd"/>
+                <book name="Documents/DATASHEET.pdf" title="APM32F4"/>
+                <feature type="Timer" n="12" m="16"/>
+                <feature type="DAC" n="2" m="12"/>
+                <feature type="SPI" n="3" m="37500000"/>
+                <feature type="USART" n="4" m="10500000"/>
+                <feature type="UART" n="2" m="10500000"/>
+                <feature type="USBOTG" n="3"/>
+                <feature type="CAN" n="2"/>
+                <feature type="SDIO" n="1" m="8" name="Secure Digital IO"/>
+                <feature type="ETH" n="1" m="100000000"/>
+                <feature type="VCC" n="1.80" m="3.60"/>
+                <feature type="Camera" n="1" m="14"/>
+                <!-- *************************  Device 'APM32F415RG'  ***************************** -->
+                <device Dname="APM32F415RG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="51"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F415VG'  ***************************** -->
+                <device Dname="APM32F415VG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="82"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F415ZG'  ***************************** -->
+                <device Dname="APM32F415ZG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="114"/>
+                    <feature type="ADC" n="24" m="12"/>
+                </device>
+            </subFamily>
+            <!-- ************************  Subfamily 'APM32F417'  **************************** -->
+            <subFamily DsubFamily="APM32F417">
+                <processor Dclock="168000000"/>
+                <debug svd="SVD/APM32F41x.svd"/>
+                <book name="Documents/DATASHEET.pdf" title="APM32F4"/>
+                <feature type="Timer" n="12" m="16"/>
+                <feature type="DAC" n="2" m="12"/>
+                <feature type="SPI" n="3" m="37500000"/>
+                <feature type="USART" n="4" m="10500000"/>
+                <feature type="UART" n="2" m="10500000"/>
+                <feature type="USBOTG" n="3"/>
+                <feature type="CAN" n="2"/>
+                <feature type="SDIO" n="1" m="8" name="Secure Digital IO"/>
+                <feature type="ETH" n="1" m="100000000"/>
+                <feature type="VCC" n="1.80" m="3.60"/>
+                <feature type="Camera" n="1" m="14"/>
+                <!-- *************************  Device 'APM32F417VE'  ***************************** -->
+                <device Dname="APM32F417VE">
+                    <memory id="IROM1" start="0x08000000" size="0x00080000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_512.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="82"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F417ZE'  ***************************** -->
+                <device Dname="APM32F417ZE">
+                    <memory id="IROM1" start="0x08000000" size="0x00080000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_512.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="114"/>
+                    <feature type="ADC" n="24" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F417IE'  ***************************** -->
+                <device Dname="APM32F417IE">
+                    <memory id="IROM1" start="0x08000000" size="0x00080000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_512.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="140"/>
+                    <feature type="ADC" n="24" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F417VG'  ***************************** -->
+                <device Dname="APM32F417VG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="82"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F417ZG'  ***************************** -->
+                <device Dname="APM32F417ZG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="114"/>
+                    <feature type="ADC" n="24" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F417IG'  ***************************** -->
+                <device Dname="APM32F417IG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="140"/>
+                    <feature type="ADC" n="24" m="12"/>
+                </device>
+            </subFamily>
+            <!-- ************************  Subfamily 'APM32F411'  **************************** -->
+            <subFamily DsubFamily="APM32F411">
+                <processor Dclock="100000000"/>
+                <debug svd="SVD/APM32F411.svd"/>
+                <book name="Documents/DATASHEET.pdf" title="APM32F4"/>
+                <feature type="Timer" n="12" m="16"/>
+                <feature type="DAC" n="2" m="12"/>
+                <feature type="SPI" n="3" m="37500000"/>
+                <feature type="USART" n="4" m="10500000"/>
+                <feature type="UART" n="2" m="10500000"/>
+                <feature type="USBOTG" n="3"/>
+                <feature type="CAN" n="2"/>
+                <feature type="SDIO" n="1" m="8" name="Secure Digital IO"/>
+                <feature type="VCC" n="1.80" m="3.60"/>
+                <!-- *************************  Device 'APM32F411VC'  ***************************** -->
+                <device Dname="APM32F411VC">
+                    <memory id="IROM1" start="0x08000000" size="0x00040000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <algorithm name="Flash/APM32F4xx_256.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="81"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F411VE'  ***************************** -->
+                <device Dname="APM32F411VE">
+                    <memory id="IROM1" start="0x08000000" size="0x00080000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <algorithm name="Flash/APM32F4xx_512.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="81"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F411RC'  ***************************** -->
+                <device Dname="APM32F411RC">
+                    <memory id="IROM1" start="0x08000000" size="0x00040000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <algorithm name="Flash/APM32F4xx_256.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="50"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F411RE'  ***************************** -->
+                <device Dname="APM32F411RE">
+                    <memory id="IROM1" start="0x08000000" size="0x00080000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <algorithm name="Flash/APM32F4xx_512.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="50"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F411CC'  ***************************** -->
+                <device Dname="APM32F411CC">
+                    <memory id="IROM1" start="0x08000000" size="0x00040000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <algorithm name="Flash/APM32F4xx_256.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="36"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F411CE'  ***************************** -->
+                <device Dname="APM32F411CE">
+                    <memory id="IROM1" start="0x08000000" size="0x00080000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <algorithm name="Flash/APM32F4xx_512.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="36"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+            </subFamily>
+            <!-- ************************  Subfamily 'APM32F465'  **************************** -->
+            <subFamily DsubFamily="APM32F465">
+                <processor Dclock="168000000"/>
+                <debug svd="SVD/APM32F465.svd"/>
+                <book name="Documents/DATASHEET.pdf" title="APM32F465"/>
+                <feature type="Timer" n="12" m="16"/>
+                <feature type="DAC" n="2" m="12"/>
+                <feature type="SPI" n="3" m="37500000"/>
+                <feature type="USART" n="4" m="10500000"/>
+                <feature type="UART" n="2" m="10500000"/>
+                <feature type="USBOTG" n="3"/>
+                <feature type="CAN" n="2"/>
+                <feature type="SDIO" n="1" m="8" name="Secure Digital IO"/>
+                <feature type="VCC" n="1.80" m="3.60"/>
+                <feature type="Camera" n="1" m="14"/>
+                <!-- *************************  Device 'APM32F465VE'  ***************************** -->
+                <device Dname="APM32F465VE">
+                    <memory id="IROM1" start="0x08000000" size="0x00080000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F465_512.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F465xx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F465_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="82"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F465RE'  ***************************** -->
+                <device Dname="APM32F465RE">
+                    <memory id="IROM1" start="0x08000000" size="0x00080000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F465_512.FLM" start="0x08000000" size="0x00080000" default="1"/>
+                    <algorithm name="Flash/APM32F465xx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F465_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="51"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+            </subFamily>
+            <!-- ************************  Subfamily 'APM32F423'  **************************** -->
+            <subFamily DsubFamily="APM32F423">
+                <processor Dclock="192000000"/>
+                <debug svd="SVD/APM32F423.svd"/>
+                <book name="Documents/DATASHEET.pdf" title="APM32F423"/>
+                <feature type="Timer" n="12" m="16"/>
+                <feature type="DAC" n="2" m="12"/>
+                <feature type="SPI" n="3" m="60000000"/>
+                <feature type="USART" n="4" m="10500000"/>
+                <feature type="UART" n="2" m="5250000"/>
+                <feature type="USBOTG" n="3"/>
+                <feature type="CAN" n="2"/>
+                <feature type="SDIO" n="1" m="8" name="Secure Digital IO"/>
+                <feature type="VCC" n="1.80" m="3.60"/>
+                <feature type="Camera" n="1" m="14"/>
+                <!-- *************************  Device 'APM32F423ZG'  ***************************** -->
+                <device Dname="APM32F423ZG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00050000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="114"/>
+                    <feature type="ADC" n="24" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F423VG'  ***************************** -->
+                <device Dname="APM32F423VG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00050000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="82"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F423RG'  ***************************** -->
+                <device Dname="APM32F423RG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00050000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="51"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F423CG'  ***************************** -->
+                <device Dname="APM32F423CG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00050000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="37"/>
+                    <feature type="ADC" n="10" m="12"/>
+                </device>
+            </subFamily>
+            <!-- ************************  Subfamily 'APM32F425'  **************************** -->
+            <subFamily DsubFamily="APM32F425">
+                <processor Dclock="240000000"/>
+                <debug svd="SVD/APM32F425.svd"/>
+                <book name="Documents/DATASHEET.pdf" title="APM32F425"/>
+                <feature type="Timer" n="12" m="16"/>
+                <feature type="DAC" n="2" m="12"/>
+                <feature type="SPI" n="3" m="60000000"/>
+                <feature type="USART" n="4" m="10500000"/>
+                <feature type="UART" n="2" m="5250000"/>
+                <feature type="USBOTG" n="3"/>
+                <feature type="CAN" n="2"/>
+                <feature type="SDIO" n="1" m="8" name="Secure Digital IO"/>
+                <feature type="VCC" n="1.80" m="3.60"/>
+                <feature type="Camera" n="1" m="14"/>
+                <!-- *************************  Device 'APM32F425ZG'  ***************************** -->
+                <device Dname="APM32F425ZG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="114"/>
+                    <feature type="ADC" n="24" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F425VG'  ***************************** -->
+                <device Dname="APM32F425VG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="82"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F425RG'  ***************************** -->
+                <device Dname="APM32F425RG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="51"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F425CG'  ***************************** -->
+                <device Dname="APM32F425CG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00020000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="37"/>
+                    <feature type="ADC" n="10" m="12"/>
+                </device>
+            </subFamily>
+            <!-- ************************  Subfamily 'APM32F427'  **************************** -->
+            <subFamily DsubFamily="APM32F427">
+                <processor Dclock="240000000"/>
+                <debug svd="SVD/APM32F427.svd"/>
+                <book name="Documents/DATASHEET.pdf" title="APM32F427"/>
+                <feature type="Timer" n="12" m="16"/>
+                <feature type="DAC" n="2" m="12"/>
+                <feature type="SPI" n="3" m="60000000"/>
+                <feature type="USART" n="4" m="10500000"/>
+                <feature type="UART" n="2" m="5250000"/>
+                <feature type="USBOTG" n="3"/>
+                <feature type="CAN" n="2"/>
+                <feature type="SDIO" n="1" m="8" name="Secure Digital IO"/>
+                <feature type="VCC" n="1.80" m="3.60"/>
+                <feature type="Camera" n="1" m="14"/>
+                <!-- *************************  Device 'APM32F427ZG'  ***************************** -->
+                <device Dname="APM32F427ZG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00060000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="114"/>
+                    <feature type="ADC" n="24" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F427VG'  ***************************** -->
+                <device Dname="APM32F427VG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00060000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="82"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F427RG'  ***************************** -->
+                <device Dname="APM32F427RG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00060000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="51"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F427CG'  ***************************** -->
+                <device Dname="APM32F427CG">
+                    <memory id="IROM1" start="0x08000000" size="0x00100000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00060000" init="0" default="1"/>
+                    <memory id="IRAM2" start="0x10000000" size="0x00010000" init="0" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_1024.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F40xxx_41xxx_OPT.FLM" start="0x1FFFC000" size="0x00000004" default="0"/>
+                    <algorithm name="Flash/APM32F4xx_OTP.FLM" start="0x1FFF7800" size="0x00000210" default="0"/>
+                    <feature type="IOs" n="37"/>
+                    <feature type="ADC" n="10" m="12"/>
+                </device>
+            </subFamily>
+            <!-- ************************  Subfamily 'APM32F403'  **************************** -->
+            <subFamily DsubFamily="APM32F403">
+                <processor Dclock="120000000"/>
+                <debug svd="SVD/APM32F403.svd"/>
+                <book name="Documents/DATASHEET.pdf" title="APM32F4"/>
+                <feature type="Timer" n="6" m="16"/>
+                <feature type="SPI" n="2" m="37500000"/>
+                <feature type="USART" n="4" m="10500000"/>
+                <feature type="UART" n="2" m="10500000"/>
+                <feature type="USBOTG" n="1"/>
+                <feature type="CAN" n="2"/>
+                <feature type="I2C" n="1"/>
+                <feature type="VCC" n="1.80" m="3.60"/>
+                <!-- *************************  Device 'APM32F403TB'  ***************************** -->
+                <device Dname="APM32F403TB">
+                    <memory id="IROM1" start="0x08000000" size="0x00020000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00008000" init="0" default="1"/>
+                    <algorithm name="Flash/APM32F403_128.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F403_OPT.FLM" start="0x1FFFF800" size="0x00000010" default="0"/>
+                    <feature type="IOs" n="26"/>
+                    <feature type="ADC" n="10" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F403CB'  ***************************** -->
+                <device Dname="APM32F403CB">
+                    <memory id="IROM1" start="0x08000000" size="0x00020000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00008000" init="0" default="1"/>
+                    <algorithm name="Flash/APM32F403_128.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F403_OPT.FLM" start="0x1FFFF800" size="0x00000010" default="0"/>
+                    <feature type="IOs" n="40"/>
+                    <feature type="ADC" n="10" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F403RB'  ***************************** -->
+                <device Dname="APM32F403RB">
+                    <memory id="IROM1" start="0x08000000" size="0x00020000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00008000" init="0" default="1"/>
+                    <algorithm name="Flash/APM32F403_128.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F403_OPT.FLM" start="0x1FFFF800" size="0x00000010" default="0"/>
+                    <feature type="IOs" n="51"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+            </subFamily>
+            <!-- ************************  Subfamily 'APM32F402'  **************************** -->
+            <subFamily DsubFamily="APM32F402">
+                <processor Dclock="120000000"/>
+                <debug svd="SVD/APM32F402.svd"/>
+                <book name="Documents/DATASHEET.pdf" title="APM32F4"/>
+                <feature type="Timer" n="6" m="16"/>
+                <feature type="SPI" n="2" m="37500000"/>
+                <feature type="USART" n="4" m="10500000"/>
+                <feature type="UART" n="2" m="10500000"/>
+                <feature type="USBOTG" n="1"/>
+                <feature type="CAN" n="2"/>
+                <feature type="I2C" n="1"/>
+                <feature type="VCC" n="1.80" m="3.60"/>
+                <!-- *************************  Device 'APM32F402TB'  ***************************** -->
+                <device Dname="APM32F402TB">
+                    <memory id="IROM1" start="0x08000000" size="0x00020000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00008000" init="0" default="1"/>
+                    <algorithm name="Flash/APM32F402_128.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F402_OPT.FLM" start="0x1FFFF800" size="0x00000010" default="0"/>
+                    <feature type="IOs" n="26"/>
+                    <feature type="ADC" n="10" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F402CB'  ***************************** -->
+                <device Dname="APM32F402CB">
+                    <memory id="IROM1" start="0x08000000" size="0x00020000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00008000" init="0" default="1"/>
+                    <algorithm name="Flash/APM32F402_128.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F402_OPT.FLM" start="0x1FFFF800" size="0x00000010" default="0"/>
+                    <feature type="IOs" n="40"/>
+                    <feature type="ADC" n="10" m="12"/>
+                </device>
+                <!-- *************************  Device 'APM32F402RB'  ***************************** -->
+                <device Dname="APM32F402RB">
+                    <memory id="IROM1" start="0x08000000" size="0x00020000" startup="1" default="1"/>
+                    <memory id="IRAM1" start="0x20000000" size="0x00008000" init="0" default="1"/>
+                    <algorithm name="Flash/APM32F402_128.FLM" start="0x08000000" size="0x00100000" default="1"/>
+                    <algorithm name="Flash/APM32F402_OPT.FLM" start="0x1FFFF800" size="0x00000010" default="0"/>
+                    <feature type="IOs" n="51"/>
+                    <feature type="ADC" n="16" m="12"/>
+                </device>
+            </subFamily>
+        </family>
+    </devices>
+    <!--APM32F4xx conditions-->
+    <conditions>
+        <!-- conditions selecting Compiler -->
+        <condition id="Compiler ARMCC">
+            <require Tcompiler="ARMCC"/>
+        </condition>
+        <!--APM32F405xx Device Conditions-->
+        <condition id="APM32F405xx">
+            <description>Geehy Semiconductor APM32F405xx Series devices</description>
+            <require Dvendor="Geehy:163" Dname="APM32F405*"/>
+        </condition>
+        <!--APM32F407xx Device Conditions-->
+        <condition id="APM32F407xx">
+            <description>Geehy Semiconductor APM32F407xx Series devices</description>
+            <require Dvendor="Geehy:163" Dname="APM32F407*"/>
+        </condition>
+        <!--APM32F415xx Device Conditions-->
+        <condition id="APM32F415xx">
+            <description>Geehy Semiconductor APM32F415xx Series devices</description>
+            <require Dvendor="Geehy:163" Dname="APM32F415*"/>
+        </condition>
+        <!--APM32F417xx Device Conditions-->
+        <condition id="APM32F417xx">
+            <description>Geehy Semiconductor APM32F417xx Series devices</description>
+            <require Dvendor="Geehy:163" Dname="APM32F417*"/>
+        </condition>
+        <!--APM32F411xx Device Conditions-->
+        <condition id="APM32F411xx">
+            <description>Geehy Semiconductor APM32F411xx Series devices</description>
+            <require Dvendor="Geehy:163" Dname="APM32F411*"/>
+        </condition>
+        <!--APM32F465xx Device Conditions-->
+        <condition id="APM32F465xx">
+            <description>Geehy Semiconductor APM32F465xx Series devices</description>
+            <require Dvendor="Geehy:163" Dname="APM32F465*"/>
+        </condition>
+        <!--APM32F423xx Device Conditions-->
+        <condition id="APM32F423xx">
+            <description>Geehy Semiconductor APM32F423xx Series devices</description>
+            <require Dvendor="Geehy:163" Dname="APM32F423*"/>
+        </condition>
+        <!--APM32F425xx Device Conditions-->
+        <condition id="APM32F425xx">
+            <description>Geehy Semiconductor APM32F425xx Series devices</description>
+            <require Dvendor="Geehy:163" Dname="APM32F425*"/>
+        </condition>
+        <!--APM32F427xx Device Conditions-->
+        <condition id="APM32F427xx">
+            <description>Geehy Semiconductor APM32F427xx Series devices</description>
+            <require Dvendor="Geehy:163" Dname="APM32F427*"/>
+        </condition>
+        <!--APM32F403xx Device Conditions-->
+        <condition id="APM32F403xx">
+            <description>Geehy Semiconductor APM32F403xx Series devices</description>
+            <require Dvendor="Geehy:163" Dname="APM32F403*"/>
+        </condition>
+        <!--APM32F402xx Device Conditions-->
+        <condition id="APM32F402xx">
+            <description>Geehy Semiconductor APM32F402xx Series devices</description>
+            <require Dvendor="Geehy:163" Dname="APM32F402*"/>
+        </condition>
+        <!--APM32F405 ARMCC Conditions -->
+        <condition id="APM32F405 ARMCC">
+            <description>filter for APM32F405 Device and the ARM compiler</description>
+            <accept condition="APM32F405xx"/>
+            <require Tcompiler="ARMCC"/>
+        </condition>
+        <!--APM32F407 ARMCC Conditions -->
+        <condition id="APM32F407 ARMCC">
+            <description>filter for APM32F407 Device and the ARM compiler</description>
+            <accept condition="APM32F407xx"/>
+            <require Tcompiler="ARMCC"/>
+        </condition>
+        <!--APM32F415 ARMCC Conditions -->
+        <condition id="APM32F415 ARMCC">
+            <description>filter for APM32F415 Device and the ARM compiler</description>
+            <accept condition="APM32F415xx"/>
+            <require Tcompiler="ARMCC"/>
+        </condition>
+        <!--APM32F417 ARMCC Conditions -->
+        <condition id="APM32F417 ARMCC">
+            <description>filter for APM32F417 Device and the ARM compiler</description>
+            <accept condition="APM32F417xx"/>
+            <require Tcompiler="ARMCC"/>
+        </condition>
+        <!--APM32F411 ARMCC Conditions -->
+        <condition id="APM32F411 ARMCC">
+            <description>filter for APM32F411 Device and the ARM compiler</description>
+            <accept condition="APM32F411xx"/>
+            <require Tcompiler="ARMCC"/>
+        </condition>
+        <!--APM32F465 ARMCC Conditions -->
+        <condition id="APM32F465xx ARMCC">
+            <description>filter for APM32F465 Device and the ARM compiler</description>
+            <require condition="APM32F465xx"/>
+            <require Tcompiler="ARMCC"/>
+        </condition>
+        <!--APM32F423 ARMCC Conditions -->
+        <condition id="APM32F423 ARMCC">
+            <description>filter for APM32F423 Device and the ARM compiler</description>
+            <accept condition="APM32F423xx"/>
+            <require Tcompiler="ARMCC"/>
+        </condition>
+        <!--APM32F425 ARMCC Conditions -->
+        <condition id="APM32F425 ARMCC">
+            <description>filter for APM32F425 Device and the ARM compiler</description>
+            <accept condition="APM32F425xx"/>
+            <require Tcompiler="ARMCC"/>
+        </condition>
+        <!--APM32F427 ARMCC Conditions -->
+        <condition id="APM32F427 ARMCC">
+            <description>filter for APM32F427 Device and the ARM compiler</description>
+            <accept condition="APM32F427xx"/>
+            <require Tcompiler="ARMCC"/>
+        </condition>
+        <!--APM32F402_403 ARMCC Conditions -->
+        <condition id="APM32F402_403 ARMCC">
+            <description>filter for APM32F402_403 Device and the ARM compiler</description>
+            <accept condition="APM32F402xx"/>
+            <accept condition="APM32F403xx"/>
+            <require Tcompiler="ARMCC"/>
+        </condition>
+        <!--APM32F4xx CMSIS Conditions -->
+        <condition id="APM32F4xx CMSIS">
+            <description>Geehy Semiconductor APM32F4xx Device with CMSIS</description>
+            <accept condition="APM32F405xx"/>
+            <accept condition="APM32F407xx"/>
+            <accept condition="APM32F415xx"/>
+            <accept condition="APM32F417xx"/>
+            <accept condition="APM32F411xx"/>
+            <accept condition="APM32F423xx"/>
+            <accept condition="APM32F425xx"/>
+            <accept condition="APM32F427xx"/>
+            <require Cclass="CMSIS" Cgroup="CORE"/>
+        </condition>
+        <!--APM32F402_403 CMSIS Conditions -->
+        <condition id="APM32F402_403 CMSIS">
+            <description>Geehy Semiconductor APM32F402_403 Device with CMSIS</description>
+            <accept condition="APM32F402xx"/>
+            <accept condition="APM32F403xx"/>
+            <require Cclass="CMSIS" Cgroup="CORE"/>
+        </condition>
+        <!--APM32F465 CMSIS Conditions -->
+        <condition id="APM32F465xx CMSIS">
+            <description>Geehy Semiconductor APM32F465 Device with CMSIS</description>
+            <require condition="APM32F465xx"/>
+            <require Cclass="CMSIS" Cgroup="CORE"/>
+        </condition>
+        <!--APM32F4xx STDPERIPH Conditions -->
+        <condition id="APM32F4xx STDPERIPH">
+            <description>Geehy Semiconductor APM32F4xx with Standard Peripherals Drivers Framework</description>
+            <require condition="APM32F4xx CMSIS"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework"/>
+        </condition>
+        <!--APM32F402_403 STDPERIPH Conditions -->
+        <condition id="APM32F402_403 STDPERIPH">
+            <description>Geehy Semiconductor APM32F402_403 with Standard Peripherals Drivers Framework</description>
+            <require condition="APM32F402_403 CMSIS"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework"/>
+        </condition>
+        <!--APM32F465 STDPERIPH Conditions -->
+        <condition id="APM32F465xx STDPERIPH">
+            <description>Geehy Semiconductor APM32F465 with Standard Peripherals Drivers Framework</description>
+            <require condition="APM32F465xx CMSIS"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework"/>
+        </condition>
+        <!--APM32F4xx STDPERIPH RCM Conditions-->
+        <condition id="APM32F4xx STDPERIPH RCM">
+            <description>Geehy Semiconductor APM32F4xx with Standard Peripherals Drivers Framework and RCM</description>
+            <require condition="APM32F4xx CMSIS"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="RCM"/>
+        </condition>
+        <!--APM32F402_403 STDPERIPH RCM Conditions-->
+        <condition id="APM32F402_403 STDPERIPH RCM">
+            <description>Geehy Semiconductor APM32F402_403 with Standard Peripherals Drivers Framework and RCM</description>
+            <require condition="APM32F402_403 CMSIS"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="RCM"/>
+        </condition>
+        <!--APM32F465 STDPERIPH RCM Conditions-->
+        <condition id="APM32F465xx STDPERIPH RCM">
+            <description>Geehy Semiconductor APM32F465 with Standard Peripherals Drivers Framework and RCM</description>
+            <require condition="APM32F465xx CMSIS"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework"/>
+            <require Cclass="Device" Cgroup="StdPeriph Drivers" Csub="RCM"/>
+        </condition>
+    </conditions>
+    <!--APM32F4xx Standard Peripherals Drivers-->
+    <components>
+        <!--Startup-->
+        <component Cclass="Device" Cgroup="Startup" Cversion="1.0.2" condition="APM32F4xx CMSIS">
+            <description>System Startup for Geehy Semiconductor APM32F4xx device series</description>
+            <files>
+                <!--  include folder -->
+                <file category="include" name="Device/CMSIS/Include/"/>
+                <file category="include" name="Device/Device/Geehy/APM32F4xx/Include/"/>
+                <!-- startup files -->
+                <file category="source" name="Device/Device/Geehy/APM32F4xx/Source/arm/startup_apm32f405xx.s" attr="config" version="1.0.0" condition="APM32F405 ARMCC"/>
+                <file category="source" name="Device/Device/Geehy/APM32F4xx/Source/arm/startup_apm32f407xx.s" attr="config" version="1.0.0" condition="APM32F407 ARMCC"/>
+                <file category="source" name="Device/Device/Geehy/APM32F4xx/Source/arm/startup_apm32f415xx.s" attr="config" version="1.0.0" condition="APM32F415 ARMCC"/>
+                <file category="source" name="Device/Device/Geehy/APM32F4xx/Source/arm/startup_apm32f417xx.s" attr="config" version="1.0.0" condition="APM32F417 ARMCC"/>
+                <file category="source" name="Device/Device/Geehy/APM32F4xx/Source/arm/startup_apm32f411xx.s" attr="config" version="1.0.0" condition="APM32F411 ARMCC"/>
+                <file category="source" name="Device/Device/Geehy/APM32F4xx/Source/arm/startup_apm32f423xx.s" attr="config" version="1.0.0" condition="APM32F423 ARMCC"/>
+                <file category="source" name="Device/Device/Geehy/APM32F4xx/Source/arm/startup_apm32f425xx.s" attr="config" version="1.0.0" condition="APM32F425 ARMCC"/>
+                <file category="source" name="Device/Device/Geehy/APM32F4xx/Source/arm/startup_apm32f427xx.s" attr="config" version="1.0.0" condition="APM32F427 ARMCC"/>
+                <file category="source" name="Device/Device/Geehy/APM32F402_403/Source/arm/startup_apm32f402_403.s" attr="config" version="1.0.0" condition="APM32F402_403 ARMCC"/>
+                <!-- system file -->
+                <file category="source" name="Device/Device/Geehy/APM32F4xx/Source/system_apm32f4xx.c" attr="config" version="1.0.4"/>
+                <!-- device configuration required by drivers at the moment -->
+            </files>
+        </component>
+        <!-- START: Geehy Semiconductor Standard Peripherals Drivers -->
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework" Cversion="1.0.4" condition="APM32F4xx STDPERIPH">
+            <description>Standard Peripherals Drivers Framework</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_FRAMEWORK</RTE_Components_h>
+            <files>
+                <file category="include" name="Device/APM32F4xx_StdPeriphDriver/inc/"/>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_misc.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_misc.c"/>
+                <file category="header" name="Device/Templates/apm32f4xx_int.h" attr="template" select="Interrupt Service Routines"/>
+                <file category="source" name="Device/Templates/apm32f4xx_int.c" attr="template" select="Interrupt Service Routines"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="ADC" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>Analog-to-digital converter (ADC) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_ADC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_adc.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_adc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CAN" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>Controller area network (CAN) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_CAN</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_can.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_can.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CRC" Cversion="1.0.4" condition="APM32F4xx STDPERIPH">
+            <description>CRC calculation unit (CRC) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_CRC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_crc.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_crc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CRYP" Cversion="1.0.4" condition="APM32F4xx STDPERIPH">
+            <description>Cryptographic processor (CRYP) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_CRYP</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_cryp.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_cryp.c"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_cryp_aes.c"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_cryp_des.c"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_cryp_tdes.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DAC" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>Digital-to-analog converter (DAC) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_DAC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_dac.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_dac.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DBGMCU" Cversion="1.0.4" condition="APM32F4xx STDPERIPH">
+            <description>MCU debug component (DBGMCU) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_DBGMCU</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_dbgmcu.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_dbgmcu.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DCI" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>Digital camera interface (DCI) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_DCI</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_dci.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_dci.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DMA" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>DMA controller (DMA) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_DMA</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_dma.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_dma.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DMC" Cversion="1.0.4" condition="APM32F4xx STDPERIPH">
+            <description>SDRC driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_SDRC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_dmc.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_dmc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="EINT" Cversion="1.0.4" condition="APM32F4xx STDPERIPH">
+            <description>External interrupt/event controller (EINT) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_EINT</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_eint.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_eint.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="ETH" Cversion="1.0.4" condition="APM32F4xx STDPERIPH">
+            <description>Ethernet controller (ETH) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_EINT</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_eth.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_eth.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="FMC" Cversion="1.0.4" condition="APM32F4xx STDPERIPH">
+            <description>Flash memory controller driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_FMC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_fmc.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_fmc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="GPIO" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>General-purpose I/O (GPIO) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_GPIO</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_gpio.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_gpio.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="HASH" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>Hash processor (HASH) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_HASH</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_hash.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_hash.c"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_hash_md5.c"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_hash_sha1.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="I2C" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>Inter-integrated circuit (I2C) interface driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_I2C</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_i2c.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_i2c.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="IWDT" Cversion="1.0.4" condition="APM32F4xx STDPERIPH">
+            <description>Independent watchdog (IWDT) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_IWDT</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_iwdt.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_iwdt.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="PMU" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>Power controller (PMU) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_PMU</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_pmu.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_pmu.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="RCM" Cversion="1.0.4" condition="APM32F4xx STDPERIPH">
+            <description>Reset and clock management unit (RCM) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_RCM</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_rcm.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_rcm.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="RNG" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>Random number generator (RNG) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_RNG</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_rng.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_rng.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="RTC" Cversion="1.0.4" condition="APM32F4xx STDPERIPH">
+            <description>Real-time clock (RTC) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_RTC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_rtc.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_rtc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="SDIO" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>Secure digital (SDIO) interface driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_SDIO</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_sdio.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_sdio.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="SMC" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>SMC driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_SMC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_smc.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_smc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="SPI" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>Serial peripheral interface (SPI) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_SPI</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_spi.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_spi.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="SYSCFG" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>System configuration controller (SYSCFG) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_SPI</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_syscfg.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_syscfg.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="TMR" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>Timers (TMR) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_TMR</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_tmr.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_tmr.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="USART" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>Universal synchronous asynchronous receiver transmitter (USART) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_USART</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_usart.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_usart.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="WWDT" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>Window watchdog (WWDT) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_WWDT</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_wwdt.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_wwdt.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="QSPI" Cversion="1.0.1" condition="APM32F4xx STDPERIPH RCM">
+            <description>Quad serial peripheral interface (QSPI) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_QSPI</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_qspi.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_qspi.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="COMP" Cversion="1.0.4" condition="APM32F4xx STDPERIPH RCM">
+            <description>Comparator (COMP) driver for APM32F4xx</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_COMP</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F4xx_StdPeriphDriver/inc/apm32f4xx_comp.h"/>
+                <file category="source" name="Device/APM32F4xx_StdPeriphDriver/src/apm32f4xx_comp.c"/>
+            </files>
+        </component>
+        <!-- END: Geehy Semiconductor Standard Peripherals Drivers -->
+        <!--Startup-->
+        <component Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="APM32F402_403 CMSIS">
+            <description>System Startup for Geehy Semiconductor APM32F402_403 device series</description>
+            <files>
+                <!--  include folder -->
+                <file category="include" name="Device/CMSIS/Include/"/>
+                <file category="include" name="Device/Device/Geehy/APM32F402_403/Include/"/>
+                <!-- startup files -->
+                <file category="source" name="Device/Device/Geehy/APM32F402_403/Source/arm/startup_apm32f402_403.s" attr="config" version="1.0.0" condition="APM32F402_403 ARMCC"/>
+                <!-- system file -->
+                <file category="source" name="Device/Device/Geehy/APM32F402_403/Source/system_apm32f402_403.c" attr="config" version="1.0.0"/>
+                <!-- device configuration required by drivers at the moment -->
+            </files>
+        </component>
+        <!-- START: Geehy Semiconductor Standard Peripherals Drivers -->
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH">
+            <description>Standard Peripherals Drivers Framework</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_FRAMEWORK</RTE_Components_h>
+            <files>
+                <file category="include" name="Device/APM32F402_403_StdPeriphDriver/inc/"/>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_misc.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_misc.c"/>
+                <file category="header" name="Device/Templates/apm32f402_403_int.h" attr="template" select="Interrupt Service Routines"/>
+                <file category="source" name="Device/Templates/apm32f402_403_int.c" attr="template" select="Interrupt Service Routines"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="ADC" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH RCM">
+            <description>Analog-to-digital converter (ADC) driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_ADC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_adc.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_adc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CAN" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH RCM">
+            <description>Controller area network (CAN) driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_CAN</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_can.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_can.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CRC" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH">
+            <description>CRC calculation unit (CRC) driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_CRC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_crc.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_crc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DBGMCU" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH">
+            <description>MCU debug component (DBGMCU) driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_DBGMCU</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_dbgmcu.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_dbgmcu.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DMA" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH RCM">
+            <description>DMA controller (DMA) driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_DMA</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_dma.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_dma.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="EINT" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH">
+            <description>External interrupt/event controller (EINT) driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_EINT</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_eint.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_eint.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="FMC" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH">
+            <description>Flash memory controller driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_FMC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_fmc.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_fmc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="GPIO" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH RCM">
+            <description>General-purpose I/O (GPIO) driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_GPIO</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_gpio.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_gpio.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="BAKPR" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH RCM">
+            <description>Backup registers (BAKPR) driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_BAKPR</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_bakpr.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_bakpr.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="I2C" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH RCM">
+            <description>Inter-integrated circuit (I2C) interface driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_I2C</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_i2c.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_i2c.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="IWDT" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH">
+            <description>Independent watchdog (IWDT) driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_IWDT</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_iwdt.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_iwdt.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="PMU" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH RCM">
+            <description>Power controller (PMU) driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_PMU</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_pmu.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_pmu.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="RCM" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH">
+            <description>Reset and clock management unit (RCM) driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_RCM</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_rcm.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_rcm.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="RTC" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH">
+            <description>Real-time clock (RTC) driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_RTC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_rtc.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_rtc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="SPI" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH RCM">
+            <description>Serial peripheral interface (SPI) driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_SPI</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_spi.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_spi.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="TMR" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH RCM">
+            <description>Timers (TMR) driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_TMR</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_tmr.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_tmr.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="USART" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH RCM">
+            <description>Universal synchronous asynchronous receiver transmitter (USART) driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_USART</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_usart.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_usart.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="WWDT" Cversion="1.0.0" condition="APM32F402_403 STDPERIPH RCM">
+            <description>Window watchdog (WWDT) driver for APM32F402_403</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_WWDT</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F402_403_StdPeriphDriver/inc/apm32f402_403_wwdt.h"/>
+                <file category="source" name="Device/APM32F402_403_StdPeriphDriver/src/apm32f402_403_wwdt.c"/>
+            </files>
+        </component>
+        <!-- END: Geehy Semiconductor Standard Peripherals Drivers -->
+        <component Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="APM32F465xx CMSIS">
+            <description>System Startup for Geehy Semiconductor APM32F465 device series</description>
+            <files>
+                <!--  include folder -->
+                <file category="include" name="Device/CMSIS/Include/"/>
+                <file category="include" name="Device/Device/Geehy/APM32F465/Include/"/>
+                <!-- startup files -->
+                <file category="source" name="Device/Device/Geehy/APM32F465/Source/arm/startup_apm32f465.s" attr="config" version="1.0.0" condition="APM32F465xx ARMCC"/>
+                <!-- system file -->
+                <file category="source" name="Device/Device/Geehy/APM32F465/Source/system_apm32f465.c" attr="config" version="1.0.0"/>
+                <!-- device configuration required by drivers at the moment -->
+            </files>
+        </component>
+        <!-- START: Geehy Semiconductor Standard Peripherals Drivers -->
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework" Cversion="1.0.0" condition="APM32F465xx STDPERIPH">
+            <description>Standard Peripherals Drivers Framework</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_FRAMEWORK</RTE_Components_h>
+            <files>
+                <file category="include" name="Device/APM32F465_StdPeriphDriver/inc/"/>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_misc.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_misc.c"/>
+                <file category="header" name="Device/Templates/apm32f465_int.h" attr="template" select="Interrupt Service Routines"/>
+                <file category="source" name="Device/Templates/apm32f465_int.c" attr="template" select="Interrupt Service Routines"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="ADC" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>Analog-to-digital converter (ADC) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_ADC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_adc.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_adc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CAN" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>Controller area network (CAN) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_CAN</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_can.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_can.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CRC" Cversion="1.0.0" condition="APM32F465xx STDPERIPH">
+            <description>CRC calculation unit (CRC) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_CRC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_crc.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_crc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="CRYP" Cversion="1.0.0" condition="APM32F465xx STDPERIPH">
+            <description>Cryptographic processor (CRYP) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_CRYP</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_cryp.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_cryp.c"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_cryp_aes.c"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_cryp_des.c"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_cryp_tdes.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DAC" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>Digital-to-analog converter (DAC) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_DAC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_dac.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_dac.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DBGMCU" Cversion="1.0.0" condition="APM32F465xx STDPERIPH">
+            <description>MCU debug component (DBGMCU) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_DBGMCU</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_dbgmcu.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_dbgmcu.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DCI" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>Digital camera interface (DCI) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_DCI</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_dci.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_dci.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DMA" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>DMA controller (DMA) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_DMA</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_dma.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_dma.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="DMC" Cversion="1.0.0" condition="APM32F465xx STDPERIPH">
+            <description>SDRC driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_SDRC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_dmc.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_dmc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="EINT" Cversion="1.0.0" condition="APM32F465xx STDPERIPH">
+            <description>External interrupt/event controller (EINT) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_EINT</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_eint.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_eint.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="FMC" Cversion="1.0.0" condition="APM32F465xx STDPERIPH">
+            <description>Flash memory controller driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_FMC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_fmc.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_fmc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="GPIO" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>General-purpose I/O (GPIO) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_GPIO</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_gpio.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_gpio.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="HASH" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>Hash processor (HASH) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_HASH</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_hash.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_hash.c"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_hash_md5.c"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_hash_sha1.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="I2C" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>Inter-integrated circuit (I2C) interface driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_I2C</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_i2c.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_i2c.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="IWDT" Cversion="1.0.0" condition="APM32F465xx STDPERIPH">
+            <description>Independent watchdog (IWDT) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_IWDT</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_iwdt.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_iwdt.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="PMU" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>Power controller (PMU) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_PMU</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_pmu.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_pmu.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="RCM" Cversion="1.0.0" condition="APM32F465xx STDPERIPH">
+            <description>Reset and clock management unit (RCM) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_RCM</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_rcm.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_rcm.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="RNG" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>Random number generator (RNG) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_RNG</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_rng.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_rng.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="RTC" Cversion="1.0.0" condition="APM32F465xx STDPERIPH">
+            <description>Real-time clock (RTC) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_RTC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_rtc.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_rtc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="SDIO" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>Secure digital (SDIO) interface driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_SDIO</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_sdio.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_sdio.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="SMC" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>SMC driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_SMC</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_smc.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_smc.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="SPI" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>Serial peripheral interface (SPI) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_SPI</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_spi.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_spi.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="SYSCFG" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>System configuration controller (SYSCFG) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_SPI</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_syscfg.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_syscfg.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="TMR" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>Timers (TMR) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_TMR</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_tmr.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_tmr.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="USART" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>Universal synchronous asynchronous receiver transmitter (USART) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_USART</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_usart.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_usart.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="WWDT" Cversion="1.0.0" condition="APM32F465xx STDPERIPH RCM">
+            <description>Window watchdog (WWDT) driver for APM32F465</description>
+            <RTE_Components_h>#define RTE_DEVICE_STDPERIPH_WWDT</RTE_Components_h>
+            <files>
+                <file category="header" name="Device/APM32F465_StdPeriphDriver/inc/apm32f465_wwdt.h"/>
+                <file category="source" name="Device/APM32F465_StdPeriphDriver/src/apm32f465_wwdt.c"/>
+            </files>
+        </component>
+        <!-- END: Geehy Semiconductor Standard Peripherals Drivers -->
+    </components>
+    <boards>
+        <!--APM32F4xx board information-->
+        <board vendor="Geehy" name="APM32F407MINI" revision="Ver 1.0">
+            <description>Geehy APM32F407 Development Board</description>
+            <mountedDevice deviceIndex="0" Dvendor="Geehy:163" Dname="APM32F407VG"/>
+            <compatibleDevice deviceIndex="0" Dvendor="Geehy:163" DsubFamily="APM32F407"/>
+            <feature type="XTAL" n="8000000"/>
+            <feature type="PWR" n="5" name="USB Powered"/>
+            <feature type="USB" n="1" name="USB 2.0 Full Speed Device"/>
+            <feature type="RS232" n="1"/>
+            <feature type="Button" n="2" name="Reset, KEY1 and KEY2"/>
+            <feature type="LED" n="2" name="LEDs directly connected to port pins"/>
+            <debugInterface adapter="JTAG/SW" connector="20 pin JTAG (0.1 inch connector)"/>
+        </board>
+        <!--APM32F411 board information-->
+        <board vendor="Geehy" name="APM32F411TINY" revision="Ver 1.0">
+            <description>Geehy APM32F411 Development Board</description>
+            <mountedDevice deviceIndex="0" Dvendor="Geehy:163" Dname="APM32F411VE"/>
+            <compatibleDevice deviceIndex="0" Dvendor="Geehy:163" DsubFamily="APM32F411"/>
+            <feature type="XTAL" n="8000000"/>
+            <feature type="PWR" n="5" name="USB Powered"/>
+            <feature type="USB" n="1" name="USB 2.0 Full Speed Device"/>
+            <feature type="RS232" n="1"/>
+            <feature type="Button" n="2" name="Reset, KEY1 and KEY2"/>
+            <feature type="LED" n="2" name="LEDs directly connected to port pins"/>
+            <debugInterface adapter="JTAG/SW" connector="20 pin JTAG (0.1 inch connector)"/>
+        </board>
+        <!--APM32F465 board information-->
+        <board vendor="Geehy" name="APM32F465MINI" revision="Ver 1.0">
+            <description>Geehy APM32F465xx Development Board</description>
+            <mountedDevice deviceIndex="0" Dvendor="Geehy:163" Dname="APM32F465VE"/>
+            <compatibleDevice deviceIndex="0" Dvendor="Geehy:163" DsubFamily="APM32F465"/>
+            <feature type="XTAL" n="8000000"/>
+            <feature type="PWR" n="5" name="USB Powered"/>
+            <feature type="USB" n="1" name="USB 2.0 Full Speed Device"/>
+            <feature type="RS232" n="1"/>
+            <feature type="Button" n="2" name="Reset, KEY1 and KEY2"/>
+            <feature type="LED" n="2" name="LEDs directly connected to port pins"/>
+            <debugInterface adapter="JTAG/SW" connector="20 pin JTAG (0.1 inch connector)"/>
+        </board>
+        <!--APM32F427 board information-->
+        <board vendor="Geehy" name="APM32F427TINY" revision="Ver 1.0">
+            <description>Geehy APM32F427 Development Board</description>
+            <mountedDevice deviceIndex="0" Dvendor="Geehy:163" Dname="APM32F427ZG"/>
+            <compatibleDevice deviceIndex="0" Dvendor="Geehy:163" DsubFamily="APM32F427"/>
+            <feature type="XTAL" n="8000000"/>
+            <feature type="PWR" n="5" name="USB Powered"/>
+            <feature type="USB" n="1" name="USB 2.0 Full Speed Device"/>
+            <feature type="RS232" n="1"/>
+            <feature type="Button" n="2" name="Reset, KEY1 and KEY2"/>
+            <feature type="LED" n="2" name="LEDs directly connected to port pins"/>
+            <debugInterface adapter="JTAG/SW" connector="20 pin JTAG (0.1 inch connector)"/>
+        </board>
+        <!--APM32F403 board information-->
+        <board vendor="Geehy" name="APM32F403TINY" revision="Ver 1.0">
+            <description>Geehy APM32F403 Development Board</description>
+            <mountedDevice deviceIndex="0" Dvendor="Geehy:163" Dname="APM32F403RB"/>
+            <compatibleDevice deviceIndex="0" Dvendor="Geehy:163" DsubFamily="APM32F403"/>
+            <feature type="XTAL" n="8000000"/>
+            <feature type="PWR" n="5" name="USB Powered"/>
+            <feature type="USB" n="1" name="USB 2.0 Full Speed Device"/>
+            <feature type="RS232" n="1"/>
+            <feature type="Button" n="2" name="Reset, KEY1 and KEY2"/>
+            <feature type="LED" n="2" name="LEDs directly connected to port pins"/>
+            <debugInterface adapter="JTAG/SW" connector="20 pin JTAG (0.1 inch connector)"/>
+        </board>
+        <!--APM32F402 board information-->
+        <board vendor="Geehy" name="APM32F402TINY" revision="Ver 1.0">
+            <description>Geehy APM32F402 Development Board</description>
+            <mountedDevice deviceIndex="0" Dvendor="Geehy:163" Dname="APM32F402RB"/>
+            <compatibleDevice deviceIndex="0" Dvendor="Geehy:163" DsubFamily="APM32F402"/>
+            <feature type="XTAL" n="8000000"/>
+            <feature type="PWR" n="5" name="USB Powered"/>
+            <feature type="USB" n="1" name="USB 2.0 Full Speed Device"/>
+            <feature type="RS232" n="1"/>
+            <feature type="Button" n="2" name="Reset, KEY1 and KEY2"/>
+            <feature type="LED" n="2" name="LEDs directly connected to port pins"/>
+            <debugInterface adapter="JTAG/SW" connector="20 pin JTAG (0.1 inch connector)"/>
+        </board>
+    </boards>
+    <examples>
+        <!--APM32F4xx example information-->
+        <example name="APM32F407MINI-Blinky" doc="readme.txt" folder="Boards/Geehy/APM32F407MINI/Blinky">
+            <description>APM32F407_MINI Blinky example</description>
+            <board name="APM32F407MINI" vendor="Geehy"/>
+            <project>
+                <environment name="uv" load="APM32F407MINI-Blinky.uvprojx"/>
+            </project>
+            <attributes>
+                <component Cclass="CMSIS" Cgroup="CORE"/>
+                <component Cclass="Device" Cgroup="Startup"/>
+                <category>Getting Started</category>
+                <keyword>LED</keyword>
+                <keyword>APM32F407</keyword>
+            </attributes>
+        </example>
+        <!--APM32F4xx example information-->
+        <example name="APM32F411TINY-Blinky" doc="readme.txt" folder="Boards/Geehy/APM32F411TINY/Blinky">
+            <description>APM32F411_TINY Blinky example</description>
+            <board name="APM32F411TINY" vendor="Geehy"/>
+            <project>
+                <environment name="uv" load="APM32F411TINY-Blinky.uvprojx"/>
+            </project>
+            <attributes>
+                <component Cclass="CMSIS" Cgroup="CORE"/>
+                <component Cclass="Device" Cgroup="Startup"/>
+                <category>Getting Started</category>
+                <keyword>LED</keyword>
+                <keyword>APM32F411</keyword>
+            </attributes>
+        </example>
+        <!--APM32F465 example information-->
+        <example name="APM32F465MINI-Blinky" doc="readme.txt" folder="Boards/Geehy/APM32F465MINI/Blinky">
+            <description>APM32F465_MINI Blinky example</description>
+            <board name="APM32F465MINI" vendor="Geehy"/>
+            <project>
+                <environment name="uv" load="APM32F465MINI-Blinky.uvprojx"/>
+            </project>
+            <attributes>
+                <component Cclass="CMSIS" Cgroup="CORE"/>
+                <component Cclass="Device" Cgroup="Startup"/>
+                <category>Getting Started</category>
+                <keyword>LED</keyword>
+                <keyword>APM32F465</keyword>
+            </attributes>
+        </example>
+        <!--APM32F427 example information-->
+        <example name="APM32F427TINY-Blinky" doc="readme.txt" folder="Boards/Geehy/APM32F427TINY/Blinky">
+            <description>APM32F427_TINY Blinky example</description>
+            <board name="APM32F427TINY" vendor="Geehy"/>
+            <project>
+                <environment name="uv" load="APM32F427TINY-Blinky.uvprojx"/>
+            </project>
+            <attributes>
+                <component Cclass="CMSIS" Cgroup="CORE"/>
+                <component Cclass="Device" Cgroup="Startup"/>
+                <category>Getting Started</category>
+                <keyword>LED</keyword>
+                <keyword>APM32F427</keyword>
+            </attributes>
+        </example>
+        <!--APM32F403 example information-->
+        <example name="APM32F403TINY-Blinky" doc="readme.txt" folder="Boards/Geehy/APM32F403TINY/Blinky">
+            <description>APM32F403_TINY Blinky example</description>
+            <board name="APM32F403TINY" vendor="Geehy"/>
+            <project>
+                <environment name="uv" load="APM32F403TINY-Blinky.uvprojx"/>
+            </project>
+            <attributes>
+                <component Cclass="CMSIS" Cgroup="CORE"/>
+                <component Cclass="Device" Cgroup="Startup"/>
+                <category>Getting Started</category>
+                <keyword>LED</keyword>
+                <keyword>APM32F403</keyword>
+            </attributes>
+        </example>
+        <!--APM32F402 example information-->
+        <example name="APM32F402TINY-Blinky" doc="readme.txt" folder="Boards/Geehy/APM32F402TINY/Blinky">
+            <description>APM32F402_TINY Blinky example</description>
+            <board name="APM32F402TINY" vendor="Geehy"/>
+            <project>
+                <environment name="uv" load="APM32F402TINY-Blinky.uvprojx"/>
+            </project>
+            <attributes>
+                <component Cclass="CMSIS" Cgroup="CORE"/>
+                <component Cclass="Device" Cgroup="Startup"/>
+                <category>Getting Started</category>
+                <keyword>LED</keyword>
+                <keyword>APM32F402</keyword>
+            </attributes>
+        </example>
+    </examples>
+</package>

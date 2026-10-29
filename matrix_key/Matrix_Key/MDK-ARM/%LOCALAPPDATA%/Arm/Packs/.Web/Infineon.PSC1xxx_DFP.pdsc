@@ -1,0 +1,390 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.6.0" xs:noNamespaceSchemaLocation="PACK.xsd">
+  <vendor>Infineon</vendor>
+  <name>PSC1xxx_DFP</name>
+  <description>Infineon PSC1xxx (PSOC C1) Device Support</description>
+  <url>https://itools.infineon.com/cmsis_packs/PSC1xxx_DFP/</url>
+  <supportContact>https://www.infineon.com/support</supportContact>
+  <license>APACHE_LICENSE.txt</license>
+  <releases>
+    <release version="1.0.0" date="2026-07-08">
+      First Release version of PSC1xxx Device Family Pack.
+    </release>
+  </releases>
+  <keywords>
+    <keyword>Infineon</keyword>
+    <keyword>PSC1xxx</keyword>
+    <keyword>DFP</keyword>
+  </keywords>
+  <devices>
+    <!-- PSC1 -->
+    <family Dfamily="PSC1" Dvendor="Infineon:7">
+      <processor Dcore="Cortex-M0" DcoreVersion="r0p0" Dfpu="NO_FPU" Dmpu="NO_MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="48000000"/>
+      <debug svd="SVD/psc1m.svd" defaultResetSequence="ResetSystem"/>
+      <description>PSOC C1: Cortex-M0 MCU series with integrated digital peripherals.</description>
+      <book name="README.txt" title="Infineon PSC1 DFP user guide"/>
+      <book name="known_issues.txt" title="Infineon PSC1 DFP known issues"/>
+      <memory name="IRAM1" access="rwx" start="0x20000000" size="0x4000" default="1"/>
+      <debugvars version="1.0">
+        // ============================================================================
+        // Cortex-M System Control Block (SCB) - Armv6-M
+        // ============================================================================
+        __var AIRCR                    = 0xE000ED0C; // Application Interrupt and Reset Control
+        __var DHCSR                    = 0xE000EDF0; // Debug Halting Control and Status
+        __var DCRSR                    = 0xE000EDF4; // Debug Core Register Selector
+        __var DCRDR                    = 0xE000EDF8; // Debug Core Register Data
+        // SCB.AIRCR fields
+        __var AIRCR_VECTKEY            = 0x05FA0000; // Write key (reads as VECTKEYSTAT)
+        __var AIRCR_SYSRESETREQ        = 0x00000004;
+        // SCB.DHCSR fields
+        __var DHCSR_DBGKEY             = 0xA05F0000; // Write key (reads as zero)
+        __var DHCSR_C_DEBUGEN          = 0x00000001;
+        __var DHCSR_C_HALT             = 0x00000002;
+        __var DHCSR_C_STEP             = 0x00000004;
+        __var DHCSR_S_REGRDY           = 0x00010000;
+        __var DHCSR_S_HALT             = 0x00020000;
+        // Note: DHCSR.S_RESET_ST (0x02000000) and DEMCR.VC_CORERESET
+        // (0x00000001) are intentionally NOT declared or used. Reset
+        // progress is tracked via DHCSR.S_HALT in ResetSystem, because
+        // DHCSR.S_RESET_ST is not reliably set after AIRCR.SYSRESETREQ on
+        // PSC1 (never observed set in real-hardware CMSIS-DAP logs). Reset
+        // catch uses an FPB breakpoint at the application Reset_Handler
+        // rather than DEMCR.VC_CORERESET (see ResetCatchSet), since a vector
+        // catch would halt the core before the boot ROM ("SSW") has
+        // (re)configured the debug pins.
+        // SCB.DCRSR register selectors (write transfer selector bit | register index)
+        __var DCRSR_REGWnR             = 0x00010000; // Write transfer (vs. read) selector bit
+        __var DCRSR_REG_XPSR           = 0x00000010; // Register index 16: xPSR
+        __var DCRSR_REG_MSP            = 0x00000011; // Register index 17: MSP
+        __var DCRSR_REG_LR             = 0x0000000E; // Register index 14: LR
+        __var DCRSR_REG_PC             = 0x0000000F; // Register index 15: PC
+
+        // ============================================================================
+        // Cortex-M Flash Patch and Breakpoint unit (FPB)
+        // ============================================================================
+        __var FPB_CTRL                 = 0xE0002000; // Breakpoint Control
+        __var FPB_COMP0                = 0xE0002008; // Breakpoint Comparator (first comparator)
+        __var FPB_CTRL_KEY_ENABLE      = 0x00000003; // KEY | ENABLE
+
+        // ============================================================================
+        // PSC1 application vector table: fixed IROM1 base for all sub-families
+        // (PSC1xxD/E/F only differ in flash size, not base address).
+        // Offset +0: initial SP, offset +4: Reset_Handler address.
+        // ============================================================================
+        __var APP_VECTOR_TABLE         = 0x10001000;
+
+        // ============================================================================
+        // HardFault-recovery scratch frame in IRAM1 (0x20000000-0x20003FFF).
+        // Ported from the IAR flash-loader macro recover_from_hardfault()
+        // (PSC1_flash.mac). Only written while the core is confirmed to be
+        // in HardFault, see RecoverFromHardFault.
+        // ============================================================================
+        __var HF_BXLR_ADDR             = 0x20003FD0; // "BX LR" opcode (0x4770) placed here
+        __var HF_FRAME_BASE            = 0x20003FE0; // Fake frame: R0,R1,R2,R3,R12,LR,ReturnAddr,xPSR
+        __var HF_EXC_RETURN_THREAD_MSP = 0xFFFFFFF9; // EXC_RETURN: Thread mode, use MSP
+      </debugvars>
+      <sequences>
+        <!-- VECTRESET is not implemented on Cortex-M0/ARMv6-M (AIRCR bit 0 is
+             reserved). An empty sequence with disable="true" removes "Vector
+             Reset" from the uVision Reset drop-down entirely (Options for
+             Target -> Debug -> Settings), matching the documented pattern for
+             Cortex-M23/SAML11:
+             https://open-cmsis-pack.github.io/Open-CMSIS-Pack-Spec/main/html/dbg_sqns_uvision.html -->
+        <sequence name="ResetProcessor" disable="true" info="VECTRESET">
+        </sequence>
+        <sequence name="ResetCatchSet">
+          <block info="Locate the application entry point in the fixed flash vector table">
+            __var appValid     = 0;
+            __var resetAddress = 0;
+
+            // PSC1's flash-resident vector table is always at a fixed
+            // address across all sub-families - read the application's
+            // Reset_Handler address directly, no per-device base register
+            // lookup is needed (unlike CPUSS-based Infineon devices).
+            resetAddress = Read32(APP_VECTOR_TABLE + 4);
+            appValid = (resetAddress != 0x00000000) &amp;&amp; (resetAddress != 0xFFFFFFFF);
+          </block>
+          <control if="appValid">
+            <block info="Valid application found: arm an FPB breakpoint at Reset_Handler">
+              // Reset vector catch (DEMCR.VC_CORERESET) is not usable here:
+              // it halts the core before the boot ROM ("SSW") has
+              // (re)configured the debug pins. An FPB instruction breakpoint
+              // lets the core free-run through SSW and only halts once it
+              // reaches the application's Reset_Handler.
+              Write32(FPB_CTRL, FPB_CTRL_KEY_ENABLE);
+              resetAddress = (resetAddress &amp; 0x1FFFFFFC) | 0xC0000001;
+              Write32(FPB_COMP0, resetAddress);
+            </block>
+          </control>
+          <control if="!appValid">
+            <block info="Flash erased / no valid application: rely on RecoverFromHardFault">
+              // Do NOT fall back to DEMCR.VC_CORERESET here. On PSC1 the
+              // real HardFault vector lives in a RAM-resident dispatch table
+              // that is only initialized by the (never reached) application
+              // Reset_Handler, so there is no known address to catch on.
+              // ResetSystem invokes RecoverFromHardFault after the reset
+              // completes to bring the core back to a debuggable state.
+            </block>
+          </control>
+          <block>
+            // Read DHCSR to clear a potentially stale DHCSR.S_RESET_ST bit
+            Read32(DHCSR);
+          </block>
+        </sequence>
+        <sequence name="ResetCatchClear">
+          <block>
+            // Disable the breakpoint comparator. No DEMCR.VC_CORERESET to
+            // clear: ResetCatchSet never sets it for PSC1.
+            Write32(FPB_COMP0, 0);
+          </block>
+        </sequence>
+        <sequence name="ResetSystem">
+          <block info="Halt the core before issuing the software reset">
+            Write32(DHCSR, DHCSR_DBGKEY | DHCSR_C_HALT | DHCSR_C_DEBUGEN);
+          </block>
+          <control while="(Read32(DHCSR) &amp; DHCSR_S_HALT) == 0" timeout="100000" info="Confirm the core is halted (S_HALT set) before issuing the reset - the wait below relies on S_HALT starting from 1."/>
+          <block info="Software system reset via AIRCR.SYSRESETREQ">
+            // On PSC1 the SYSRESETREQ write asserts the reset
+            // before the AP write transaction is acknowledged, so the AHB-AP
+            // access faults and the DP STICKYERR bit is set. Tools that verify
+            // the write acknowledge (e.g. ULINK2, unlike CMSIS-DAP) otherwise
+            // abort with "E310: Debug access failed - cannot write value
+            // 0x05FA0004 to address 0xE000ED0C" and cancel the flash download.
+            // __errorcontrol bit 0 tells the debugger to not abort on this
+            // expected-to-fail access; the sticky-error clear below then makes
+            // the DP usable again for the DHCSR polls that follow (a set
+            // STICKYERR bit faults every subsequent AP access until cleared,
+            // regardless of __errorcontrol - SYSRESETREQ does not reset the DP).
+            // PSC1 only supports SWD (no JTAG), so the sticky-error clear is
+            // done unconditionally via the SWD DP ABORT register.
+            __errorcontrol = 1;
+            Write32(AIRCR, AIRCR_VECTKEY | AIRCR_SYSRESETREQ);
+            // SWD: clear DP sticky error/compare/overrun bits via the ABORT
+            // register (ORUNERRCLR|WDERRCLR|STKERRCLR|STKCMPCLR).
+            WriteDP(0x0, 0x0000001E);
+            __errorcontrol = 0;
+          </block>
+          <control while="(Read32(DHCSR) &amp; DHCSR_S_HALT) != 0" timeout="500000" info="Wait for the software reset to actually assert: the core leaves the halted state (DHCSR.S_HALT clears) once AIRCR.SYSRESETREQ takes effect. Because we start from a confirmed-halted state (S_HALT=1) and wait for the transition to 0, this cannot exit before the reset asserts - unlike a bare DHCSR.S_RESET_ST poll, which is racy AND unreliable here (S_RESET_ST is never observed set after SYSRESETREQ on PSC1)."/>
+          <block info="Re-halt the core: on PSC1 the halt state does NOT survive AIRCR.SYSRESETREQ (observed on real hardware - DHCSR.C_HALT/S_HALT read back 0 right after reset, unlike the Armv6-M assumption that a software system reset preserves the debug halt state), so the core resumes running through boot ROM/erased flash unless re-halted here.">
+            Write32(DHCSR, DHCSR_DBGKEY | DHCSR_C_HALT | DHCSR_C_DEBUGEN);
+          </block>
+          <control while="(Read32(DHCSR) &amp; DHCSR_S_HALT) == 0" timeout="100000" info="Wait for the core to actually halt before touching DCRSR/DCRDR"/>
+          <control if="(__connection &amp; 0xFF) == 2" info="Only recover from HardFault for a flash-programming connection">
+            <block info="Recover gracefully if flash is erased (HardFault storm)">
+              // Requires the core to be halted to access DCRSR/DCRDR - see
+              // the explicit re-halt + S_HALT poll above: on PSC1 the core
+              // does not stay halted across AIRCR.SYSRESETREQ on its own.
+              //
+              // __connection bits 0..7 identify the connection type: 1 =
+              // debug connection, 2 = flash-programming connection ("Connection
+              // for downloading application to flash"). HardFault recovery
+              // is intentionally scoped to flash operations only - a plain
+              // debug session/reset on an erased device is expected to stop
+              // in HardFault so the user can see the real state.
+              Sequence("RecoverFromHardFault");
+            </block>
+          </control>
+          <block info="Re-evaluate whether a valid application reset vector exists (same test ResetCatchSet uses): only a valid app has an FPB breakpoint armed that will re-halt the core at Reset_Handler once the boot ROM runs.">
+            __var resetVector = Read32(APP_VECTOR_TABLE + 4);
+            __var appValid = (resetVector != 0x00000000) &amp;&amp; (resetVector != 0xFFFFFFFF);
+          </block>
+          <control if="(__connection &amp; 0xFF) != 2 &amp;&amp; appValid != 0">
+            <block>
+              // Debug connection with a valid application: let the core
+              // free-run through the boot ROM ("SSW"). The FPB breakpoint
+              // armed by ResetCatchSet halts it at Reset_Handler, which the
+              // debugger's post-reset wait then observes.
+              Write32(DHCSR, DHCSR_DBGKEY | DHCSR_C_DEBUGEN);
+            </block>
+          </control>
+          <control if="(__connection &amp; 0xFF) == 2 || appValid == 0">
+            <block>
+              // Flash-programming connection, OR no valid application
+              // (erased/blank flash): keep the core halted. There is no FPB
+              // breakpoint to catch it, so resuming would free-run into
+              // erased flash and HardFault, and the debugger's post-reset
+              // wait only polls DHCSR.S_HALT (it does not re-issue its own
+              // halt request after ResetSystem returns) - so it would spin
+              // forever ("connection error"). Staying halted lets both the
+              // flash algorithm run and an erased-device debug session stop
+              // cleanly.
+              Write32(DHCSR, DHCSR_DBGKEY | DHCSR_C_HALT | DHCSR_C_DEBUGEN);
+            </block>
+          </control>
+        </sequence>
+        <sequence name="RecoverFromHardFault">
+          <block info="Read the real xPSR via DCRSR/DCRDR (requires the core to be halted)">
+            __var xpsr = 0;
+            Write32(DCRSR, DCRSR_REG_XPSR);
+          </block>
+          <control while="(Read32(DHCSR) &amp; DHCSR_S_REGRDY) == 0" timeout="100000" info="Wait for register transfer to complete"/>
+          <block>
+            xpsr = Read32(DCRDR);
+          </block>
+          <control if="(xpsr &amp; 0x3F) == 0x03">
+            <block info="HardFault detected (e.g. erased/blank flash): force a graceful exception return">
+              // Ported from the IAR flash-loader macro recover_from_hardfault()
+              // (PSC1_flash.mac). Builds a synthetic exception-return frame
+              // in the otherwise-unused top of IRAM1 and single-steps a
+              // "BX LR" to leave HardFault and return to Thread mode.
+              Message(1, "PSC1 core was in HardFault (flash likely erased) - recovering via exception return.");
+
+              // 1) "BX LR" opcode (Thumb 0x4770) - the return target
+              Write16(HF_BXLR_ADDR, 0x4770);
+
+              // 2) Fake exception-return frame: R0,R1,R2,R3,R12,LR,ReturnAddr,xPSR
+              Write32(HF_FRAME_BASE +  0, 0x00000000); // R0
+              Write32(HF_FRAME_BASE +  4, 0x00000000); // R1
+              Write32(HF_FRAME_BASE +  8, 0x00000000); // R2
+              Write32(HF_FRAME_BASE + 12, 0x00000000); // R3
+              Write32(HF_FRAME_BASE + 16, 0x00000000); // R12
+              Write32(HF_FRAME_BASE + 20, 0x00000000); // LR (Thread mode)
+              Write32(HF_FRAME_BASE + 24, HF_BXLR_ADDR); // Return address (safe RAM)
+              Write32(HF_FRAME_BASE + 28, 0x01000000); // xPSR: Thumb bit set
+            </block>
+            <block info="Set MSP to the base of the fake frame">
+              Write32(DCRDR, HF_FRAME_BASE);
+              Write32(DCRSR, DCRSR_REGWnR | DCRSR_REG_MSP);
+            </block>
+            <control while="(Read32(DHCSR) &amp; DHCSR_S_REGRDY) == 0" timeout="100000" info="Wait for register transfer to complete"/>
+            <block info="Set LR to EXC_RETURN (Thread mode, use MSP)">
+              Write32(DCRDR, HF_EXC_RETURN_THREAD_MSP);
+              Write32(DCRSR, DCRSR_REGWnR | DCRSR_REG_LR);
+            </block>
+            <control while="(Read32(DHCSR) &amp; DHCSR_S_REGRDY) == 0" timeout="100000" info="Wait for register transfer to complete"/>
+            <block info="Set PC to the BX LR opcode (Thumb bit set)">
+              Write32(DCRDR, HF_BXLR_ADDR | 1);
+              Write32(DCRSR, DCRSR_REGWnR | DCRSR_REG_PC);
+            </block>
+            <control while="(Read32(DHCSR) &amp; DHCSR_S_REGRDY) == 0" timeout="100000" info="Wait for register transfer to complete"/>
+            <block info="Single-step the BX LR to perform the exception return, then re-halt">
+              Write32(DHCSR, DHCSR_DBGKEY | DHCSR_C_STEP | DHCSR_C_DEBUGEN);
+            </block>
+            <control while="(Read32(DHCSR) &amp; DHCSR_S_HALT) == 0" timeout="100000" info="Wait for single step to complete"/>
+            <block>
+              Write32(DHCSR, DHCSR_DBGKEY | DHCSR_C_HALT | DHCSR_C_DEBUGEN);
+            </block>
+          </control>
+        </sequence>
+      </sequences>
+      <!-- PSC1xxD, 64K of Main Flash -->
+      <subFamily DsubFamily="PSC1xxD">
+        <memory name="IROM1" access="rx" start="0x10001000" size="0x10000" startup="1" default="1"/>
+        <algorithm name="Flash/PSC1_64.FLM" start="0x10001000" size="0x10000" default="1"/>
+        <device Dname="PSC1M2DBABQ0AT">
+          <compile define="PSC1M2DBABQ0AT"/>
+        </device>
+        <device Dname="PSC1M2DBLEQ0AT">
+          <compile define="PSC1M2DBLEQ0AT"/>
+        </device>
+        <device Dname="PSC1M2DBLGQ0AT">
+          <compile define="PSC1M2DBLGQ0AT"/>
+        </device>
+        <device Dname="PSC1M2DBTBQ0AT">
+          <compile define="PSC1M2DBTBQ0AT"/>
+        </device>
+        <device Dname="PSC1M3DBABQ0AT">
+          <compile define="PSC1M3DBABQ0AT"/>
+        </device>
+        <device Dname="PSC1M3DBLGQ0AT">
+          <compile define="PSC1M3DBLGQ0AT"/>
+        </device>
+      </subFamily>
+      <!-- PSC1xxE, 128K of Main Flash -->
+      <subFamily DsubFamily="PSC1xxE">
+        <memory name="IROM1" access="rx" start="0x10001000" size="0x20000" startup="1" default="1"/>
+        <algorithm name="Flash/PSC1_128.FLM" start="0x10001000" size="0x20000" default="1"/>
+        <device Dname="PSC1M2EBABQ0AT">
+          <compile define="PSC1M2EBABQ0AT"/>
+        </device>
+        <device Dname="PSC1M2EBLEQ0AT">
+          <compile define="PSC1M2EBLEQ0AT"/>
+        </device>
+        <device Dname="PSC1M2EBLGQ0AT">
+          <compile define="PSC1M2EBLGQ0AT"/>
+        </device>
+        <device Dname="PSC1M2EBTBQ0AT">
+          <compile define="PSC1M2EBTBQ0AT"/>
+        </device>
+        <device Dname="PSC1M3EBABQ0AT">
+          <compile define="PSC1M3EBABQ0AT"/>
+        </device>
+        <device Dname="PSC1M3EBLGQ0AT">
+          <compile define="PSC1M3EBLGQ0AT"/>
+        </device>
+      </subFamily>
+      <!-- PSC1xxF, 200K of Main Flash -->
+      <subFamily DsubFamily="PSC1xxF">
+        <memory name="IROM1" access="rx" start="0x10001000" size="0x32000" startup="1" default="1"/>
+        <algorithm name="Flash/PSC1_200.FLM" start="0x10001000" size="0x32000" default="1"/>
+        <device Dname="PSC1M2FBABQ0AT">
+          <compile define="PSC1M2FBABQ0AT"/>
+        </device>
+        <device Dname="PSC1M2FBLEQ0AT">
+          <compile define="PSC1M2FBLEQ0AT"/>
+        </device>
+        <device Dname="PSC1M2FBLGQ0AT">
+          <compile define="PSC1M2FBLGQ0AT"/>
+        </device>
+        <device Dname="PSC1M2FBTBQ0AT">
+          <compile define="PSC1M2FBTBQ0AT"/>
+        </device>
+        <device Dname="PSC1M3FBABQ0AT">
+          <compile define="PSC1M3FBABQ0AT"/>
+        </device>
+        <device Dname="PSC1M3FBLGQ0AT">
+          <compile define="PSC1M3FBLGQ0AT"/>
+        </device>
+      </subFamily>
+    </family>
+  </devices>
+  <conditions>
+    <condition id="PSC1">
+      <description>PSOC C1 devices</description>
+      <accept condition="PSC1xxD"/>
+      <accept condition="PSC1xxE"/>
+      <accept condition="PSC1xxF"/>
+    </condition>
+    <condition id="PSC1xxD">
+      <description>PSC1xxD devices</description>
+      <accept Dvendor="Infineon:7" Dname="PSC1M2DBABQ0AT"/>
+      <accept Dvendor="Infineon:7" Dname="PSC1M2DBLEQ0AT"/>
+      <accept Dvendor="Infineon:7" Dname="PSC1M2DBLGQ0AT"/>
+      <accept Dvendor="Infineon:7" Dname="PSC1M2DBTBQ0AT"/>
+      <accept Dvendor="Infineon:7" Dname="PSC1M3DBABQ0AT"/>
+      <accept Dvendor="Infineon:7" Dname="PSC1M3DBLGQ0AT"/>
+    </condition>
+    <condition id="PSC1xxE">
+      <description>PSC1xxE devices</description>
+      <accept Dvendor="Infineon:7" Dname="PSC1M2EBABQ0AT"/>
+      <accept Dvendor="Infineon:7" Dname="PSC1M2EBLEQ0AT"/>
+      <accept Dvendor="Infineon:7" Dname="PSC1M2EBLGQ0AT"/>
+      <accept Dvendor="Infineon:7" Dname="PSC1M2EBTBQ0AT"/>
+      <accept Dvendor="Infineon:7" Dname="PSC1M3EBABQ0AT"/>
+      <accept Dvendor="Infineon:7" Dname="PSC1M3EBLGQ0AT"/>
+    </condition>
+    <condition id="PSC1xxF">
+      <description>PSC1xxF devices</description>
+      <accept Dvendor="Infineon:7" Dname="PSC1M2FBABQ0AT"/>
+      <accept Dvendor="Infineon:7" Dname="PSC1M2FBLEQ0AT"/>
+      <accept Dvendor="Infineon:7" Dname="PSC1M2FBLGQ0AT"/>
+      <accept Dvendor="Infineon:7" Dname="PSC1M2FBTBQ0AT"/>
+      <accept Dvendor="Infineon:7" Dname="PSC1M3FBABQ0AT"/>
+      <accept Dvendor="Infineon:7" Dname="PSC1M3FBLGQ0AT"/>
+    </condition>
+  </conditions>
+  <components>
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="PSC1">
+      <!-- This is a dummy startup implementation that emits a compiler error once
+           this software component is enabled in the CMSIS RTE project configuration.
+           It exists to silence PackChk WARNING M350: No 'Startup' component found.
+           Refer to README.txt in the pack root directory for the guidance on the
+           intended use of this CMSIS pack. -->
+      <description>Dummy startup component, do not use</description>
+      <files>
+        <file category="doc" name="README.txt"/>
+        <file category="source" name="Device/Source/startup_error.c" version="1.0.0"/>
+      </files>
+    </component>
+  </components>
+</package>

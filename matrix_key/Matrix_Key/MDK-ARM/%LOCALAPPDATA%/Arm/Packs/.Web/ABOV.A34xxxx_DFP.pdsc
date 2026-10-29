@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<package schemaVersion="1.7.2" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd">
+  <vendor>ABOV</vendor>
+  <url>https://www.abov.co.kr/data/mds/PACK/</url>
+  <name>A34xxxx_DFP</name>
+  <supportContact>abov_fae@abov.co.kr</supportContact>
+  <description>Package Descriptor about A34xxxx-Device support, Driver and Example</description>
+  
+  <releases>
+    <release version="1.0.13" date="2026-07-29">
+      * Changes
+        - Supported Chipsets.
+          * Cortex-M0+  : A31xxxx Series
+            - A31C11x
+    </release>
+    <release version="1.0.12" date="2026-05-08">
+      * Changes
+        - Supported Chipsets.
+          * Cortex-M0+  : A31xxxx Series
+            - A31C14x
+            - A31C21x
+    </release>
+  </releases>
+  
+<!-- keywords for indexing -->
+  <keywords>
+    <keyword>ABOV</keyword>
+    <keyword>Device Family Package ABOV</keyword>
+    <keyword>Cortex-M4F</keyword>
+    <keyword>A34xxxx</keyword>
+    <keyword>A34M41x</keyword>
+    <keyword>A34M42x</keyword>
+    <keyword>A34L71x</keyword>
+    <keyword>A34G43x</keyword>
+    <keyword>A34M418</keyword>
+    <keyword>A34M416</keyword>
+    <keyword>A34M414</keyword>
+    <keyword>A34M420</keyword>
+    <keyword>A34L716</keyword>
+    <keyword>A34G43A</keyword>
+    <keyword>A34G430</keyword>
+  </keywords>
+
+
+<!-- ############## Definition of Devies -->
+  <devices>
+    <family Dfamily="A34xxxx Family" Dvendor="ABOV Semiconductor:126">
+      <processor Dcore="Cortex-M4" DcoreVersion="r0p0" Dfpu="1" Dmpu="0" Dendian="Little-endian"/>
+      <book name="https://developer.arm.com/documentation/dui0553/b" title="Cortex-M4F Generic User Guide"/>
+      <description>
+A34xxxx is a 32bit microcontroller family based on Cortex-M4F and combines ARM Cortex architecture and various peripherals available in platform.
+It also provides low-power, real-time performance, advanced architecture and high performance and is also a good approach for cost-sensitive application especially.
+      </description>
+      <book name="Document/Doxygen/AUDK32.chm" title="ABOV Unified Development Kit 32bit (AUDK32)"/>
+      <book name="https://abov.atlassian.net/wiki/spaces/AUDK32/pages/2070675457/CMSIS-Pack" title="AUDK32 CMSIS-Pack User Guide"/>
+
+<!-- Subfamily : A34M41x Series -->
+      <subFamily DsubFamily="A34M41x Series">
+        <processor Dclock="120000000"/>
+        <compile header="ProductConfig/A34M41x/Config/a34m41x.h" Pdefine="EXTRN_SUBFAMILY_A34M41x"/>
+        <debug svd="ProductConfig/A34M41x/SVD/a34m41x.svd"/>
+        
+        <book name="https://www.abovsemi.com/document/viewer.php?file=1566810203.pdf&amp;d_it_id=1566810203&amp;fileName=UM_A34M41x_Eng.pdf"
+              title="A34M41x User Manual"/>
+        <book name="https://www.abovsemi.com/document/viewer.php?file=1566809888.pdf&amp;d_it_id=1566809888&amp;fileName=DS_A34M41x_Eng.pdf"
+              title="A34M41x Data Sheet"/>
+
+        <feature type="PowerMode" n="3" name="Run, Sleep, Deep-Sleep"/>
+        <feature type="VCC" n="2.7" m="5.5"/>
+        <feature type="IntRC" n="32000000" name="HSI (High-Speed Internal Oscillator)"/> 
+        <feature type="IntRC" n="500000" name="LSI (Low-Speed Internal Oscillator)"/>
+        <feature type="NVIC" n="86" name="NVIC"/>
+        <feature type="Timer" n="10" m="16" name="Timer Module with 16bit resolution"/>
+        <feature type="Timer" n="2" m="32" name="Timer Module with 32bit resolution"/>
+        <feature type="WDT" n="1"/>
+        <feature type="PWM" n="2" m="16" name="Pulse Width Modulation"/>
+        <feature type="XTAL" n="4000000" m="16000000" name="HSE (High-Speed External Oscillator)"/>
+        <feature type="XTAL" n="32768" m="32768" name="LSE (Low-Speed External Oscillator)"/>
+        <feature type="PLL" n="1" name="Internal PLL"/>
+        <feature type="DMA" n="16" name="High-Speed DMA"/>
+        <feature type="RNG" n="1" name="True Random Number Generator"/>
+        <feature type="MemoryOther" n="1" name="32KB Data Flash Memory"/>
+        <feature type="AnalogOther" n="4" name="CMP (Comparator)"/>
+        <feature type="AnalogOther" n="3" name="PGA (Programmable Gain Amplifier)"/>
+        <feature type="Other" n="1" name="CRC"/>
+        <feature type="Other" n="1" name="Quadrature Encoder Interface"/>
+
+<!-- Device : A34M418 -->
+        <device Dname="A34M418">
+          <description>
+512KB Code Flash and below H/W modules vary depending on package type.
+  - IOs, ADC, I2C, SPI and UART
+  - For more information, refer ordering information in user manual.          
+          </description>
+          <memory id="IRAM1" start="0x20000000" size="0x10000" init="0" default="1" />
+          <memory id="IROM1" start="0x00000000" size="0x80000" startup="1" default="1" />
+          <algorithm name="ProductConfig/A34M41x/FPA/FLM/a34m41x_code.flm" start="0x00000000" size="0x10000" default="1" />
+          
+<!-- Variants -->
+          <variant Dvariant="A34M418YLN">
+            <compile define="EXTRN_VARIANT_A34M418YLN"/>
+            <feature type="QFP" n="120" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+          <variant Dvariant="A34M418VLN">
+            <compile define="EXTRN_VARIANT_A34M418VLN"/>
+            <feature type="QFP" n="100" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+          <variant Dvariant="A34M418RLN">
+            <compile define="EXTRN_VARIANT_A34M418RLN"/>
+            <feature type="QFP" n="64" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+        </device>
+
+<!-- Device : A34M416 -->
+        <device Dname="A34M416">
+          <description>
+256KB Code Flash and below H/W modules vary depending on package type.
+  - IOs, ADC, I2C, SPI and UART
+  - For more information, refer ordering information in user manual.          
+          </description>
+          <memory id="IRAM1" start="0x20000000" size="0x10000" init="0" default="1" />
+          <memory id="IROM1" start="0x00000000" size="0x40000" startup="1" default="1" />
+          <algorithm name="ProductConfig/A34M41x/FPA/FLM/a34m41x_code.flm" start="0x00000000" size="0x10000" default="1" />
+          
+<!-- Variants -->
+          <variant Dvariant="A34M416VLN">
+            <compile define="EXTRN_VARIANT_A34M416VLN"/>
+            <feature type="QFP" n="100" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>     
+          <variant Dvariant="A34M416RLN">
+            <compile define="EXTRN_VARIANT_A34M416RLN"/>
+            <feature type="QFP" n="64" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+        </device>
+
+<!-- Device : A34M414 -->
+        <device Dname="A34M414">
+          <description>
+128KB Code Flash and below H/W modules vary depending on package type.
+  - IOs, ADC, I2C, SPI and UART
+  - For more information, refer ordering information in user manual.          
+          </description>
+          <memory id="IRAM1" start="0x20000000" size="0x8000" init="0" default="1" />
+          <memory id="IROM1" start="0x00000000" size="0x20000" startup="1" default="1" />
+          <algorithm name="ProductConfig/A34M41x/FPA/FLM/a34m41x_code.flm" start="0x00000000" size="0x10000" default="1" />
+          
+<!-- Variants -->
+          <variant Dvariant="A34M414VLN">
+            <compile define="EXTRN_VARIANT_A34M414VLN"/>
+            <feature type="QFP" n="100" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>     
+          <variant Dvariant="A34M414RLN">
+            <compile define="EXTRN_VARIANT_A34M414RLN"/>
+            <feature type="QFP" n="64" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+        </device>
+      </subFamily>    
+
+<!-- Subfamily : A34M42x Series -->
+      <subFamily DsubFamily="A34M42x Series">
+        <processor Dclock="140000000"/>
+        <compile header="ProductConfig/A34M42x/Config/a34m42x.h" Pdefine="EXTRN_SUBFAMILY_A34M42x"/>
+        <debug svd="ProductConfig/A34M42x/SVD/a34m42x.svd"/>
+
+        <book name="https://www.abovsemi.com/document/viewer.php?file=1712280836.pdf&amp;d_it_id=1712280836&amp;fileName=STD10-UM_A34M420_Eng.pdf"
+              title="A34M42x User Manual"/>
+        <book name="https://www.abovsemi.com/document/viewer.php?file=1709514018.pdf&amp;d_it_id=1709514018&amp;fileName=STD10-DS_A34M420_Eng.pdf"
+              title="A34M42x Data Sheet"/>
+
+        <feature type="PowerMode" n="3" name="Run, Sleep, Deep-Sleep"/>
+        <feature type="VCC" n="2.5" m="5.5"/>
+        <feature type="IntRC" n="32000000" name="HSI (High-Speed Internal Oscillator)"/>
+        <feature type="IntRC" n="500000" name="LSI (Low-Speed Internal Oscillator)"/>
+        <feature type="NVIC" n="86" name="NVIC"/>
+        <feature type="Timer" n="10" m="16" name="Timer Module with 16bit resolution"/>
+        <feature type="Timer" n="2" m="32" name="Timer Module with 32bit resolution"/>
+        <feature type="WDT" n="1"/>
+        <feature type="PWM" n="2" m="16" name="Pulse Width Modulation"/>
+        <feature type="XTAL" n="4000000" m="16000000" name="HSE (High-Speed External Oscillator)"/>
+        <feature type="XTAL" n="32768" m="32768" name="LSE (Low-Speed External Oscillator)"/>
+        <feature type="PLL" n="1" name="Internal PLL"/>
+        <feature type="DMA" n="16" name="High-Speed DMA"/>
+        <feature type="RNG" n="1" name="True Random Number Generator"/>
+        <feature type="MemoryOther" n="1" name="32KB Data Flash Memory"/>
+        <feature type="Other" n="1" name="CRC"/>
+
+<!-- Device : A34M420 -->
+        <device Dname="A34M420">
+          <description>
+1024KB Code Flash and below H/W modules vary depending on package type.
+  - IOs, ADC, I2C, SPI and UART
+  - For more information, refer ordering information in user manual.
+          </description>
+          <memory id="IRAM1" start="0x20000000" size="0x10000" init="0" default="1" />
+          <memory id="IROM1" start="0x00000000" size="0x100000" startup="1" default="1" />
+          <algorithm name="ProductConfig/A34M42x/FPA/FLM/a34m42x_code.flm" start="0x00000000" size="0x10000" default="1" />
+
+<!-- Variants -->
+          <variant Dvariant="A34M420YLN">
+            <compile define="EXTRN_VARIANT_A34M420YLN"/>
+            <feature type="QFP" n="120" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+          <variant Dvariant="A34M420VLN">
+            <compile define="EXTRN_VARIANT_A34M420VLN"/>
+            <feature type="QFP" n="100" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+          <variant Dvariant="A34M420RLN">
+            <compile define="EXTRN_VARIANT_A34M420RLN"/>
+            <feature type="QFP" n="64" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+        </device>
+      </subFamily>
+
+<!-- Subfamily : A34L71x Series -->
+      <subFamily DsubFamily="A34L71x Series">
+        <processor Dclock="48000000"/>
+        <compile header="ProductConfig/A34L71x/Config/a34l71x.h" Pdefine="EXTRN_SUBFAMILY_A34L71x"/>
+        <debug svd="ProductConfig/A34L71x/SVD/a34l71x.svd"/>
+
+        <book name="https://www.abovsemi.com/document/viewer.php?file=1727393892.pdf&amp;d_it_id=1727393892&amp;fileName=STD10-UM_A34L716_Eng.pdf"
+              title="A34L71x User Manual"/>
+        <book name="https://www.abovsemi.com/document/viewer.php?file=1727393362.pdf&amp;d_it_id=1727393362&amp;fileName=STD10-DS_A34L716_Eng.pdf"
+              title="A34L71x Data Sheet"/>
+
+        <feature type="PowerMode" n="3" name="Run, Sleep, Deep-Sleep"/>
+        <feature type="VCC" n="1.8" m="3.6"/>
+        <feature type="IntRC" n="32000000" name="HSI (High-Speed Internal Oscillator)"/>
+        <feature type="IntRC" n="40000" name="LSI (Low-Speed Internal Oscillator)"/>
+        <feature type="NVIC" n="86" name="NVIC"/>
+        <feature type="Timer" n="8" m="16" name="Timer Module with 16bit resolution"/>
+        <feature type="Timer" n="1" m="32" name="Timer Module with 32bit resolution"/>
+        <feature type="WDT" n="1"/>
+        <feature type="XTAL" n="4000000" m="16000000" name="HSE (High-Speed External Oscillator)"/>
+        <feature type="XTAL" n="32768" m="32768" name="LSE (Low-Speed External Oscillator)"/>
+        <feature type="PLL" n="1" name="Internal PLL"/>
+        <feature type="DMA" n="7" name="High-Speed DMA"/>
+        <feature type="MemoryOther" n="1" name="32KB Data Flash Memory"/>
+        <feature type="Other" n="1" name="CRC"/>
+
+<!-- Device : A34L716 -->
+        <device Dname="A34L716">
+          <description>
+256KB Code Flash and below H/W modules vary depending on package type.
+  - IOs, ADC, DAC, I2C, SPI, UART, USART and LPUART.
+  - For more information, refer ordering information in user manual.
+          </description>
+          <memory id="IRAM1" start="0x20000000" size="0x6000" init="0" default="1" />
+          <memory id="IROM1" start="0x00000000" size="0x40000" startup="1" default="1" />
+          <algorithm name="ProductConfig/A34L71x/FPA/FLM/a34l71x_code.flm" start="0x00000000" size="0x40000" default="1" />
+
+<!-- Variants -->
+          <variant Dvariant="A34L716VLN">
+            <compile define="EXTRN_VARIANT_A34L716VLN"/>
+            <feature type="QFP" n="100" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+          <variant Dvariant="A34L716RLN">
+            <compile define="EXTRN_VARIANT_A34L716RLN"/>
+            <feature type="QFP" n="64" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+          <variant Dvariant="A34L716JYN">
+            <compile define="EXTRN_VARIANT_A34L716JYN"/>
+            <feature type="QFN" n="56" name="Quad Flat No-Lead Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+        </device>
+      </subFamily>
+
+<!-- Subfamily : A34G43x Series -->
+      <subFamily DsubFamily="A34G43x Series">
+        <processor Dclock="200000000"/>
+        <compile header="ProductConfig/A34G43x/Config/a34g43x.h" Pdefine="EXTRN_SUBFAMILY_A34G43x"/>
+        <debug svd="ProductConfig/A34G43x/SVD/a34g43x.svd"/>
+
+        <book name="https://www.abovsemi.com/document/viewer.php?file=1767944538.pdf&amp;d_it_id=1767944538&amp;fileName=STD10-UM_A34G43x_Eng.pdf"
+              title="A34G43x User Manual"/>
+        <book name="https://www.abovsemi.com/document/viewer.php?file=1767943214.pdf&amp;d_it_id=1767943214&amp;fileName=STD10-DS_A34G43x_Eng.pdf"
+              title="A34G43x Data Sheet"/>
+
+        <feature type="PowerMode" n="3" name="Run, Sleep, Deep-Sleep"/>
+        <feature type="VCC" n="1.8" m="3.6"/>
+        <feature type="IntRC" n="16000000" name="HSI (High-Speed Internal Oscillator)"/>
+        <feature type="IntRC" n="500000" name="LSI (Low-Speed Internal Oscillator)"/>
+        <feature type="NVIC" n="86" name="NVIC"/>
+        <feature type="Timer" n="10" m="16" name="Timer Module with 16bit resolution"/>
+        <feature type="Timer" n="2" m="32" name="Timer Module with 32bit resolution"/>
+        <feature type="WDT" n="1"/>
+        <feature type="XTAL" n="4000000" m="16000000" name="HSE (High-Speed External Oscillator)"/>
+        <feature type="XTAL" n="32768" m="32768" name="LSE (Low-Speed External Oscillator)"/>
+        <feature type="PLL" n="1" name="Internal PLL"/>
+        <feature type="DMA" n="16" name="High-Speed DMA"/>
+        <feature type="MemoryOther" n="1" name="32KB Data Flash Memory"/>
+        <feature type="Other" n="1" name="CRC"/>
+
+<!-- Device : A34G43A -->
+        <device Dname="A34G43A">
+          <description>
+2048KB Code Flash and below H/W modules vary depending on package type.
+  - IOs, ADC, DAC, I2C, SPI, UART and QSPI.
+  - For more information, refer ordering information in user manual.
+          </description>
+          <memory id="IRAM1" start="0x20000000" size="0x40000" init="0" default="1" />
+          <memory id="IROM1" start="0x00000000" size="0x200000" startup="1" default="1" />
+          <algorithm name="ProductConfig/A34G43x/FPA/FLM/a34g43x_code.flm" start="0x00000000" size="0x40000" default="1" />
+
+<!-- Variants -->
+          <variant Dvariant="A34G43AYLN">
+            <compile define="EXTRN_VARIANT_A34G43AYLN"/>
+            <feature type="QFP" n="120" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+          <variant Dvariant="A34G43AVLN">
+            <compile define="EXTRN_VARIANT_A34G43AVLN"/>
+            <feature type="QFP" n="100" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+          <variant Dvariant="A34G43ARLN">
+            <compile define="EXTRN_VARIANT_A34G43ARLN"/>
+            <feature type="QFP" n="64" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+        </device>
+
+<!-- Device : A34G430 -->
+        <device Dname="A34G430">
+          <description>
+1024KB Code Flash and below H/W modules vary depending on package type.
+  - IOs, ADC, DAC, I2C, SPI, UART and QSPI.
+  - For more information, refer ordering information in user manual.
+          </description>
+          <memory id="IRAM1" start="0x20000000" size="0x40000" init="0" default="1" />
+          <memory id="IROM1" start="0x00000000" size="0x100000" startup="1" default="1" />
+          <algorithm name="ProductConfig/A34G43x/FPA/FLM/a34g43x_code.flm" start="0x00000000" size="0x40000" default="1" />
+
+<!-- Variants -->
+          <variant Dvariant="A34G430YLN">
+            <compile define="EXTRN_VARIANT_A34G430YLN"/>
+            <feature type="QFP" n="120" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+          <variant Dvariant="A34G430VLN">
+            <compile define="EXTRN_VARIANT_A34G430VLN"/>
+            <feature type="QFP" n="100" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+          <variant Dvariant="A34G430RLN">
+            <compile define="EXTRN_VARIANT_A34G430RLN"/>
+            <feature type="QFP" n="64" name="Low-profile Quad Flat Package"/>
+            <feature type="Temp" n="-40" m="85" name="Commercial Operating Temperature Range"/>
+          </variant>
+        </device>
+      </subFamily>
+    </family>
+  </devices>
+
+
+<!-- ############## Definition of Conditions  -->
+<conditions>
+<!-- Condition for Cross compiler -->
+<condition id="ARMCC Compiler">
+  <require Tcompiler="ARMCC" Toptions="AC5"/>
+</condition>
+
+<!-- Condition for Family -->
+<condition id="A34xxxx">
+  <description> ABOV A34xxxx Family Devices </description>
+  <require Dvendor="ABOV Semiconductor:126"  Dname="A34*"/>
+</condition>
+
+<!-- Condition for SubFamily -->
+<condition id="A34M41x">
+  <description> ABOV A34M41x Series Devices </description>
+  <require Dvendor="ABOV Semiconductor:126"  Dname="A34M41[864]*"/>
+</condition>
+<condition id="A34M42x">
+  <description> ABOV A34M42x Series Devices </description>
+  <require Dvendor="ABOV Semiconductor:126"  Dname="A34M42[0]*"/>
+</condition>
+<condition id="A34L71x">
+  <description> ABOV A34L71x Series Devices </description>
+  <require Dvendor="ABOV Semiconductor:126"  Dname="A34L71[6]*"/>
+</condition>
+<condition id="A34G43x">
+  <description> ABOV A34G43x Series Devices </description>
+  <require Dvendor="ABOV Semiconductor:126"  Dname="A34G43[0A]*"/>
+</condition>
+
+<!-- Condition for Family + CMSIS -->
+<condition id="A34xxxx CMSIS">
+  <description> ABOV A34xxxx Family Device and CMSIS-Core </description>
+  <require condition="A34xxxx"/>
+  <require Cclass="CMSIS"  Cgroup="CORE"/>
+</condition>
+
+<!-- Condition for SubFamily + CMSIS -->
+<condition id="A34M41x CMSIS">
+  <description> ABOV A34M41x Series Device and CMSIS-Core </description>
+  <require condition="A34M41x"/>
+  <require Cclass="CMSIS"  Cgroup="CORE"/>
+</condition>
+<condition id="A34M42x CMSIS">
+  <description> ABOV A34M42x Series Device and CMSIS-Core </description>
+  <require condition="A34M42x"/>
+  <require Cclass="CMSIS"  Cgroup="CORE"/>
+</condition>
+<condition id="A34L71x CMSIS">
+  <description> ABOV A34L71x Series Device and CMSIS-Core </description>
+  <require condition="A34L71x"/>
+  <require Cclass="CMSIS"  Cgroup="CORE"/>
+</condition>
+<condition id="A34G43x CMSIS">
+  <description> ABOV A34G43x Series Device and CMSIS-Core </description>
+  <require condition="A34G43x"/>
+  <require Cclass="CMSIS"  Cgroup="CORE"/>
+</condition>
+
+<!-- Condition for Family + Compiler -->
+<!-- Condition for SubFamily + Compiler is not needed because only ARMCC is required for PACK -->
+<condition id="A34xxxx ARMCC">
+  <description> ABOV A34xxxx Family with ARMCC Compiler </description>
+  <require condition="A34xxxx"/>
+  <require condition="ARMCC Compiler"/>
+</condition>
+
+<!-- Condition for common components -->
+<condition id="A34xxxx CMSIS CStartup">
+  <description> Common components for A34xxxx family </description>
+  <require condition="A34xxxx CMSIS"/>
+  <require Cbundle="Platform" Cclass="Device" Cgroup="Startup"/>
+</condition>
+<condition id="A34xxxx Serial">
+  <description> Common debug for A34xxxx family </description>
+  <require condition="A34xxxx CMSIS CStartup"/>
+  <accept Cbundle="Platform" Cclass="Device" Cgroup="Driver" Csub="HAL"/>
+</condition>
+</conditions>
+
+
+<!-- ############## Definitions of Components -->
+<components>
+  <bundle Cbundle="Platform" Cclass="Device" isDefaultVariant="true" Cversion="1.0.0">
+    <description> ABOV Solutions delivered thru. "Platform" </description>
+    <doc></doc>
+
+<!-- Component : Startup -->
+    <component Cgroup="Startup" condition="A34xxxx CMSIS">
+      <description> System Startup for A34xxxx family </description>
+      <RTE_Components_h>
+        #define RTE_DEVICE_STARTUP_A34XXXX    /* Device Startup for A34XXXX */
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Framework/CMSIS/Device/ABOV/Include/"/>
+        <file category="header" name="Framework/CMSIS/Device/ABOV/Include/system_a34xxxx.h"/>
+        <file category="source" condition="A34xxxx ARMCC" name="Framework/CMSIS/Device/ABOV/Source/startup_a34xxxx.c"/>
+        <file category="source" condition="A34xxxx ARMCC" name="Framework/CMSIS/Device/ABOV/Source/system_a34xxxx.c"/>
+      </files>
+    </component>
+
+<!-- Component : HAL -->
+    <component Cgroup="Driver" Csub="HAL" condition="A34xxxx CMSIS CStartup">
+      <description> HAL </description>
+      <RTE_Components_h>
+        #define RTE_DEVICE_DRIVER_HAL
+      </RTE_Components_h>
+      <files>
+        <file category="include" name="Platform/HAL/Include/"/>
+        <file category="include" name="Platform/HAL/HPL/Include/"/>
+
+        <file category="source" name="Platform/HAL/SCU/hal_scu.c"/>
+        <file category="source" name="Platform/HAL/SCU/hal_scu_clk.c"/>
+        <file category="source" name="Platform/HAL/PCU/hal_pcu.c"/>
+        <file category="source" name="Platform/HAL/UART/hal_uart.c"/>
+        <file category="source" name="Platform/HAL/HPL/DMA/hpl_dma.c"/>
+        <file category="source" name="Platform/HAL/HPL/NMI/hpl_nmi.c"/>
+      </files>
+    </component>
+  </bundle>
+
+<!-- Component : Utility -->
+  <component Cclass="Utility" Cgroup="Debug" Csub="Serial" Cversion="1.0.0" condition="A34xxxx Serial">
+    <description> Utility Serial Debug Driver </description>
+    <RTE_Components_h>
+      #define RTE_UTILITY_DEBUG_COMMON
+    </RTE_Components_h>
+    <files>
+      <file category="include" name="Platform/Library/ABOV/Debug/Include/"/>
+      
+      <file category="source" name="Platform/Library/ABOV/Debug/Source/debug.c"/>
+      <file category="source" name="Platform/Library/ABOV/Debug/Source/debug_cmd.c"/>
+      <file category="source" name="Platform/Library/ABOV/Debug/Source/debug_hardfault.c"/>
+      <file category="source" name="Platform/Library/ABOV/Debug/Source/debug_log.c"/>
+      <file category="source" name="Platform/Library/ABOV/Debug/Source/debug_retarget.c"/>
+      <file category="source" name="Platform/Library/ABOV/Debug/Source/debug_serial.c"/>
+    </files>
+  </component>
+
+<!-- Bundle : Product Configuration -->
+  <bundle Cbundle="ProductConfig" Cclass="Config" isDefaultVariant="true" Cversion="1.0.0">
+    <description> Global Configuration for a Product </description>
+    <doc></doc>
+
+<!-- Component : Device Common -->
+    <component Cgroup="Device" Csub="Common">
+      <description> Device Common Configuration </description>
+      <RTE_Components_h>
+        #define RTE_PRODUCT_CONFIG_COMMON
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="ProductConfig/Config/abov_config.h" attr="config"/>
+        <file category="source" name="ProductConfig/Config/abov_module.h" attr="config"/>
+        <file category="source" name="ProductConfig/Config/abov_example_config.h" attr="config"/>
+        
+        <file category="linkerScript" name="Framework/CMSIS/Device/ABOV/Source/ARM/ac5_a34xxxx.sct" condition="A34xxxx ARMCC" attr="config"/>
+        <file category="linkerScript" name="Framework/CMSIS/Device/ABOV/Source/ARM/ac5_a34m42x.sct" condition="A34xxxx ARMCC" attr="config"/>
+        <file category="linkerScript" name="Framework/CMSIS/Device/ABOV/Source/ARM/ac5_a34l71x.sct" condition="A34xxxx ARMCC" attr="config"/>
+        <file category="linkerScript" name="Framework/CMSIS/Device/ABOV/Source/ARM/ac5_a34g43x.sct" condition="A34xxxx ARMCC" attr="config"/>
+      </files>
+    </component>
+
+<!-- Component : Device A34M41x -->
+    <component Cgroup="Device" Csub="A34M41x" condition="A34M41x CMSIS">
+      <description> A34M41x Configuration </description>
+      <RTE_Components_h>
+        #define RTE_PRODUCT_CONFIG_A34M41x
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="ProductConfig/A34M41x/Config/a34m41x.h"/>
+        <file category="source" name="ProductConfig/A34M41x/Config/board_a34m41x.h"/>
+        <file category="source" name="ProductConfig/A34M41x/Config/config_a34m41x.h"/>
+        <file category="source" name="ProductConfig/A34M41x/Config/debug_a34m41x.h"/>
+        <file category="source" name="ProductConfig/A34M41x/Config/startup_a34m41x.h"/>
+      </files>
+    </component>
+
+<!-- Component : Device A34M42x -->
+    <component Cgroup="Device" Csub="A34M42x" condition="A34M42x CMSIS">
+      <description> A34M42x Configuration </description>
+      <RTE_Components_h>
+        #define RTE_PRODUCT_CONFIG_A34M42x
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="ProductConfig/A34M42x/Config/a34m42x.h"/>
+        <file category="source" name="ProductConfig/A34M42x/Config/board_a34m42x.h"/>
+        <file category="source" name="ProductConfig/A34M42x/Config/config_a34m42x.h"/>
+        <file category="source" name="ProductConfig/A34M42x/Config/debug_a34m42x.h"/>
+        <file category="source" name="ProductConfig/A34M42x/Config/startup_a34m42x.h"/>
+      </files>
+    </component>
+
+<!-- Component : Device A34L71x -->
+    <component Cgroup="Device" Csub="A34L71x" condition="A34L71x CMSIS">
+      <description> A34L71x Configuration </description>
+      <RTE_Components_h>
+        #define RTE_PRODUCT_CONFIG_A34L71x
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="ProductConfig/A34L71x/Config/a34l71x.h"/>
+        <file category="source" name="ProductConfig/A34L71x/Config/board_a34l71x.h"/>
+        <file category="source" name="ProductConfig/A34L71x/Config/config_a34l71x.h"/>
+        <file category="source" name="ProductConfig/A34L71x/Config/debug_a34l71x.h"/>
+        <file category="source" name="ProductConfig/A34L71x/Config/startup_a34l71x.h"/>
+      </files>
+    </component>
+
+<!-- Component : Device A34G43x -->
+    <component Cgroup="Device" Csub="A34G43x" condition="A34G43x CMSIS">
+      <description> A34G43x Configuration </description>
+      <RTE_Components_h>
+        #define RTE_PRODUCT_CONFIG_A34G43x
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="ProductConfig/A34G43x/Config/a34g43x.h"/>
+        <file category="source" name="ProductConfig/A34G43x/Config/board_a34g43x.h"/>
+        <file category="source" name="ProductConfig/A34G43x/Config/config_a34g43x.h"/>
+        <file category="source" name="ProductConfig/A34G43x/Config/debug_a34g43x.h"/>
+        <file category="source" name="ProductConfig/A34G43x/Config/startup_a34g43x.h"/>
+      </files>
+    </component>
+  </bundle>
+</components>
+
+
+<!-- ############## Definitions of Boards -->
+<boards>
+<!-- board : STK-A34M418-VLN-A -->
+  <board vendor="ABOV" name="STK-A34M418-VLN-A" revision="v2.0" salesContact="sales_gl@abov.co.kr">
+    <description> STK(StarterKit) with A34M418VLN </description>
+    <image small="Document/A34M41x/Board/STK/STK_A34M418_VLN_A.jpg"/>
+    <book category="manual" 
+          name="https://www.abovsemi.com/document/viewer.php?file=1622783702.pdf&amp;d_it_id=1622783702&amp;fileName=STK_Manual_A34M418VLN_Eng.pdf"
+          title="Manual"/>
+    <book category="schematic" 
+          name="https://www.abovsemi.com/document/viewer.php?file=1588567401.pdf&amp;d_it_id=1588567401&amp;fileName=STK_Schematic_A34M418VLN.pdf"
+          title="Schematic"/>
+    <mountedDevice deviceIndex="0" Dvendor="ABOV Semiconductor:126" Dname="A34M418VLN"/>
+    <compatibleDevice deviceIndex="0" Dvendor="ABOV Semiconductor:126" DsubFamily="A34M41x Series"/>
+    <feature type="ODbg"   n="1"              name="On-board Type A-Link Debug Adaptor"/>
+    <feature type="XTAL"   n="8000000"        name="8MHz HSE (High-Speed External Oscillator)"/>
+    <feature type="XTAL"   n="32768"          name="32.768KHz LSE (Low-Speed External Oscillator)"/>
+    <feature type="PWR"    n="3.3"   m="5.0"  name="Internal Power Supply"/>
+    <feature type="PWR"    n="3.3"   m="5.0"  name="External Power Supply"/>
+    <feature type="Button" n="2"              name="Tact-buttons : USER and nRESET"/>
+    <feature type="LED"    n="6"              name="6 LEDs: D101~106"/>
+    <feature type="Other"  n="1"              name="100 pins User I/O connector"/>
+    <debugInterface adapter="CMSIS-DAP" connector="Mini-USB"/>
+  </board>
+
+<!-- board : STK-A34M418-YLN-A -->
+  <board vendor="ABOV" name="STK-A34M418-YLN-A" revision="v2.1" salesContact="sales_gl@abov.co.kr">
+    <description> STK(StarterKit) with A34M418YLN </description>
+    <image small="Document/A34M41x/Board/STK/STK_A34M418_YLN_A.jpg"/>
+    <book category="manual" 
+          name="https://www.abovsemi.com/document/viewer.php?file=1622783770.pdf&amp;d_it_id=1622783770&amp;fileName=STK_Manual_A34M418YLN_Eng.pdf"
+          title="Manual"/>
+    <book category="schematic" 
+          name="https://www.abovsemi.com/document/viewer.php?file=1622781029.pdf&amp;d_it_id=1622781029&amp;fileName=STK_Schematic_A34M418YLN.pdf"
+          title="Schematic"/>
+    <mountedDevice deviceIndex="0" Dvendor="ABOV Semiconductor:126" Dname="A34M418YLN"/>
+    <compatibleDevice deviceIndex="0" Dvendor="ABOV Semiconductor:126" DsubFamily="A34M41x Series"/>
+    <feature type="ODbg"   n="1"              name="On-board Type A-Link Debug Adaptor"/>
+    <feature type="XTAL"   n="8000000"        name="8MHz HSE (High-Speed External Oscillator)"/>
+    <feature type="XTAL"   n="32768"          name="32.768KHz LSE (Low-Speed External Oscillator)"/>
+    <feature type="PWR"    n="3.3"   m="5.0"  name="Internal Power Supply"/>
+    <feature type="PWR"    n="1.8"   m="5.0"  name="External Power Supply"/>
+    <feature type="Button" n="2"              name="Tact-buttons : USER and nRESET"/>
+    <feature type="LED"    n="6"              name="6 LEDs: D101~106"/>
+    <feature type="Other"  n="1"              name="120 pins User I/O connector"/>
+    <debugInterface adapter="CMSIS-DAP" connector="Mini-USB"/>
+  </board>
+
+<!-- board : STK-A34M420-YLN-A -->
+  <board vendor="ABOV" name="STK-A34M420-YLN-A" revision="v2.0" salesContact="sales_gl@abov.co.kr">
+    <description> STK(StarterKit) with A34M420YLN </description>
+    <image small="Document/A34M42x/Board/STK/STK_A34M420_YLN_A.jpg"/>
+    <book category="manual" 
+          name="https://www.abovsemi.com/document/viewer.php?file=1712282340.pdf&amp;d_it_id=1712282340&amp;fileName=STD10-StarterKit_Manual_A34M420YLN_Eng.pdf"
+          title="Manual"/>
+    <mountedDevice deviceIndex="1" Dvendor="ABOV Semiconductor:126" Dname="A34M420YLN"/>
+    <compatibleDevice deviceIndex="0" Dvendor="ABOV Semiconductor:126" DsubFamily="A34M42x Series"/>
+    <feature type="ODbg"   n="1"              name="On-board Type A-Link Debug Adaptor"/>
+    <feature type="XTAL"   n="8000000"        name="8MHz HSE (High-Speed External Oscillator)"/>
+    <feature type="XTAL"   n="32768"          name="32.768KHz LSE (Low-Speed External Oscillator)"/>
+    <feature type="PWR"    n="3.3"   m="5.0"  name="Internal Power Supply"/>
+    <feature type="PWR"    n="3.3"   m="5.0"  name="External Power Supply"/>
+    <feature type="Button" n="2"              name="Tact-buttons : USER and nRESET"/>
+    <feature type="LED"    n="6"              name="6 LEDs: D101~106"/>
+    <feature type="Other"  n="1"              name="120 pins User I/O connector"/>
+    <debugInterface adapter="CMSIS-DAP" connector="USB-C"/>
+  </board>
+
+<!-- board : STK-A34L716-VLN-A -->
+  <board vendor="ABOV" name="STK-A34L716-VLN-A" revision="v2.0" salesContact="sales_gl@abov.co.kr">
+    <description> STK(StarterKit) with A34L716VLN </description>
+    <image small="Document/A34L71x/Board/STK/STK_A34L716_VLN_A.jpg"/>
+    <book category="manual" 
+          name="https://www.abovsemi.com/document/viewer.php?file=1727656978.pdf&amp;d_it_id=1727656978&amp;fileName=STD10-StarterKit_Manual_A34L716VLN_Eng.pdf"
+          title="Manual"/>
+    <mountedDevice deviceIndex="1" Dvendor="ABOV Semiconductor:126" Dname="A34L716VLN"/>
+    <compatibleDevice deviceIndex="0" Dvendor="ABOV Semiconductor:126" DsubFamily="A34L71x Series"/>
+    <feature type="ODbg"   n="1"              name="On-board Type A-Link Debug Adaptor"/>
+    <feature type="XTAL"   n="8000000"        name="8MHz HSE (High-Speed External Oscillator)"/>
+    <feature type="XTAL"   n="32768"          name="32.768KHz LSE (Low-Speed External Oscillator)"/>
+    <feature type="PWR"    n="3.3"            name="Internal Power Supply"/>
+    <feature type="PWR"    n="1.8"   m="3.6"  name="External Power Supply"/>
+    <feature type="Button" n="2"              name="Tact-buttons : USER and nRESET"/>
+    <feature type="LED"    n="6"              name="6 LEDs: D101~106"/>
+    <feature type="Other"  n="1"              name="100 pins User I/O connector"/>
+    <debugInterface adapter="CMSIS-DAP" connector="USB-C"/>
+  </board>
+
+<!-- board : STK-A34G43A-YLN-A -->
+  <board vendor="ABOV" name="STK-A34G43A-YLN-A" revision="v2.0" salesContact="sales_gl@abov.co.kr">
+    <description> STK(StarterKit) with A34G43AYLN </description>
+    <image small="Document/A34G43x/Board/STK/STK_A34G43A_YLN_A.jpg"/>
+    <book category="manual" 
+          name="https://www.abovsemi.com/document/viewer.php?file=1767945462.pdf&amp;d_it_id=1767945462&amp;fileName=STD10-StarterKit_Manual_A34G43AYLN_Eng.pdf"
+          title="Manual"/>
+    <mountedDevice deviceIndex="1" Dvendor="ABOV Semiconductor:126" Dname="A34G43AYLN"/>
+    <compatibleDevice deviceIndex="0" Dvendor="ABOV Semiconductor:126" DsubFamily="A34G43x Series"/>
+    <feature type="ODbg"   n="1"              name="On-board Type A-Link Debug Adaptor"/>
+    <feature type="XTAL"   n="8000000"        name="8MHz HSE (High-Speed External Oscillator)"/>
+    <feature type="XTAL"   n="32768"          name="32.768KHz LSE (Low-Speed External Oscillator)"/>
+    <feature type="PWR"    n="3.3"   m="5.0"  name="Internal Power Supply"/>
+    <feature type="PWR"    n="2.7"   m="5.0"  name="External Power Supply"/>
+    <feature type="Button" n="3"              name="Tact-buttons : USER and nRESET"/>
+    <feature type="LED"    n="6"              name="6 LEDs: D1~6"/>
+    <feature type="Other"  n="1"              name="100 pins User I/O connector"/>
+    <debugInterface adapter="CMSIS-DAP" connector="USB-C"/>
+  </board>
+</boards>
+
+
+<!-- ############## Definitions of Examples -->
+<examples>
+  <example name="GPIO-LED Blinking" doc="Source/GpioLedBlinking/REF_Example.docx" folder="Example/">
+    <description> GPIO-LED Blinking Example </description>
+    <board name="STK-A34M418-YLN-A" vendor="ABOV"/>
+    <project>
+      <environment name="uv" load="Build/ARM/STK/stk.uvprojx"/>
+    </project>
+    <attributes>
+      <component Cclass="CMSIS" Cgroup="CORE"/>
+      <component Cclass="Device" Cgroup="Startup"/>
+      <component Cclass="CMSIS" Cgroup="RTOS"/>
+      <category> Getting Start with STK </category>
+    </attributes>
+  </example>
+
+  <example name="GPIO-LED Blinking" doc="Source/GpioLedBlinking/REF_Example.docx" folder="Example/">
+    <description> GPIO-LED Blinking Example </description>
+    <board name="STK-A34M420-YLN-A" vendor="ABOV"/>
+    <project>
+      <environment name="uv" load="Build/ARM/STK/stk.uvprojx"/>
+    </project>
+    <attributes>
+      <component Cclass="CMSIS" Cgroup="CORE"/>
+      <component Cclass="Device" Cgroup="Startup"/>
+      <component Cclass="CMSIS" Cgroup="RTOS"/>
+      <category> Getting Start with STK </category>
+    </attributes>
+  </example>
+
+  <example name="GPIO-LED Blinking" doc="Source/GpioLedBlinking/REF_Example.docx" folder="Example/">
+    <description> GPIO-LED Blinking Example </description>
+    <board name="STK-A34L716-VLN-A" vendor="ABOV"/>
+    <project>
+      <environment name="uv" load="Build/ARM/STK/stk.uvprojx"/>
+    </project>
+    <attributes>
+      <component Cclass="CMSIS" Cgroup="CORE"/>
+      <component Cclass="Device" Cgroup="Startup"/>
+      <component Cclass="CMSIS" Cgroup="RTOS"/>
+      <category> Getting Start with STK </category>
+    </attributes>
+  </example>
+
+  <example name="GPIO-LED Blinking" doc="Source/GpioLedBlinking/REF_Example.docx" folder="Example/">
+    <description> GPIO-LED Blinking Example </description>
+    <board name="STK-A34G43A-YLN-A" vendor="ABOV"/>
+    <project>
+      <environment name="uv" load="Build/ARM/STK/stk.uvprojx"/>
+    </project>
+    <attributes>
+      <component Cclass="CMSIS" Cgroup="CORE"/>
+      <component Cclass="Device" Cgroup="Startup"/>
+      <component Cclass="CMSIS" Cgroup="RTOS"/>
+      <category> Getting Start with STK </category>
+    </attributes>
+  </example>
+</examples>
+
+</package>

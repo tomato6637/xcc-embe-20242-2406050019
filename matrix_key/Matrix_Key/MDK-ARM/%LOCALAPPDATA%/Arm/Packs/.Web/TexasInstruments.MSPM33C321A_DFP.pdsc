@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<package schemaVersion="1.4" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd">
+    <vendor>TexasInstruments</vendor>
+    <name>MSPM33C321A_DFP</name>
+    <description>Device Family Pack for Texas Instruments MSPM33C321A Series</description>
+    <url>https://software-dl.ti.com/msp430/esd/MSPM0-CMSIS/MSPM33C321A/latest/exports/</url>
+    <supportContact>https://e2e.ti.com/support/microcontrollers/</supportContact>
+    <license>01_Pack/license.txt</license>
+
+    <releases>
+        <release version="1.0.0" date="2026-05-04">
+        Initial release of MSPM33C321A device family pack.
+        New device support:
+            * MSPM33C321A (1MB Flash, 256KB SRAM)
+            * MSPM33C3219 (512KB Flash, 256KB SRAM)
+        </release>
+    </releases>
+
+    <keywords>
+        <!-- keywords for indexing -->
+        <keyword>Texas Instruments</keyword>
+        <keyword>MSPM33</keyword>
+        <keyword>MSPM33C</keyword>
+        <keyword>MSPM33C321A</keyword>
+        <keyword>MSPM33C3219</keyword>
+        <keyword>Device Support</keyword>
+        <keyword>Device Family Package Texas Instruments</keyword>
+    </keywords>
+
+    <!-- devices section (mandatory for Device Family Packs) -->
+    <devices>
+        <family Dfamily="MSPM33C321A Series" Dvendor="Texas Instruments:16">
+            <processor Dcore="Cortex-M33" DcoreVersion="r0p0" Dfpu="SP_FPU" Ddsp="DSP" Dclock="160000000" Dmpu="MPU" Dtz="TZ" Dendian="Little-endian"/>
+            <!--processor Dcore="Cortex-M33" DcoreVersion="r0p0" Dfpu="1" Dmpu="1" Dclock="200000000" Dendian="Little-endian"/-->
+            <!--debugconfig default="swd" clock="5000000" swj="1"/-->
+            <book name="https://developer.arm.com/documentation/100235/latest/" title="Cortex-M33 Generic User Guide"/>
+            <description>
+The MSPM33C32xx microcontrollers (MCUs) are part of the MSP general-purpose
+32-bit MCU family operating at up to 160 MHz, based on the Arm(R) Cortex(R)-M33
+32-bit core with Arm(R) TrustZone(R) technology, DSP extensions, and FPU.
+
+These MCUs feature flexible communication interfaces, high-performance analog,
+and security accelerators. The extended temperature range (-40C to 125C) and
+wide supply voltage range (1.71V to 3.6V) make this family suitable for
+industrial, enterprise, and personal electronics applications.
+
+MSPM33C321A provides:
+  - 1MB embedded flash program memory with ECC (dual-bank with address swap)
+  - 256kB SRAM with ECC
+  - 32kB high-endurance data flash for EEPROM emulation
+  - 160 MHz Cortex-M33 with TrustZone, FPU, DSP extensions, and 4kB instruction cache
+  - Two DMA controllers with 16 total channels
+  - Two 9.4 MSPS 12-bit ADCs with up to 36 external channels
+  - Two high-speed/low-power comparators (COMP) with 8-bit reference DACs
+  - Two externally available 8-bit DACs
+  - Configurable 1.4V or 2.5V internal shared voltage reference (VREF)
+  - Nine timers (up to 30 PWM channels): two 16-bit advanced, four 16-bit GP,
+    one 32-bit GP, two 16-bit QEI
+  - One window-watchdog timer (WWDT) and one independent watchdog timer (IWDT)
+  - Two CAN-FD interfaces (CAN 2.0A/B and CAN-FD)
+  - Two I2C dedicated interfaces (FM+, SMBus/PMBus)
+  - One dedicated SPI, one QSPI (external memory up to 20 MB/s)
+  - Eight UART channels (including LIN, IrDA, DALI, Smart Card, Manchester)
+  - Two I2S/TDM digital audio interfaces
+  - Real-time clock (RTC) with tamper detection and backup memory
+  - AES256/GCM, SHA256/HMAC, PKA (RSA/ECC), 32-bit TRNG
+  - Up to 93 GPIOs
+  - Packages: 100-pin LQFP, 80-pin LQFP, 64-pin LQFP, 48-pin VQFN, 100-pin nFBGA
+            </description>
+            <!--sequence name="DebugPortStart">
+                <block>
+                    Message(0, "=== DebugPortStart: Entry ===");
+                    __var SW_DP_ABORT = 0x0;
+                    __var DP_CTRL_STAT = 0x4;
+                    __var DP_SELECT = 0x8;
+                    __var powered_down = 0;
+
+                    WriteDP(DP_SELECT, 0x00000000);
+                    Message(0, "DP_SELECT written");
+
+                    powered_down = ((ReadDP(DP_CTRL_STAT) & 0xA0000000) != 0xA0000000);
+                    Message(0, "Power status: %x", powered_down);
+                </block>
+            </sequence-->
+            <debug>
+                <!-- ROM Table for a Cortex-M33 -->
+                <datapatch  type="AP" __dp="0" __ap="4" address="0xF8" value="0xE00FF003" info="AP BASE Register, ROM Table at 0xF0000002"/>
+            </debug>
+            <!-- debug sequences -->
+            <sequences>
+                <sequence name="DebugPortSetup">
+                    <block>
+                        __var isSWJ      = ((__protocol &amp; 0x00010000) != 0);
+                        __var hasDormant = __protocol &amp; 0x00020000;
+                        __var protType   = __protocol &amp; 0x0000FFFF;
+                    </block>
+                    <!-- JTAG Protocol -->
+                    <control if="protType == 1">
+                        <control if="isSWJ">
+                            <control if="hasDormant">
+                                <block atomic="1">
+                                    // Ensure current debug interface is in reset state
+                                    DAP_SWJ_Sequence(51, 0x0007FFFFFFFFFFFF);
+                                    // Select Dormant State (from SWD)
+                                    DAP_SWJ_Sequence(16, 0xE3BC);
+                                    // At least 8 cycles SWDIO/TMS HIGH
+                                    DAP_SWJ_Sequence(8, 0xFF);
+                                    // Alert Sequence Bits  0.. 63
+                                    DAP_SWJ_Sequence(64, 0x86852D956209F392);
+                                    // Alert Sequence Bits 64..127
+                                    DAP_SWJ_Sequence(64, 0x19BC0EA2E3DDAFE9);
+                                    // 4 cycles SWDIO/TMS LOW + 8-Bit JTAG Activation Code (0x0A)
+                                    DAP_SWJ_Sequence(12, 0x0A0);
+                                    // Ensure JTAG interface is reset
+                                    DAP_SWJ_Sequence(6, 0x3F);
+                                </block>
+                            </control>
+                            <control if="!hasDormant">
+                                <block atomic="1">
+                                // Ensure current debug interface is in reset state
+                                DAP_SWJ_Sequence(51, 0x0007FFFFFFFFFFFF);
+                                // Execute SWJ-DP Switch Sequence SWD to JTAG (0xE73C)
+                                // Change if SWJ-DP uses deprecated switch code (0xAEAE)
+                                DAP_SWJ_Sequence(16, 0xE73C);
+                                // Ensure JTAG interface is reset
+                                DAP_SWJ_Sequence(6, 0x3F);
+                                </block>
+                            </control>
+                        </control>
+                            <block atomic="1">
+                                // JTAG "Soft" Reset
+                                DAP_JTAG_Sequence(6, 1, 0x3F);
+                                DAP_JTAG_Sequence(1, 0, 0x01);
+                            </block>
+                    </control>
+
+                    <!-- SWD Protocol -->
+                    <control if="protType == 2">
+                        <control if="isSWJ">
+                            <control if="hasDormant">
+                                <block atomic="1">
+                                    // Ensure current debug interface is in reset state
+                                    DAP_SWJ_Sequence(51, 0x0007FFFFFFFFFFFF);
+                                    // Select Dormant State (from JTAG)
+                                    DAP_SWJ_Sequence(31, 0x33BBBBBA);
+                                    // At least 8 cycles SWDIO/TMS HIGH
+                                    DAP_SWJ_Sequence(8, 0xFF);
+                                    // Alert Sequence Bits  0.. 63
+                                    DAP_SWJ_Sequence(64, 0x86852D956209F392);
+                                    // Alert Sequence Bits 64..127
+                                    DAP_SWJ_Sequence(64, 0x19BC0EA2E3DDAFE9);
+                                    // 4 cycles SWDIO/TMS LOW + 8-Bit SWD Activation Code (0x1A)
+                                    DAP_SWJ_Sequence(12, 0x1A0);
+                                    // Enter SWD Line Reset State
+                                    DAP_SWJ_Sequence(51, 0x0007FFFFFFFFFFFF);  // &gt; 50 cycles SWDIO/TMS High
+                                    DAP_SWJ_Sequence(3,  0x00);                // At least 2 idle cycles (SWDIO/TMS Low)
+                                </block>
+                            </control>
+                            <control if="!hasDormant">
+                                <block>
+                                    // Ensure current debug interface is in reset state
+                                    DAP_SWJ_Sequence(51, 0x0007FFFFFFFFFFFF); //lets put the JTAG line in a reset state
+                                    DAP_SWJ_Sequence(16,0xE73C); //SWD to JTAG, this is to ensure the state machine is initialized
+                                    DAP_SWJ_Sequence(51, 0x0007FFFFFFFFFFFF); //Put it back in reset
+                                    DAP_SWJ_Sequence(16, 0xE79E); //JTAG to SWD switch
+                                    DAP_SWJ_Sequence(51, 0x0007FFFFFFFFFFFF);  //Ensure the switch is successful
+                                    DAP_SWJ_Sequence(7,  0x00); //Give the line some time to initialize
+                                </block>
+                            </control>
+                        </control>
+                        <control if="!isSWJ">
+                            <control if="hasDormant">
+                                <block atomic="1">
+                                // Ensure current debug interface is in reset state
+                                DAP_SWJ_Sequence(51, 0x0007FFFFFFFFFFFF);
+
+                                // At least 8 cycles SWDIO/TMS HIGH
+                                DAP_SWJ_Sequence(8, 0xFF);
+
+                                // Alert Sequence Bits  0.. 63
+                                DAP_SWJ_Sequence(64, 0x86852D956209F392);
+
+                                // Alert Sequence Bits 64..127
+                                DAP_SWJ_Sequence(64, 0x19BC0EA2E3DDAFE9);
+
+                                // 4 cycles SWDIO/TMS LOW + 8-Bit SWD Activation Code (0x1A)
+                                DAP_SWJ_Sequence(12, 0x1A0);
+
+                                // Enter SWD Line Reset State
+                                DAP_SWJ_Sequence(51, 0x0007FFFFFFFFFFFF);  // &gt; 50 cycles SWDIO/TMS High
+                                DAP_SWJ_Sequence(3,  0x00);                // At least 2 idle cycles (SWDIO/TMS Low)
+                                </block>
+                            </control>
+                            <control if="!hasDormant">
+                                <block atomic="1">
+                                // Enter SWD Line Reset State
+                                DAP_SWJ_Sequence(51, 0x0007FFFFFFFFFFFF);  // &gt; 50 cycles SWDIO/TMS High
+                                DAP_SWJ_Sequence(3,  0x00);                // At least 2 idle cycles (SWDIO/TMS Low)
+                                </block>
+                            </control>
+                        </control>
+                        <block>
+                            // Read DPIDR to enable SWD interface (SW-DPv1 and SW-DPv2)
+                            ReadDP(0x0);
+                        </block>
+                    </control>
+                </sequence>
+                <sequence name="DebugPortStart">
+
+                    <block>
+                        __var SW_DP_ABORT       = 0x0;
+                        __var DP_CTRL_STAT      = 0x4;
+                        __var DP_SELECT         = 0x8;
+                        __var powered_down      = 0;
+
+                        //Beyond here do not modify
+                        // Switch to DP Register Bank 0
+                        WriteDP(DP_SELECT, 0x00000000);
+
+                        // Read DP CTRL/STAT Register and check if CSYSPWRUPACK and CDBGPWRUPACK bits are set
+                        powered_down = ((ReadDP(DP_CTRL_STAT) &amp; 0xA0000000) != 0xA0000000);
+                    </block>
+                    <control if="powered_down">
+                        <block>
+                            // Request Debug/System Power-Up
+                            Message(0, "Debug/System power-up request sent");
+                            WriteDP(DP_CTRL_STAT, 0x50000000);
+                        </block>
+
+                        <!-- Wait for Power-Up Request to be acknowledged -->
+                        <control while="(ReadDP(DP_CTRL_STAT) &amp; 0xA0000000) != 0xA0000000" timeout="1000000"/>
+
+                        <!-- JTAG Specific Part of sequence -->
+                        <control if="(__protocol &amp; 0xFFFF) == 1">
+
+                            <block>
+                                // Init AP Transfer Mode, Transaction Counter, and Lane Mask (Normal Transfer Mode, Include all Byte Lanes)
+                                // Additionally clear STICKYORUN, STICKYCMP, and STICKYERR bits by writing '1'
+                                WriteDP(DP_CTRL_STAT, 0x50000F32);
+                            </block>
+
+                        </control>
+
+                        <!-- SWD Specific Part of sequence -->
+                        <control if="(__protocol &amp; 0xFFFF) == 2">
+                            <block>
+                                Message(0, "executing SWD power up");
+                                // Init AP Transfer Mode, Transaction Counter, and Lane Mask (Normal Transfer Mode, Include all Byte Lanes)
+                                WriteDP(DP_CTRL_STAT, 0x50000F00);
+
+                                // Clear WDATAERR, STICKYORUN, STICKYCMP, and STICKYERR bits of CTRL/STAT Register by write to ABORT register
+                                WriteDP(SW_DP_ABORT, 0x0000001E);
+                            </block>
+                        </control>
+                    </control>
+                    <block>
+                        __var DEBUG_PORT_VAL    = 0;
+                        __var ACCESS_POINT_VAL  = 0;
+
+                        __ap = 1;
+                        WriteAP(0x0C, 0x04); //lets use the mini pwr-ap as backup
+
+                        __ap = 4;
+                        ACCESS_POINT_VAL = ReadAP(0x00);//Reading current state of access point
+                        Message(0, "Current state of access point is: %x",ACCESS_POINT_VAL);
+                    </block>
+                        <block>
+                        __var nReset = 0x80;
+                        __var canReadPins = 0;
+                        // De-assert nRESET line to activate the hardware reset
+                        canReadPins = (DAP_SWJ_Pins(0x00, nReset, 0) != 0xFFFFFFFF);
+                        </block>
+                        <!-- Keep reset active for 50 ms -->
+                        <control while="1" timeout="200"/>
+                        <control if="canReadPins">
+                            <!-- Assert nRESET line and wait max. 1s for recovery -->
+                            <control while="(DAP_SWJ_Pins(nReset, nReset, 0) &amp; nReset) == 0" timeout="1000000"/>
+                        </control>
+                        <control if="!canReadPins">
+                            <block>
+                            // Assert nRESET line
+                            DAP_SWJ_Pins(nReset, nReset, 0);
+                            </block>
+                            <!-- Wait 100ms for recovery if nRESET not readable -->
+                            <control while="1" timeout="100000"/>
+                        </control>
+                    <control if = "(ACCESS_POINT_VAL &amp; 0x00E00000) == 0">
+                        <block>
+                            WriteAP(0x00, 0x190008);
+                            WriteAP(0xF0, 0x01);
+                        </block>
+                    </control>
+                    <control if = "(ACCESS_POINT_VAL &amp; 0x00E00000) != 0">
+                        <block>
+                            WriteAP(0xF0, 0x01);
+                            WriteAP(0x00, 0xF90008);
+                            WriteAP(0xF0, 0x01);
+                        </block>
+                    </control>
+                    <block>
+                        ACCESS_POINT_VAL = ReadAP(0x00);//Reading current state of access point
+                        Message(0, "Current state of access point is: %x",ACCESS_POINT_VAL);
+                        __ap = 0; //lets make sure we reset the access point selection
+                    </block>
+                </sequence>
+                <sequence name="DebugDeviceUnlock">
+                    <block>
+                        __ap = 1;
+                        __var deviceID = 0;
+                        __var version = 0;
+                        __var partNum = 0;
+                        __var manuf = 0;
+                        __var isMSPM33C321X = 0;
+                        __var isProduction = 0;
+                        __var continueId = 0;
+                        deviceID =   ReadAP(0x00);
+                        version = deviceID >> 28;
+                        partNum = (deviceID &amp; 0x0FFFF000) >> 12;
+                        manuf = (deviceID &amp; 0x00000FFE) >> 1;
+                        isMSPM33C321X = (partNum == 0xBBB7) &amp;&amp; (manuf == 0x17);
+                        isProduction = (version &gt; 0);
+                    </block>
+                    <!-- Check if device ID is correct -->
+                    <control if="!isMSPM33C321X">
+                        <block>
+                            continueId = Query(1, "Incorrect ID. This support package is for MSPM33C321X devices. Continue?", 4);
+                        </block>
+                    </control>
+                    <control if="continueId == 4">
+                        <block>
+                            Message(2, "Invalid ID");
+                        </block>
+                    </control>
+                </sequence>
+            </sequences>
+            <!-- features common for the whole family -->
+            <feature type="NVIC" n="64" name="Nested Vectored Interrupt Controller (NVIC) with 64 priority levels"/>
+            <feature type="DMA" n="16" name="Two DMA controllers with 16 total channels"/>
+            <feature type="MemoryOther" name="Up to 1MB Flash memory with ECC (dual-bank with address swap)"/>
+            <feature type="MemoryOther" name="256kB SRAM with ECC"/>
+            <feature type="MemoryOther" name="32kB high-endurance data flash (EEPROM emulation)"/>
+            <feature type="XTAL" n="4000000" m="48000000" name="High Frequency crystal (HFXT)"/>
+            <feature type="PLL" n="1" name="System PLL (SYSPLL) 32 to 160 MHz"/>
+            <feature type="RTC" n="32768" name="Real-time clock (RTC) with alarm, calendar, tamper detection, and 32B backup memory"/>
+            <feature type="ClockOther" name="Internal 32MHz oscillator (SYSOSC)"/>
+            <feature type="ClockOther" name="Internal 32kHz oscillator (LFOSC)"/>
+            <feature type="ClockOther" name="External 32kHz crystal oscillator (LFXT)"/>
+            <feature type="PowerMode" n="5" name="RUN, SLEEP, STOP, STANDBY, SHUTDOWN"/>
+            <feature type="VCC" n="1.71" m="3.6"/>
+            <feature type="Temp" n="-40" m="125" name="Extended Operating Temperature Range"/>
+<!-- ************************  Subfamily MSPM33C321A (1MB Flash)  **************************** -->
+            <subFamily DsubFamily="MSPM33C321A">
+                <feature type="ADC" n="36" m="12" name="Two simultaneous 9.4 MSPS 12-bit ADCs with up to 36 external channels"/>
+                <feature type="DAC" n="2" m="8" name="Two externally available 8-bit DACs"/>
+                <feature type="AnalogOther" n="2" name="High-speed/low-power comparators (COMP) with 8-bit reference DACs"/>
+                <feature type="AnalogOther" n="1" name="Configurable 1.4V or 2.5V internal shared voltage reference (VREF)"/>
+                <feature type="Timer" n="4" m="16" name="Two 16-bit advanced timers with deadband, fault handling, and complementary pair (up to 8 PWM ch each)"/>
+                <feature type="TimerOther" n="4" name="Four 16-bit general purpose timers"/>
+                <feature type="TimerOther" n="1" name="One 32-bit general purpose timer"/>
+                <feature type="TimerOther" n="2" name="Two 16-bit general purpose timers with quadrature encoder interface (QEI)"/>
+                <feature type="WDT" n="1" name="Window-watchdog timer (WWDT)"/>
+                <feature type="WDT" n="1" name="Independent watchdog timer (IWDT) in VBAT domain"/>
+                <feature type="CAN" n="2" name="Two CAN interfaces supporting CAN 2.0A/B and CAN-FD"/>
+                <feature type="I2C" n="2" name="Two dedicated I2C interfaces supporting FM+ (1Mbit/s), SMBus/PMBus"/>
+                <feature type="SPI" n="1" m="20000000" name="One dedicated SPI interface"/>
+                <feature type="Other" n="1" name="Quad SPI (QSPI) for external memory up to 20 MB/s"/>
+                <feature type="UART" n="8" name="Eight UART channels including LIN, IrDA, DALI, Smart Card, Manchester"/>
+                <feature type="Other" n="2" name="Two digital audio interfaces supporting full-duplex I2S and TDM (16-slot)"/>
+                <feature type="Crypto" n="256" name="AES256/GCM hardware accelerator"/>
+                <feature type="Crypto" n="256" name="SHA256/HMAC hardware accelerator"/>
+                <feature type="Other" n="1" name="Public Key Accelerator (PKA) supporting RSA and ECC algorithms"/>
+                <feature type="RNG" n="1" name="32-bit True Random Number Generator (TRNG)"/>
+                <feature type="IOs" n="93" name="Up to 93 General Purpose I/Os"/>
+
+                <!-- *************************  Device MSPM33C321A  ***************************** -->
+                <!-- Flash "A" suffix = 1MB Flash, 256KB SRAM                                    -->
+                <!-- Bank0 MAIN: 0x00000000, size 0x00080000 (512KB)                             -->
+                <!-- Bank1 MAIN: 0x00080000, size 0x00080000 (512KB) — total 1MB                 -->
+                <!-- SRAM NS:    0x20000000, size 0x00040000 (256KB)                             -->
+                <!-- SRAM S:     0x30000000, size 0x00040000 (256KB, secure alias)               -->
+                <!-- NonMain B0: 0x80101800 (peripheral address space)                           -->
+                <!-- Factory B0: 0x80110000                                                      -->
+                <!-- Factory B1: 0x80111000 (DEVICEID at 0x80111004)                            -->
+                <device Dname="MSPM33C321A">
+                    <!-- Non-Secure Flash (full 1MB span) -->
+                    <memory     name="IROM1"          access="rx"  start="0x00000000" size="0x00100000" startup="1" default="1"/>
+                    <!-- Secure Flash alias -->
+                    <memory     name="IROM1_S"        access="rx"  start="0x10000000" size="0x00100000" default="0" alias="IROM1"/>
+                    <!-- Non-Secure SRAM -->
+                    <memory     name="IRAM1"          access="rwx" start="0x20000000" size="0x00040000" default="1"/>
+                    <!-- Secure SRAM alias -->
+                    <memory     name="IRAM1_S"        access="rwx" start="0x30000000" size="0x00040000" default="0" alias="IRAM1"/>
+                    <!-- NonMain region Non-secure (Bank 0 — BCR/BSL configuration) -->
+                    <memory     name="NonMain_B0"     access="r"   start="0x80101800" size="0x00000800" default="1"/>
+                    <!-- NonMain region Secure alias (Bank 0 — BCR/BSL configuration) -->
+                    <memory     name="NonMain_B0_S"   access="r"   start="0x90101800" size="0x00000800" default="0"/>
+                    <!-- NonMain region (Bank 1) -->
+                    <memory     name="NonMain_B1"     access="r"   start="0x80113800" size="0x00000800" default="0" alias="NonMain_B0"/>
+                    <!-- NonMain region Secure alias (Bank 1) -->
+                    <memory     name="NonMain_B1_S"   access="r"   start="0x90113800" size="0x00000800" default="0" alias="NonMain_B0"/>
+                    <!-- Factory region (Bank 0) -->
+                    <memory     name="Factory_B0"     access="r"   start="0x80110000" size="0x00001000" default="1"/>
+                    <!-- Factory region (Bank 1 — contains DEVICEID at 0x80111004) -->
+                    <memory     name="Factory_B1"     access="r"   start="0x80111000" size="0x00001000" default="0" alias="Factory_B0"/>
+                    <!-- Data Flash (32kB high-endurance) -->
+                    <memory     name="DataFlash"      access="rw"  start="0x80000000" size="0x00008000" default="0"/>
+                    <!-- Data Flash Secure alias (32kB high-endurance) -->
+                    <memory     name="DataFlash_S"    access="rw"  start="0x90000000" size="0x00008000" default="0"/>
+                    <compile    define="__MSPM33C321A__"/>
+                    <debug      svd="03_SVD/MSPM33C321A.svd"/>
+                    <algorithm  name="02_Flash_Programming/FlashARM/MSPM33C_MAIN_1MB_S.FLM"    start="0x10000000" size="0x00100000" RAMstart="0x30000000" RAMsize="0x00040000" default="1"/>
+                    <algorithm  name="02_Flash_Programming/FlashARM/MSPM33C_MAIN_1MB_NS.FLM"   start="0x00000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x00040000" default="0"/>
+                    <algorithm  name="02_Flash_Programming/FlashARM/MSPM33C_DATA_32KB_S.FLM"   start="0x90000000" size="0x00008000" RAMstart="0x30000000" RAMsize="0x00040000" default="0"/>
+                    <algorithm  name="02_Flash_Programming/FlashARM/MSPM33C_DATA_32KB_NS.FLM"  start="0x80000000" size="0x00008000" RAMstart="0x20000000" RAMsize="0x00040000" default="0"/>
+                    <algorithm  name="02_Flash_Programming/FlashARM/MSPM33C_NONMAIN_S.FLM"     start="0x90101800" size="0x00000800" RAMstart="0x30000000" RAMsize="0x00040000" default="0"/>
+                    <algorithm  name="02_Flash_Programming/FlashARM/MSPM33C_NONMAIN_NS.FLM"    start="0x80101800" size="0x00000800" RAMstart="0x20000000" RAMsize="0x00040000" default="0"/>
+                </device>
+
+                <!-- *************************  Device MSPM33C3219  ***************************** -->
+                <!-- Flash "9" suffix = 512KB Flash, 256KB SRAM                                  -->
+                <!-- Bank0 MAIN: 0x00000000, size 0x00040000 (256KB)                             -->
+                <!-- Bank1 MAIN: 0x00040000, size 0x00040000 (256KB) — total 512KB               -->
+                <device Dname="MSPM33C3219">
+                    <!-- Non-Secure Flash (512KB) -->
+                    <memory     name="IROM1"          access="rx"  start="0x00000000" size="0x00080000" startup="1" default="1"/>
+                    <!-- Secure Flash alias -->
+                    <memory     name="IROM1_S"        access="rx"  start="0x10000000" size="0x00080000" default="0" alias="IROM1"/>
+                    <!-- Non-Secure SRAM -->
+                    <memory     name="IRAM1"          access="rwx" start="0x20000000" size="0x00040000" default="1"/>
+                    <!-- Secure SRAM alias -->
+                    <memory     name="IRAM1_S"        access="rwx" start="0x30000000" size="0x00040000" default="0" alias="IRAM1"/>
+                    <!-- NonMain region (Bank 0) -->
+                    <memory     name="NonMain_B0"     access="r"   start="0x80101800" size="0x00000800" default="1"/>
+                    <!-- NonMain region (Bank 1) -->
+                    <memory     name="NonMain_B1"     access="r"   start="0x80113800" size="0x00000800" default="0" alias="NonMain_B0"/>
+                    <!-- Factory region (Bank 0) -->
+                    <memory     name="Factory_B0"     access="r"   start="0x80110000" size="0x00001000" default="1"/>
+                    <!-- Factory region (Bank 1) -->
+                    <memory     name="Factory_B1"     access="r"   start="0x80111000" size="0x00001000" default="0" alias="Factory_B0"/>
+                    <!-- Data Flash (32kB high-endurance) -->
+                    <memory     name="DataFlash"      access="rw"  start="0x80000000" size="0x00008000" default="0"/>
+                    <compile    define="__MSPM33C3219__"/>
+                    <debug      svd="03_SVD/MSPM33C321A.svd"/>
+                    <algorithm  name="02_Flash_Programming/FlashARM/MSPM33C_MAIN_1MB_S.FLM"    start="0x10000000" size="0x00100000" RAMstart="0x30000000" RAMsize="0x00040000" default="1"/>
+                    <algorithm  name="02_Flash_Programming/FlashARM/MSPM33C_MAIN_1MB_NS.FLM"   start="0x00000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x00040000" default="0"/>
+                    <algorithm  name="02_Flash_Programming/FlashARM/MSPM33C_DATA_32KB_S.FLM"   start="0x90000000" size="0x00008000" RAMstart="0x30000000" RAMsize="0x00040000" default="0"/>
+                    <algorithm  name="02_Flash_Programming/FlashARM/MSPM33C_DATA_32KB_NS.FLM"  start="0x80000000" size="0x00008000" RAMstart="0x20000000" RAMsize="0x00040000" default="0"/>
+                    <algorithm  name="02_Flash_Programming/FlashARM/MSPM33C_NONMAIN_S.FLM"     start="0x90101800" size="0x00000800" RAMstart="0x30000000" RAMsize="0x00040000" default="0"/>
+                    <algorithm  name="02_Flash_Programming/FlashARM/MSPM33C_NONMAIN_NS.FLM"    start="0x80101800" size="0x00000800" RAMstart="0x20000000" RAMsize="0x00040000" default="0"/>
+                </device>
+            </subFamily>
+        </family>
+    </devices>
+
+    <!--boards>
+        <board vendor="TexasInstruments" name="LP-MSPM33C321A" salesContact="http://www.ti.com/general/docs/contact.tsp">
+            <description>MSPM33C321A LaunchPad</description>
+            <mountedDevice    deviceIndex="0" Dvendor="Texas Instruments:16" Dname="MSPM33C321A"/>
+            <compatibleDevice deviceIndex="0" Dvendor="Texas Instruments:16" Dfamily="MSPM33C321A Series" DsubFamily="MSPM33C321A"/>
+            <debugInterface adapter="XDS110-ET" connector="XDS110-ET Onboard Emulator"/>
+            <debugInterface adapter="SWD" connector="10-pin Cortex Debug Connector (0.05 inch connector)"/>
+            <feature type="USB" n="1" name="USB Device, Micro-B receptacle"/>
+            <feature type="Button" n="3" name="Reset and two user push-buttons"/>
+            <feature type="LED" n="4" name="LEDs for user interaction, including 1 RGB LED"/>
+            <feature type="ConnOther" n="2" name="40 pin BoosterPack Connector and support for 20 pin BoosterPacks"/>
+            <feature type="XTAL" n="48000000"/>
+            <feature type="Other" name="EnergyTrace technology available for ultra-low-power debugging"/>
+            <feature type="Other" name="32kHz crystal"/>
+        </board>
+    </boards-->
+
+</package>

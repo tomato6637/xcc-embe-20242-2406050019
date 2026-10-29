@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package schemaVersion="1.4" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd">
+  <vendor>Cmsemicon</vendor>
+  <name>CMS32F003</name>
+  <description>Cmsemicon CMS32F003 Device Family Pack</description>
+  <url>http://www.mcu.com.cn/pack/</url>
+
+  <releases>
+    <release version="0.1.4">
+      Added volatile in GPIO macro define.
+      Modified FLASH code in flag clearing.
+    </release>
+    <release version="0.1.3">
+      Modified IICA, FLASH and UART code and UID address.
+    </release>
+    <release version="0.1.2">
+      Modified SPI00 Slave demo.
+    </release>
+    <release version="0.1.1">
+      Add some examples.
+    </release>
+    <release version="0.0.1">
+      Initial Version
+    </release>
+  </releases>
+  <keywords>
+    <!-- keywords for indexing -->
+    <keyword>Cmsemicon</keyword>
+    <keyword>CMS32F003</keyword>
+  </keywords>
+  <!-- devices section (mandatory for Device Family Packs) -->
+  <devices>
+    <family Dfamily="M0+ Series" Dvendor="Cmsemicon:161">
+      <!-- *************************  Sub Family 'CMS32F003'  ***************************** -->
+      <subFamily DsubFamily="CMS32F003">
+        <processor Dcore="Cortex-M0+" DcoreVersion="r0p1" Dfpu="0" Dmpu="1" Dendian="Little-endian" Dclock="48000000"/>
+        <description>
+          The CMS32F003 device family contains an ARM Cortex-M0+ processor, running up to 48 MHz with a versatile set of on-chip peripherals.
+        </description>
+        <compile  header="Device/Include/CMS32F003.h"/>
+        <debug    svd="SVD/CMS32F003.svd"/>
+        <algorithm  name="Flash/CMS32F003_DataFlash.FLM"    start="0x00500200"  size="0x00400"     default="1"/>
+        <feature 	type="VCC"    		      n="2.1" 	      m="5.5"/>
+        <feature 	type="Temp"          	  n="-40"     	  m="85"/>
+        <feature 	type="IntRC"            n="48000000"     	  name="Internal RC Oscillator with +/- 1% accuracy"/>
+        <feature 	type="WDT"              n="1"/>
+        <feature 	type="PowerMode"        n="2"                           name=" Sleep, Deep-Sleep"/>
+        <feature 	type="PowerOther"       n="1"                           name="POR"/>
+        <feature 	type="ADC"              n="22"          m="12"          name="High-Accuracy ADC"/>
+        <feature 	type="I2C"              n="1"                           name="Full Function I2C"/>
+        <feature 	type="I2C"              n="1"                           name="Simplified I2C"/>
+        <feature 	type="SPI"              n="1"                           name="3-wire SPI"/>
+        <feature 	type="UART"             n="1"/>
+        <feature 	type="LIN"              n="1"/>
+        <feature 	type="Timer"            n="2"           m="16"          name="General Purpose Timer (TIM4)"/>
+        <feature 	type="ACMP"            n="1"                               name="ACMP"/>
+        <feature 	type="IWDG"            n="1"                              name="General Purpose WDG"/>
+        <!-- *************************  Device 'CMS32F003DA20SA'  ***************************** -->
+        <device Dname="CMS32F003DA20SA">
+          <description>
+            Code Flash: 16KB,  Data Flash: 1KB,  RAM: 2KB
+            Package: 20-lead TSSOP(6.5x4.4mm, 0.65mm pitch)
+          </description>
+          <memory     name="IROM1"  access="rx"       start="0x00000000"  size="0x04000"     startup="1"   default="1"/>
+          <memory     name="IRAM0"  access="rw"       start="0x20000000"  size="0x00800"     init   ="0"   default="1"/>
+          <algorithm  name="Flash/CMS32F003.FLM"    start="0x00000000"  size="0x04000"     default="1"/>
+	      <feature    type="TSSOP"            n="20"                        name="6.5x4.4mm, 0.65mm pitch TSSOP"/>
+        </device>
+       <!-- *************************  Device 'CMS32F003DA20NB'  ***************************** -->
+        <device Dname="CMS32F003DA20NB">
+          <description>
+            Code Flash: 16KB,  Data Flash: 1KB,  RAM: 2KB
+            Package: 20-lead QFN(3x3mm, 0.4mm pitch)
+          </description>
+          <memory     name="IROM1"  access="rx"       start="0x00000000"  size="0x04000"     startup="1"   default="1"/>
+          <memory     name="IRAM0"  access="rw"       start="0x20000000"  size="0x00800"     init   ="0"   default="1"/>
+          <algorithm  name="Flash/CMS32F003.FLM"    start="0x00000000"  size="0x04000"     default="1"/>
+	      <feature    type="QFN"            n="20"                        name="3x3mm, 0.4mm pitch QFN"/>
+        </device>
+      </subFamily>
+    </family>
+  </devices>
+  <!-- examples section (optional for all Software Packs)-->
+  <examples>
+    <example name="Blinky" doc="README" folder="Examples/Blinky/MDK">
+      <description>Sample project</description>
+      <board name="CMS32F003_EVB" vendor="Cmsemicon"/>
+      <project>
+        <environment name="uv" load="Blinky.uvprojx"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="ISR"/>
+      </attributes>
+    </example>
+  </examples>
+  
+  <!-- conditions section (optional for all Software Packs)-->
+  <conditions>
+    <condition id="CMS32F003 CMSIS-CORE">
+      <!-- conditions selecting Devices -->
+      <description>Cmsemicon CMS32F003 Series devices and CMSIS-CORE</description>
+      <require Cclass="CMSIS" Cgroup="CORE"/>
+      <require Dvendor="Cmsemicon:161" Dname="CMS32F003*"/>
+    </condition>
+    <condition id="Startup ARM">
+      <description>Startup assembler file for ARMCC</description>
+      <require Tcompiler="ARMCC"/>
+    </condition>
+    <condition id="Startup GCC">
+      <description>Startup assembler file for GCC</description>
+      <require Tcompiler="GCC"/>
+    </condition>
+    <condition id="Startup IAR">
+      <description>Startup assembler file for IAR</description>
+      <require Tcompiler="IAR"/>
+    </condition>
+  </conditions>
+  
+  <!-- component section (optional for all Software Packs)-->
+  <components>
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="CMS32F003 CMSIS-CORE">
+      <description>System Startup for Cmsemicon CMS32F003 Series</description>
+      <files>
+        <!--  include folder -->
+        <file category="include" name="Device/Include/"/>
+        <!--file category="header" name="Device/Source/userdefine.h"  attr="config" version="1.0.0"/-->
+
+        <file category="source"  name="Device/Source/ARM/startup_CMS32F003.s" attr="config" condition="Startup ARM" version="1.0.0"/>
+        <file category="source"  name="Device/Source/GCC/startup_CMS32F003.S" attr="config" condition="Startup GCC" version="1.0.0"/>
+        <file category="source"  name="Device/Source/IAR/startup_CMS32F003.s" attr="config" condition="Startup IAR" version="1.0.0"/>
+
+        <file category="source"  name="Device/Source/system_CMS32F003.c"  attr="config" version="1.0.0"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="ISR" Cversion="1.0.0" condition="CMS32F003 CMSIS-CORE">
+      <description>Interrupt Server Handler for Cmsemicon CMS32F003 Series</description>
+      <files>
+        <!--  include folder -->
+        <file category="source"  name="Device/Source/isr_CMS32F003.c"  attr="config" version="1.0.0"/>
+      </files>
+    </component>
+  </components>
+  
+</package>

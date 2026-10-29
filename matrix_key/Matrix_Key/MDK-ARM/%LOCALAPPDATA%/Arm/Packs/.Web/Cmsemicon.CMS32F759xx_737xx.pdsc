@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package schemaVersion="1.4" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd">
+  <vendor>Cmsemicon</vendor>
+  <name>CMS32F759xx_737xx</name>
+  <description>Cmsemicon CMS32F759xx_737xx Device Family Pack</description>
+  <url>http://www.mcu.com.cn/pack/</url>
+
+  <releases>
+    <release version="1.1.4">
+      Modified SCI, INTP and ADC code.
+    </release>
+    <release version="1.1.3">
+      Added compilation judge while running in RAM.
+    </release>
+    <release version="1.1.2">
+      Added demo running in RAM.
+    </release>
+    <release version="1.1.1">
+      Modified sleep code.
+    </release>
+    <release version="1.1.0">
+      Added CMS32F759GK48FA in list.
+    </release>
+    <release version="1.0.9">
+      Modified I2CA code.
+    </release>
+    <release version="1.0.8">
+      Modified FLASH algorithm.
+    </release>
+    <release version="1.0.7">
+      Cancelled two words operation.
+    </release>
+    <release version="1.0.6">
+      Added pull down input for GPIO.
+    </release>
+    <release version="1.0.5">
+      Added standby demos.
+    </release>
+    <release version="1.0.4">
+      Modified UART1 code.
+     Modified UART interrupt selection.
+    </release>
+    <release version="1.0.3">
+      Modified system file.
+    </release>
+    <release version="1.0.2">
+      FLASH driver add interrupt control.
+    </release>
+    <release version="1.0.1">
+      Add SCM demo code.
+    </release>
+    <release version="1.0.0">
+      Initial Version
+    </release>
+  </releases>
+  <keywords>
+    <!-- keywords for indexing -->
+    <keyword>Cmsemicon</keyword>
+    <keyword>CMS32F759xx_737xx</keyword>
+  </keywords>
+  <!-- devices section (mandatory for Device Family Packs) -->
+  <devices>
+    <family Dfamily="M0+ Series" Dvendor="Cmsemicon:161">
+      <!-- *************************  Sub Family 'CMS32F759xx_737xx'  ***************************** -->
+      <subFamily DsubFamily="CMS32F759xx_737xx">
+        <processor Dcore="Cortex-M0+" DcoreVersion="r0p1" Dfpu="0" Dmpu="1" Dendian="Little-endian" Dclock="64000000"/>
+        <description>
+          The CMS32F759xx_737xx device family contains an ARM Cortex-M0+ processor, running up to 64 MHz with a versatile set of on-chip peripherals.
+        </description>
+        <compile  header="Device/Include/CMS32F759xx_737xx.h"/>
+        <debug    svd="SVD/CMS32F759xx_737xx.svd"/>
+        <algorithm  name="Flash/CMS32F759xx_737xx_DataFlash.FLM"    start="0x00500200"  size="0x00E00"     default="1"/>
+        <feature 	type="VCC"    		      n="2.5" 	      m="5.5"/>
+        <feature 	type="Temp"          	  n="-40"     	  m="105"/>
+        <feature 	type="DMA"          	  n="8"     	                    name="Enhanced DMA"/>
+        <feature 	type="XTAL"          	  n="1000000"     m="20000000" 	  name="External Crystal Oscillator"/>
+        <feature 	type="IntRC"            n="64000000"       	         name="Internal RC Oscillator with +/- 1% accuracy"/>
+        <feature 	type="RTC"          	  n="32768"                       name="Internal Real Time Clock(RTC)"/>
+        <feature 	type="IWDG"               n="1"/>
+        <feature 	type="PowerMode"        n="3"                           name="Run, Sleep, Deep-Sleep"/>
+        <feature 	type="PowerOther"       n="1"                           name="POR"/>
+        <feature 	type="ADC"              n="60"          m="7"          name="High-Accuracy ADC"/>
+        <feature 	type="DAC"              n="1"                         name="DAC"/>
+        <feature 	type="AnalogOther"      n="2"                           name="CMP"/>
+        <feature 	type="I2C"              n="1"                           name="Full Function I2C"/>
+        <feature 	type="I2C"              n="6"                           name="Simplified I2C"/>
+        <feature 	type="SPI"              n="6"                           name="3-wire SPI"/>
+        <feature 	type="UART"             n="6"/>
+        <feature 	type="LIN"              n="1"/>
+        <feature 	type="Timer"            n="2"           m="16"          name="General Purpose Timer (TIM4)"/>
+        <feature 	type="LED"            n="1"                                   name="General Purpose LED"/>
+        <feature 	type="LCD"            n="1"                                   name="General Purpose LCD"/>
+        <feature 	type="EPWM"            n="8"                               name="General Purpose EPWM"/>
+        <feature 	type="WWDT"            n="1"                              name="General Purpose WWDT"/>
+        <!-- *************************  Device 'CMS32F759GK64FA'  ***************************** -->
+        <device Dname="CMS32F759GK64FA">
+          <description>
+            Code Flash: 256KB,  Data Flash: 3.5KB,  RAM: 16KB
+            Package: 64-lead LQFP(10x10mm, 0.5mm pitch)
+          </description>
+          <memory     name="IROM1"  access="rx"       start="0x00000000"  size="0x40000"     startup="1"   default="1"/>
+          <memory     name="IRAM1"  access="rw"       start="0x20000000"  size="0x02000"     init   ="0"   default="1"/>
+          <memory     name="IRAM2"  access="rw"       start="0x20002000"  size="0x02000"     init   ="0"   default="1"/>
+          <algorithm  name="Flash/CMS32F759xxGK.FLM"    start="0x00000000"  size="0x40000"     default="1"/>
+	      <feature    type="QFP"            n="64"                        name="10x10mm, 0.5mm pitch LQFP"/>
+        </device>
+        <!-- *************************  Device 'CMS32F759GK48FA'  ***************************** -->
+        <device Dname="CMS32F759GK48FA">
+          <description>
+            Code Flash: 256KB,  Data Flash: 3.5KB,  RAM: 16KB
+            Package: 48-lead LQFP(7x7mm, 0.5mm pitch)
+          </description>
+          <memory     name="IROM1"  access="rx"       start="0x00000000"  size="0x40000"     startup="1"   default="1"/>
+          <memory     name="IRAM1"  access="rw"       start="0x20000000"  size="0x02000"     init   ="0"   default="1"/>
+          <memory     name="IRAM2"  access="rw"       start="0x20002000"  size="0x02000"     init   ="0"   default="1"/>
+          <algorithm  name="Flash/CMS32F759xxGK.FLM"    start="0x00000000"  size="0x40000"     default="1"/>
+	      <feature    type="QFP"            n="48"                        name="7x7mm, 0.5mm pitch LQFP"/>
+        </device>
+        <!-- *************************  Device 'CMS32F737GH44FP'  ***************************** -->
+        <device Dname="CMS32F737GH44FP">
+          <description>
+            Code Flash: 128KB,  Data Flash: 3.5KB,  RAM: 16KB
+            Package: 44-lead LQFP(10x10mm, 0.8mm pitch)
+          </description>
+          <memory     name="IROM1"  access="rx"       start="0x00000000"  size="0x20000"     startup="1"   default="1"/>
+          <memory     name="IRAM1"  access="rw"       start="0x20000000"  size="0x02000"     init   ="0"   default="1"/>
+          <memory     name="IRAM2"  access="rw"       start="0x20002000"  size="0x02000"     init   ="0"   default="1"/>
+          <algorithm  name="Flash/CMS32F737xxGH.FLM"    start="0x00000000"  size="0x20000"     default="1"/>
+	      <feature    type="QFP"            n="44"                        name="10x10mm, 0.8mm pitch LQFP"/>
+        </device>
+        <!-- *************************  Device 'CMS32F737GH48FA'  ***************************** -->
+        <device Dname="CMS32F737GH48FA">
+          <description>
+            Code Flash: 128KB,  Data Flash: 3.5KB,  RAM: 16KB
+            Package: 48-lead LQFP(7x7mm, 0.5mm pitch)
+          </description>
+          <memory     name="IROM1"  access="rx"       start="0x00000000"  size="0x20000"     startup="1"   default="1"/>
+          <memory     name="IRAM1"  access="rw"       start="0x20000000"  size="0x02000"     init   ="0"   default="1"/>
+          <memory     name="IRAM2"  access="rw"       start="0x20002000"  size="0x02000"     init   ="0"   default="1"/>
+          <algorithm  name="Flash/CMS32F737xxGH.FLM"    start="0x00000000"  size="0x20000"     default="1"/>
+	      <feature    type="QFP"            n="48"                        name="7x7mm, 0.5mm pitch LQFP"/>
+        </device>
+      </subFamily>
+    </family>
+  </devices>
+  <!-- examples section (optional for all Software Packs)-->
+  <examples>
+    <example name="Blinky" doc="README" folder="Examples/Blinky/MDK">
+      <description>Sample project</description>
+      <board name="CMS32F759xx_737xx_EVB" vendor="Cmsemicon"/>
+      <project>
+        <environment name="uv" load="Blinky.uvprojx"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="ISR"/>
+      </attributes>
+    </example>
+  </examples>
+  
+  <!-- conditions section (optional for all Software Packs)-->
+  <conditions>
+    <condition id="CMS32F759xx_737xx CMSIS-CORE">
+      <!-- conditions selecting Devices -->
+      <description>Cmsemicon CMS32F759xx_737xx Series devices and CMSIS-CORE</description>
+      <require Cclass="CMSIS" Cgroup="CORE"/>
+      <require Dvendor="Cmsemicon:161" Dname="CMS32F7*"/>
+    </condition>
+    <condition id="Startup ARM">
+      <description>Startup assembler file for ARMCC</description>
+      <require Tcompiler="ARMCC"/>
+    </condition>
+    <condition id="Startup GCC">
+      <description>Startup assembler file for GCC</description>
+      <require Tcompiler="GCC"/>
+    </condition>
+    <condition id="Startup IAR">
+      <description>Startup assembler file for IAR</description>
+      <require Tcompiler="IAR"/>
+    </condition>
+  </conditions>
+  
+  <!-- component section (optional for all Software Packs)-->
+  <components>
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="CMS32F759xx_737xx CMSIS-CORE">
+      <description>System Startup for Cmsemicon CMS32F759xx_737xx Series</description>
+      <files>
+        <!--  include folder -->
+        <file category="include" name="Device/Include/"/>
+        <!--file category="header" name="Device/Source/userdefine.h"  attr="config" version="1.0.0"/-->
+
+        <file category="source"  name="Device/Source/ARM/startup_CMS32F759xx_737xx.s" attr="config" condition="Startup ARM" version="1.0.0"/>
+        <file category="source"  name="Device/Source/GCC/startup_CMS32F759xx_737xx.S" attr="config" condition="Startup GCC" version="1.0.0"/>
+        <file category="source"  name="Device/Source/IAR/startup_CMS32F759xx_737xx.s" attr="config" condition="Startup IAR" version="1.0.0"/>
+
+        <file category="source"  name="Device/Source/system_CMS32F759xx_737xx.c"  attr="config" version="1.0.0"/>
+      </files>
+    </component>
+    <component Cclass="Device" Cgroup="ISR" Cversion="1.0.0" condition="CMS32F759xx_737xx CMSIS-CORE">
+      <description>Interrupt Server Handler for Cmsemicon CMS32F759xx_737xx Series</description>
+      <files>
+        <!--  include folder -->
+        <file category="source"  name="Device/Source/isr_CMS32F759xx_737xx.c"  attr="config" version="1.0.0"/>
+      </files>
+    </component>
+  </components>
+  
+</package>

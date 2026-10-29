@@ -1,0 +1,1101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<package schemaVersion="1.2" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+         xs:noNamespaceSchemaLocation="PACK.xsd">
+    <vendor>AnalogDevices</vendor>
+    <name>ADuCM355_DFP</name>
+    <url>http://download.analog.com/tools/EZBoards/ADuCM355/Releases/</url>
+    <description>Analog Devices ADuCM355 Device Support and Examples</description>
+    <supportContact>https://www.analog.com/en/support.html</supportContact>
+    <license>License\aducm355_dfp-click-thru-SLA.txt</license>
+
+    <releases>
+		<release version="2.1.0" date="2026-08-28">
+			- IAR ADuCM356 example import bug fixed.
+		</release>
+		<release version="2.0.0" date="2026-07-30">
+			- Pack was built and tested with Keil MDK 6.
+			- Pack was built and tested with IAR version 9.70.1.
+			- Updated ARM CMSIS Pack to version 6.3.0.
+			- Updates for armclangv6 Keil support.
+			- Created Blinky LED example for IAR Embedded Workbench and Keil MDK6
+			- Built Keil Flash FLM using MDK 6 and ARM CMSIS 6.3.0
+			- Built the IAR FlashLoader using IAR v9.70.1 and updated the .out file in the DFP.
+			- Added IAR ADuCM355 examples of AnalogDie, Application Examples, DigitalDie to the pack.
+			- Added README documentation for all IAR and Keil examples.
+			- Updated the Keil examples with Release Configurations and renamed ADuCM355 target setting as Debug.
+			- Updated the Keil MDK6 modification for startup files and resolved c90 warnings.
+			- Fixed incorrect memset size calculation for Desc initialization in DMA library
+			- Fixed operator precedence in RTC status register polling loop
+			- Fixed UART baud-rate comment to match configured baud rate.
+			- Resolved SVD warnings in ADuCM355.svd and ADuCM356.svd 
+        </release>
+        <release version="1.0.4" date="2023-09-21">
+            ADuCM356 is added.
+        </release>
+        <release version="1.0.3" date="2020-01-21">
+            Examples added.
+        </release>
+		    <release version="1.0.2" date="2020-01-17">
+            Updated license. Updated examples.
+        </release>
+	      <release version="1.0.1" date="2019-12-05">
+            Corrected errors in examples.
+        </release>
+        <release version="1.0.0" date="2019-11-29">
+            Initial Pack (Keil Support).
+        </release>
+    </releases>
+
+    <requirements>
+        <packages>
+            <package name="CMSIS" vendor="ARM" version="6.3.0"/>
+        </packages>
+    </requirements>
+
+    <boards>
+        <board vendor="AnalogDevices" name="EVAL-ADuCM355QSPZ" revision="Rev-B"
+               orderForm="https://www.analog.com/en/design-center/evaluation-hardware-and-software/evaluation-boards-kits/EVAL-ADuCM355.html#eb-buy">
+            <description>Analog Devices ADuCM355 Evaluation Board</description>
+            <mountedDevice deviceIndex="0" Dvendor="Analog Devices:1" Dname="ADuCM355"/>
+            <compatibleDevice deviceIndex="0" Dvendor="Analog Devices:1" Dfamily="ADuCM355 Series"/>
+            <debugInterface adapter="JTAG/SW" connector="20 pin JTAG (0.1 inch connector)"/>
+            <debugInterface adapter="USB-SWD/UART-EMUZ" connector="8 pin (proprietary ADI)"/>
+        </board>
+    </boards>
+
+    <keywords>
+        <keyword>Analog Devices</keyword>
+        <keyword>Device Support</keyword>
+        <keyword>Device Family Package Analog Devices</keyword>
+        <keyword>ADuCM355</keyword>
+        <keyword>ADuCM356</keyword>
+    </keywords>
+
+
+    <devices>
+
+        <family Dfamily="ADuCM355 Series" Dvendor="Analog Devices:1">
+            <description>
+                The ADuCM355 system on a chip provides the features needed to bias and measure a range of different electrochemical sensors.
+            </description>
+            <environment name="uv">
+                <CMisc>--C99</CMisc>
+                <AMisc>--cpreproc --cpreproc_opts=-U__STDC__,-D__ASSEMBLER__</AMisc>
+            </environment>
+            <!-- ******************************  ADuCM355  ****************************** -->
+            <device Dname="ADuCM355">
+                <processor Dcore="Cortex-M3" DcoreVersion="r2p1" Dfpu="NO_FPU" Dmpu="NO_MPU" Dtz="NO_TZ"
+                           Dendian="Little-endian" Dclock="26000000"/>
+                <environment name="iar">
+                  <file category="i79file" name="ARM/config/devices/AnalogDevices/ADuCM3xx/ADuCM355.i79" />
+                </environment>
+                <debug svd="SVD/ADuCM355.svd"/>
+
+                <memory name="IROM1" access="rw" start="0x00000000" size="0x20000" startup="1" default="1"/>
+                <!-- Using USER_SRAM_MODE = 2 as default Configuration   -->
+                <memory name="dRAM_always_retained_region" access="rw" start="0x20000000" size="0x02000" default="1"/>
+                <memory name="dRAM_bank1_retained_region" access="rw" start="0x20002000" size="0x02000" default="1"/>
+                <memory name="dRAM_bank2_retained_region" access="rw" start="0x20004000" size="0x04000"/>
+                <memory name="dRAM_never_retained_region" access="rw" start="0x20040000" size="0x08000"/>
+
+                <memory name="digital_die_registers" access="prw" start="0x40000000" size="0x45000"/>
+                <memory name="afe_die_registers" access="prw" start="0x400C0800" size="0x1C00"/>
+                <memory name="uart_registers" access="prw" start="0x40005000" size="0x800"/>
+
+                <algorithm name="Flash/ADuCM355.FLM" start="0x00000000" size="0x20000"
+                           default="1"/>
+
+                <compile header="ADuCM355/inc/ADuCM355.h"/>
+            </device>
+            
+            <!-- ******************************  ADuCM356  ****************************** -->
+            <device Dname="ADuCM356">
+                <processor Dcore="Cortex-M3" DcoreVersion="r2p1" Dfpu="NO_FPU" Dmpu="NO_MPU" Dtz="NO_TZ"
+                           Dendian="Little-endian" Dclock="26000000"/>
+                <environment name="iar">
+                  <file category="i79file" name="ARM/config/devices/AnalogDevices/ADuCM3xx/ADuCM356.i79" />
+                </environment>
+                <debug svd="SVD/ADuCM356.svd"/>
+
+                <memory name="IROM1" access="rw" start="0x00000000" size="0x40000" startup="1" default="1"/>
+                <!-- Using USER_SRAM_MODE = 2 as default Configuration   -->
+                <memory name="dRAM_always_retained_region" access="rw" start="0x20000000" size="0x02000" default="1"/>
+                <memory name="dRAM_bank1_retained_region" access="rw" start="0x20002000" size="0x02000" default="1"/>
+                <memory name="dRAM_bank2_retained_region" access="rw" start="0x20004000" size="0x04000"/>
+                <memory name="dRAM_never_retained_region" access="rw" start="0x20040000" size="0x08000"/>
+
+                <memory name="digital_die_registers" access="prw" start="0x40000000" size="0x45000"/>
+                <memory name="afe_die_registers" access="prw" start="0x400C0800" size="0x1C00"/>
+                <memory name="uart_registers" access="prw" start="0x40005000" size="0x800"/>
+
+                <algorithm name="Flash/ADuCM356.FLM" start="0x00000000" size="0x20000"
+                           default="1"/>
+
+                <compile header="ADuCM355/inc/ADuCM355.h"/>
+            </device>
+
+
+        </family>
+    </devices>
+
+    <conditions>
+        <condition id="ARMCC">
+            <description>ARM Toolchain</description>
+            <require Tcompiler="ARMCC"/>
+        </condition>
+
+        <condition id="ADuCM355">
+            <description>ADuCM355 device</description>
+            <require Dvendor="Analog Devices:1"/>
+            <accept Dname="ADuCM355"/>
+            <accept Dname="ADuCM356"/>
+        </condition>
+
+        <condition id="IAR">
+          <require Tcompiler="IAR"/>
+        </condition>
+
+        <condition id="ADuCM355_IAR">
+          <description>ADuCM355 IAR</description>
+          <require condition="ADuCM355"/>
+          <require condition="IAR"/>
+        </condition>
+
+        <condition id="ADuCM355_ARM">
+            <description>ADuCM355 ARM (Keil)</description>
+            <require condition="ADuCM355"/>
+            <require condition="ARMCC"/>
+        </condition>
+
+        <condition id="ADuCM355 CMSIS Device">
+            <description>ADuCM355 CMSIS Device</description>
+            <require Cclass="CMSIS" Cgroup="CORE"/>
+            <require condition="ADuCM355"/>
+        </condition>
+        <condition id="ADuCM355 Library">
+            <description>Low Level Peripheral Libraries for ADuCM355</description>
+            <require condition="ADuCM355"/>
+        </condition>
+
+        <condition id="ADuCM355 Library IntLib">
+            <description>Low Level Peripheral Libraries for ADuCM355</description>
+            <require condition="ADuCM355"/>
+            <require Cclass="Device" Cgroup="Peripheral Libraries" Csub="INT" Cvendor="Analog Devices"/>
+        </condition>
+
+        <condition id="ADuCM355 Library RST">
+            <description>Conditions for ADuCM355 RST Library</description>
+            <require condition="ADuCM355"/>
+            <require Cclass="Device" Cgroup="Peripheral Libraries" Csub="GPIO" Cvendor="Analog Devices"/>
+        </condition>
+
+        <condition id="ADuCM355 Library Retarget">
+            <description>Conditions for ADuCM355 Retarget Library</description>
+            <require condition="ADuCM355"/>
+            <require Cclass="Device" Cgroup="Peripheral Libraries" Csub="UART" Cvendor="Analog Devices"/>
+        </condition>
+
+    </conditions>
+
+    <components>
+        <component Cclass="Device" Cgroup="Startup" Cversion="2.0.0" Cvendor="Analog Devices"
+                   condition="ADuCM355 CMSIS Device">
+            <!-- Cversion is necessary -->
+            <description>System Startup for ADuCM355</description>
+            <files>
+                <!-- additional include path -->
+                <file category="include" name="ADuCM355/inc/"/>
+                <!-- startup files -->
+                <file category="source" name="ADuCM355/common/ARM/startup_ADuCM355.S" version="2.0.0" attr="config"
+                      condition="ADuCM355_ARM"/>                      
+                <file category="source" name="ADuCM355/common/IAR/startup_ADuCM355.c" version="2.0.0" attr="config" 
+                      condition="ADuCM355_IAR"/>
+                <!-- system files -->
+                <file category="source" name="ADuCM355/common/system_ADuCM355.c" version="2.0.0" attr="config"
+                      condition="ADuCM355"/>
+
+                <file category="header" name="ADuCM355/inc/adi_config.h" version="2.0.0" attr="config"
+                      condition="ADuCM355"/>
+                <!-- linker scripts -->
+            </files>
+        </component>
+
+        <component Cclass="Device" Cgroup="Retarget UART" Cversion="2.0.0" Cvendor="Analog Devices"
+                   condition="ADuCM355 Library Retarget">
+            <description>Retarget standard library I/O to UART</description>
+            <files>
+                <file category="source" name="ADuCM355/common/ARM/retarget.c" version="2.0.0"
+                      condition="ADuCM355_ARM"/>
+                <file category="source" name="ADuCM355/common/IAR/retarget.c" version="2.0.0"
+                      condition="ADuCM355_IAR"/>
+            </files>
+        </component>
+
+        <component Cclass="Device" Cgroup="Peripheral Libraries" Csub="FLASH" Cversion="2.0.0" Cvendor="Analog Devices"
+                   condition="ADuCM355 Library">
+            <description>Flash controller low level library for ADuCM355</description>
+            <files>
+                <file category="header" name="ADuCM355/common/FeeLib.h" version="2.0.0"/>
+                <file category="source" name="ADuCM355/common/FeeLib.c" version="2.0.0"/>
+            </files>
+        </component>
+
+        <component Cclass="Device" Cgroup="Peripheral Libraries" Csub="UART" Cversion="2.0.0" Cvendor="Analog Devices"
+                   condition="ADuCM355 Library">
+            <description>UART low level library for ADuCM355</description>
+            <files>
+                <file category="header" name="ADuCM355/common/UrtLib.h" version="2.0.0"/>
+                <file category="source" name="ADuCM355/common/UrtLib.c" version="2.0.0"/>
+            </files>
+        </component>
+
+        <component Cclass="Device" Cgroup="Peripheral Libraries" Csub="DMA" Cversion="2.0.0" Cvendor="Analog Devices"
+                   condition="ADuCM355 Library">
+            <description>DMA low level library for ADuCM355</description>
+            <files>
+                <file category="header" name="ADuCM355/common/DmaLib.h" version="2.0.0"/>
+                <file category="source" name="ADuCM355/common/DmaLib.c" version="2.0.0"/>
+            </files>
+        </component>
+
+        <component Cclass="Device" Cgroup="Peripheral Libraries" Csub="GPIO" Cversion="2.0.0" Cvendor="Analog Devices"
+                   condition="ADuCM355 Library">
+            <description>GPIO low level library for ADuCM355</description>
+            <files>
+                <file category="header" name="ADuCM355/common/DioLib.h" version="2.0.0"/>
+                <file category="source" name="ADuCM355/common/DioLib.c" version="2.0.0"/>
+            </files>
+        </component>
+
+        <component Cclass="Device" Cgroup="Peripheral Libraries" Csub="CLOCK" Cversion="2.0.0" Cvendor="Analog Devices"
+                   condition="ADuCM355 Library">
+            <description>Clock low level library for ADuCM355</description>
+            <files>
+                <file category="header" name="ADuCM355/common/ClkLib.h" version="2.0.0"/>
+                <file category="source" name="ADuCM355/common/ClkLib.c" version="2.0.0"/>
+            </files>
+        </component>
+
+        <component Cclass="Device" Cgroup="Peripheral Libraries" Csub="CRC" Cversion="2.0.0" Cvendor="Analog Devices"
+                   condition="ADuCM355 Library">
+            <description>CRC low level library for ADuCM355</description>
+            <files>
+                <file category="header" name="ADuCM355/common/CrcLib.h" version="2.0.0"/>
+                <file category="source" name="ADuCM355/common/CrcLib.c" version="2.0.0"/>
+            </files>
+        </component>
+
+        <component Cclass="Device" Cgroup="Peripheral Libraries" Csub="Timer" Cversion="2.0.0" Cvendor="Analog Devices"
+                   condition="ADuCM355 Library">
+            <description>General Purpose Timer low level library for ADuCM355</description>
+            <files>
+                <file category="header" name="ADuCM355/common/GptLib.h" version="2.0.0"/>
+                <file category="source" name="ADuCM355/common/GptLib.c" version="2.0.0"/>
+            </files>
+        </component>
+
+        <component Cclass="Device" Cgroup="Peripheral Libraries" Csub="I2C" Cversion="2.0.0" Cvendor="Analog Devices"
+                   condition="ADuCM355 Library">
+            <description>I2C interface low level library for ADuCM355</description>
+            <files>
+                <file category="header" name="ADuCM355/common/I2cLib.h" version="2.0.0"/>
+                <file category="source" name="ADuCM355/common/I2cLib.c" version="2.0.0"/>
+            </files>
+        </component>
+
+        <component Cclass="Device" Cgroup="Peripheral Libraries" Csub="SPI" Cversion="2.0.0" Cvendor="Analog Devices"
+                   condition="ADuCM355 Library">
+            <description>SPI interface low level library for ADuCM355</description>
+            <files>
+                <file category="header" name="ADuCM355/common/SpiLib.h" version="2.0.0"/>
+                <file category="source" name="ADuCM355/common/SpiLib.c" version="2.0.0"/>
+            </files>
+        </component>
+
+        <component Cclass="Device" Cgroup="Peripheral Libraries" Csub="INT" Cversion="2.0.0" Cvendor="Analog Devices"
+                   condition="ADuCM355 Library">
+            <description>External interrupt library for ADuCM355</description>
+            <files>
+                <file category="header" name="ADuCM355/common/IntLib.h" version="2.0.0"/>
+                <file category="source" name="ADuCM355/common/IntLib.c" version="2.0.0"/>
+            </files>
+        </component>
+
+        <component Cclass="Device" Cgroup="Peripheral Libraries" Csub="PWR" Cversion="2.0.0" Cvendor="Analog Devices"
+                   condition="ADuCM355 Library">
+            <description>Power Management low level library for ADuCM355</description>
+            <files>
+                <file category="header" name="ADuCM355/common/PwrLib.h" version="2.0.0"/>
+                <file category="source" name="ADuCM355/common/PwrLib.c" version="2.0.0"/>
+            </files>
+        </component>
+
+        <component Cclass="Device" Cgroup="Peripheral Libraries" Csub="RST" Cversion="2.0.0" Cvendor="Analog Devices"
+                   condition="ADuCM355 Library RST">
+            <description>Reset low level library for ADuCM355</description>
+            <files>
+                <file category="header" name="ADuCM355/common/RstLib.h" version="2.0.0"/>
+                <file category="source" name="ADuCM355/common/RstLib.c" version="2.0.0"/>
+            </files>
+        </component>
+
+        <component Cclass="Device" Cgroup="Peripheral Libraries" Csub="RTC" Cversion="2.0.0" Cvendor="Analog Devices"
+                   condition="ADuCM355 Library">
+            <description>RTC low level library for ADuCM355</description>
+            <files>
+                <file category="header" name="ADuCM355/common/RtcLib.h" version="2.0.0"/>
+                <file category="source" name="ADuCM355/common/RtcLib.c" version="2.0.0"/>
+            </files>
+        </component>
+
+        <component Cclass="Device" Cgroup="AFE" Csub="Operation" Cversion="2.0.0" Cvendor="Analog Devices"
+                   condition="ADuCM355 Library IntLib">
+            <description>AFE low level library for ADuCM355</description>
+            <files>
+                 <!-- additional include path -->
+                <file category="include" name="ADuCM355/common/ad5940lib/"/>
+                <file category="header" name="ADuCM355/common/ad5940lib/ad5940.h" version="2.0.0"/>
+                <file category="source" name="ADuCM355/common/ad5940lib/ad5940.c" version="2.0.0"/>
+                <file category="source" name="ADuCM355/common/ADuCM355Port.c" version="2.0.0"/>
+            </files>
+        </component>
+
+        <component Cclass="Device" Cgroup="Peripheral Libraries" Csub="Watchdog" Cversion="2.0.0"
+                   Cvendor="Analog Devices"
+                   condition="ADuCM355 Library">
+            <description>Watchdog low level library for ADuCM355</description>
+            <files>
+                <file category="header" name="ADuCM355/common/AfeWdtLib.h" version="2.0.0"/>
+                <file category="source" name="ADuCM355/common/AfeWdtLib.c" version="2.0.0"/>
+            </files>
+        </component>
+
+
+    </components>
+<examples>
+    <!-- Examples go here 
+    <example name="M356_GPIO" doc="ARM/Readme_M356_GPIO.txt" folder="ADuCM355/examples/ADuCM356Examples/M356_GPIO">
+      <description>Example demonstrating how to configure the ADC for Polling and FIFO mode</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M356_GPIO.uvprojx"/>
+        <environment name="iar" load="IAR/M356_GPIO.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>\ADuCM356Examples/M356_GPIO</keyword>
+      </attributes>
+    </example>-->
+    
+    <example name="M356_4WireZ" doc="ARM/Readme_M356_4WireZ.txt" folder="ADuCM355/examples/ADuCM356Examples/M356_4WireZ">
+      <description>Example demonstrating how to configure the ADC for Polling and FIFO mode</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M356_4WireZ.uvprojx"/>
+        <environment name="iar" load="IAR/M356_4WireZ/M356_4WireZ.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ADuCM356Examples/M356_4WireZ</keyword>
+      </attributes>
+    </example>
+    <example name="M356_BIOZ_2Wire" doc="ARM/Readme_M356_BIOZ_2Wire.txt" folder="ADuCM355/examples/ADuCM356Examples/M356_BIOZ-2Wire">
+      <description>Example application demonstrating a 2 wire impedance measurement</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M356_BIOZ_2Wire.uvprojx"/>
+        <environment name="iar" load="IAR/M356_BIOZ_2Wire/M356_BIOZ_2Wire.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ADuCM356Examples/M356_BIOZ-2Wire</keyword>
+      </attributes>
+    </example>
+    <example name="M356_ECSns_2Sensors" doc="ARM/Readme_M356_ECSns_2Sensors.txt" folder="ADuCM355/examples/ADuCM356Examples/M356_ECSns_2Sensors">
+      <description>Example application demonstrating how to measure 2 EC sensors</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M356_ECSns_2Sensors.uvprojx"/>
+        <environment name="iar" load="IAR/M356_ECSns_2Sensors/M356_ECSns_2Sensors.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ADuCM356Examples/M356_ECSns_2Sensors</keyword>
+      </attributes>
+    </example>
+    <example name="M356_ECSns_CapaTest" doc="ARM/Readme_M356_ECSns_CapaTest.txt" folder="ADuCM355/examples/ADuCM356Examples/M356_ECSns_CapaTest">
+      <description>Example application demonstrating how to do a chrono-amperometric measurement</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M356_ECSns_CapaTest.uvprojx"/>
+        <environment name="iar" load="IAR/M356_ECSns_CapaTest/M356_ECSns_CapaTest.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ADuCM356Examples/M356_ECSns_CapaTest</keyword>
+      </attributes>
+    </example>
+    <example name="M356_ECSns_CycloVoltammetry" doc="ARM/Readme_M356_ECSns_CycloVoltammetry.txt" folder="ADuCM355/examples/ADuCM356Examples/M356_ECSns_CycloVoltammetry">
+      <description>Example applicationd demonstrating how to do a cyclic voltammetry measurement</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M356_ECSns_CycloVoltammetry.uvprojx"/>
+        <environment name="iar" load="IAR/M356_ECSns_CycloVoltammetry/M356_ECSns_CycloVoltammetry.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ADuCM356Examples/M356_ECSns_CycloVoltammetry</keyword>
+      </attributes>
+    </example>
+    <example name="M356_ECSns_DualWE" doc="ARM/Readme_M356_ECSns_DualWE.txt" folder="ADuCM355/examples/ADuCM356Examples/M356_ECSns_DualWE">
+      <description>Example application demonstrating how to measure a dual working electrode EC sensor</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M356_ECSns_DualWE.uvprojx"/>
+        <environment name="iar" load="IAR/M356_ECSns_DualWE/M356_ECSns_DualWE.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ADuCM356Examples/M356_ECSns_DualWE</keyword>
+      </attributes>
+    </example>
+    <example name="M356_ECSns_EIS" doc="ARM/Readme_M356_ECSns_EIS.txt" folder="ADuCM355/examples/ADuCM356Examples/M356_ECSns_EIS">
+      <description>Example application demonstrating hopw to do an Impedance measurement on an EC sensor</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M356_ECSns_EIS.uvprojx"/>
+        <environment name="iar" load="IAR/M356_ECSns_EIS/M356_ECSns_EIS.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ADuCM356Examples/M356_ECSns_EIS</keyword>
+      </attributes>
+    </example>
+    <example name="M356_ECSns_SingleWE" doc="ARM/Readme_M356_ECSns_SingleWE.txt" folder="ADuCM355/examples/ADuCM356Examples/M356_ECSns_SingleWE">
+      <description>Example application demonstrating how to measure a standard 3 lead EC sensor</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M356_ECSns_SingleWE.uvprojx"/>
+        <environment name="iar" load="IAR/M356_ECSns_SingleWE/M356_ECSns_SingleWE.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ADuCM356Examples/M356_ECSns_SingleWE</keyword>
+      </attributes>
+    </example>
+    <example name="M356_EDA" doc="ARM/Readme_M356_EDA.txt" folder="ADuCM355/examples/ADuCM356Examples/M356_EDA">
+      <description>Example application demonstrating how to do a low power impedance measurement &lt; 200Hz</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M356_EDA.uvprojx"/>
+        <environment name="iar" load="IAR/M356_EDA/M356_EDA.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ADuCM356Examples/M356_EDA</keyword>
+      </attributes>
+    </example>
+    <example name="M356_Impedance" doc="ARM/Readme_M356_Impedance.txt" folder="ADuCM355/examples/ADuCM356Examples/M356_Impedance">
+      <description>Example demonstrating how to do a standard 2 wire impedance measurement</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M356_Impedance.uvprojx"/>
+        <environment name="iar" load="IAR/M356_Impedance/M356_Impedance.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ADuCM356Examples/M356_Impedance</keyword>
+      </attributes>
+    </example>
+    <example name="M356_PwrModes" doc="ARM/Readme_M356_PwrModes.txt" folder="ADuCM355/examples/ADuCM356Examples/M356_PwrModes">
+      <description>Example application demonstrating the various power modes of the ADuCM355</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M356_PwrModes.uvprojx"/>
+        <environment name="iar" load="IAR/M356_PwrModes/M356_PwrModes.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ADuCM356Examples/M356_PwrModes</keyword>
+      </attributes>
+    </example>
+    <example name="M356_SqrWaveVoltammetry" doc="ARM/Readme_M356_SqrWaveVoltammetry.txt" folder="ADuCM355/examples/ADuCM356Examples/M356_SqrWaveVoltammetry">
+      <description>Example application demonstrating how to do a square wave voltammetery measurement</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M356_SqrWaveVoltammetry.uvprojx"/>
+        <environment name="iar" load="IAR/M356_SqrWaveVoltammetry/M356_SqrWaveVoltammetry.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ADuCM356Examples/M356_SqrWaveVoltammetry</keyword>
+      </attributes>
+    </example>
+    <example name="M355_ADC" doc="ARM/Readme_M355_ADC.txt" folder="ADuCM355/examples/AnalogDie/M355_ADC">
+      <description>Example demonstrating how to configure the ADC for Polling and FIFO mode</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_ADC.uvprojx"/>
+        <environment name="iar" load="IAR/M355_ADC.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>AnalogDie/M355_ADC</keyword>
+      </attributes>
+    </example>
+    <example name="M355_AfeWdt" doc="ARM/Readme_M355_AfeWdt.txt" folder="ADuCM355/examples/AnalogDie/M355_AfeWdt">
+      <description>Example demonstrating how to use the AFE Watchdog Timer</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_AfeWdt.uvprojx"/>
+        <environment name="iar" load="IAR/M355_AfeWdt.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>AnalogDie/M355_AfeWdt</keyword>
+      </attributes>
+    </example>
+    <example name="M355_DFT" doc="ARM/Readme_M355_DFT.txt" folder="ADuCM355/examples/AnalogDie/M355_DFT">
+      <description>Example demonstrating how to configure the DFT engine</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_DFT.uvprojx"/>
+        <environment name="iar" load="IAR/M355_DFT.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>AnalogDie/M355_DFT</keyword>
+      </attributes>
+    </example>
+    <example name="M355_HSDACCal" doc="ARM/Readme_M355_HSDACCal.txt" folder="ADuCM355/examples/AnalogDie/M355_HSDACCal">
+      <description>Example demonstrating how to calibrate the HSDAC</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_HSDACCal.uvprojx"/>
+        <environment name="iar" load="IAR/M355_HSDACCal.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>AnalogDie/M355_HSDACCal</keyword>
+      </attributes>
+    </example>
+    <example name="M355_LPLoop" doc="ARM/Readme_M355_LPLoop.txt" folder="ADuCM355/examples/AnalogDie/M355_LPLoop">
+      <description>Example demonstrating how to configure the low power potentiostat block</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_LPLoop.uvprojx"/>
+        <environment name="iar" load="IAR/M355_LPLoop.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>AnalogDie/M355_LPLoop</keyword>
+      </attributes>
+    </example>
+    <example name="M355_Temperature" doc="ARM/Readme_M355_Temperature.txt" folder="ADuCM355/examples/AnalogDie/M355_Temperature">
+      <description>Example demonstrating how to use the internal temperature sensor</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_Temperature.uvprojx"/>
+        <environment name="iar" load="IAR/M355_Temperature.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>AnalogDie/M355_Temperature</keyword>
+      </attributes>
+    </example>
+    <example name="M355_TempSensor2" doc="ARM/Readme_M355_TempSensor2.txt" folder="ADuCM355/examples/AnalogDie/M355_TempSensor2">
+      <description>Example demonstrating how to use the 2nd temperature sensor in the ADuCM355</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_TempSensor2.uvprojx"/>
+        <environment name="iar" load="IAR/M355_TempSensor2.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>AnalogDie/M355_TempSensor2</keyword>
+      </attributes>
+    </example>
+    <example name="M355_WaveGenerator" doc="ARM/Readme_M355_WaveformGenerator.txt" folder="ADuCM355/examples/AnalogDie/M355_WaveformGenerator">
+      <description>Example demonstrating how to configure the waveform generator</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_WaveGenerator.uvprojx"/>
+        <environment name="iar" load="IAR/M355_WaveGenerator.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>AnalogDie/M355_WaveformGenerator</keyword>
+      </attributes>
+    </example>
+    <example name="M355_4WireZ" doc="ARM/Readme_M355_4WireZ.txt" folder="ADuCM355/examples/ApplicationExamples/M355_4WireZ">
+      <description>Example application demonstrating how to do a 4 wire impedance measurement</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_4WireZ.uvprojx"/>
+        <environment name="iar" load="IAR/M355_4WireZ.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ApplicationExamples/M355_4WireZ</keyword>
+      </attributes>
+    </example>
+    <example name="M355_BIOZ_2Wire" doc="ARM/Readme_M355_BIOZ-2Wire.txt" folder="ADuCM355/examples/ApplicationExamples/M355_BIOZ-2Wire">
+      <description>Example application demonstrating a 2 wire impedance measurement</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_BIOZ_2Wire.uvprojx"/>
+        <environment name="iar" load="IAR/M355_BIOZ_2Wire.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ApplicationExamples/M355_BIOZ-2Wire</keyword>
+      </attributes>
+    </example>
+    <example name="M355_ECSns_2Sensors" doc="ARM/Readme_M355_ECSns_2Sensors.txt" folder="ADuCM355/examples/ApplicationExamples/M355_ECSns_2Sensors">
+      <description>Example application demonstrating how to measure 2 EC sensors</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_ECSns_2Sensors.uvprojx"/>
+        <environment name="iar" load="IAR/M355_ECSns_2Sensors.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ApplicationExamples/M355_ECSns_2Sensors</keyword>
+      </attributes>
+    </example>
+    <example name="M355_ECSns_CapaTest" doc="ARM/Readme_M355_ECSns_CapaTest.txt" folder="ADuCM355/examples/ApplicationExamples/M355_ECSns_CapaTest">
+      <description>Example application demonstrating how to do a chrono-amperometric measurement</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_ECSns_CapaTest.uvprojx"/>
+        <environment name="iar" load="IAR/M355_ECSns_CapaTest.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ApplicationExamples/M355_ECSns_CapaTest</keyword>
+      </attributes>
+    </example>
+    <example name="M355_ECSns_CycloVoltammetry" doc="ARM/Readme_M355_ECSns_CycloVoltammetry.txt" folder="ADuCM355/examples/ApplicationExamples/M355_ECSns_CycloVoltammetry">
+      <description>Example applicationd demonstrating how to do a cyclic voltammetry measurement</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_ECSns_CycloVoltammetry.uvprojx"/>
+        <environment name="iar" load="IAR/M355_ECSns_CycloVoltammetry.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ApplicationExamples/M355_ECSns_CycloVoltammetry</keyword>
+      </attributes>
+    </example>
+    <example name="M355_ECSns_DualWE" doc="ARM/Readme_M355_ECSns_DualWE.txt" folder="ADuCM355/examples/ApplicationExamples/M355_ECSns_DualWE">
+      <description>Example application demonstrating how to measure a dual working electrode EC sensor</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_ECSns_DualWE.uvprojx"/>
+        <environment name="iar" load="IAR/M355_ECSns_DualWE.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ApplicationExamples/M355_ECSns_DualWE</keyword>
+      </attributes>
+    </example>
+    <example name="M355_ECSns_EIS" doc="ARM/Readme_M355_ECSns_EIS.txt" folder="ADuCM355/examples/ApplicationExamples/M355_ECSns_EIS">
+      <description>Example application demonstrating hopw to do an Impedance measurement on an EC sensor</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_ECSns_EIS.uvprojx"/>
+        <environment name="iar" load="IAR/M355_ECSns_EIS.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ApplicationExamples/M355_ECSns_EIS</keyword>
+      </attributes>
+    </example>
+    <example name="M355_ECSns_SingleWE" doc="ARM/Readme_M355_ECSns_SingleWE.txt" folder="ADuCM355/examples/ApplicationExamples/M355_ECSns_SingleWE">
+      <description>Example application demonstrating how to measure a standard 3 lead EC sensor</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_ECSns_SingleWE.uvprojx"/>
+        <environment name="iar" load="IAR/M355_ECSns_SingleWE.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ApplicationExamples/M355_ECSns_SingleWE</keyword>
+      </attributes>
+    </example>
+    <example name="M355_EDA" doc="ARM/Readme_M355_EDA.txt" folder="ADuCM355/examples/ApplicationExamples/M355_EDA">
+      <description>Example application demonstrating how to do a low power impedance measurement &lt; 200Hz</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_EDA.uvprojx"/>
+        <environment name="iar" load="IAR/M355_EDA.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ApplicationExamples/M355_EDA</keyword>
+      </attributes>
+    </example>
+    <example name="M355_Impedance" doc="ARM/Readme_M355_Impedance.txt" folder="ADuCM355/examples/ApplicationExamples/M355_Impedance">
+      <description>Example demonstrating how to do a standard 2 wire impedance measurement</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_Impedance.uvprojx"/>
+        <environment name="iar" load="IAR/M355_Impedance.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ApplicationExamples/M355_Impedance</keyword>
+      </attributes>
+    </example>
+    <example name="M355_RadiatedImmunity_Demo" doc="ARM/Readme_M355_RadiatedImmunity_Demo.txt" folder="ADuCM355/examples/ApplicationExamples/M355_RadiatedImmunity_Demo">
+      <description>Example application for CN0425</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_RadiatedImmunity_Demo.uvprojx"/>
+        <environment name="iar" load="IAR/M355_RadiatedImmunity_Demo.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ApplicationExamples/M355_RadiatedImmunity_Demo</keyword>
+      </attributes>
+    </example>
+    <example name="M355_SqrWaveVoltammetry" doc="ARM/Readme_M355_SqrWaveVoltammetry.txt" folder="ADuCM355/examples/ApplicationExamples/M355_SqrWaveVoltammetry">
+      <description>Example application demonstrating how to do a square wave voltammetery measurement</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_SqrWaveVoltammetry.uvprojx"/>
+        <environment name="iar" load="IAR/M355_SqrWaveVoltammetry.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ApplicationExamples/M355_SqrWaveVoltammetry</keyword>
+      </attributes>
+    </example>
+    <example name="M355_PwrModes" doc="ARM/Readme_M355_PwrModes.txt" folder="ADuCM355/examples/ApplicationExamples/M355_PwrModes">
+      <description>Example application demonstrating the various power modes of the ADuCM355</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_PwrModes.uvprojx"/>
+        <environment name="iar" load="IAR/M355_PwrModes.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>ApplicationExamples/M355_PwrModes</keyword>
+      </attributes>
+    </example>
+    <example name="M355_CRC" doc="ARM/Readme_M355_CRC.txt" folder="ADuCM355/examples/DigitalDie/M355_CRC">
+      <description>Example demonstrating how to use the CRC function</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_CRC.uvprojx"/>
+        <environment name="iar" load="IAR/M355_CRC.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>DigitalDie/M355_CRC</keyword>
+      </attributes>
+    </example>
+    <example name="M355_Flash" doc="ARM/Readme_M355_Flash.txt" folder="ADuCM355/examples/DigitalDie/M355_Flash">
+      <description>Example demonstrating how to store info in the flash</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_Flash.uvprojx"/>
+        <environment name="iar" load="IAR/M355_Flash.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>DigitalDie/M355_Flash</keyword>
+      </attributes>
+    </example>
+    <example name="M355_Flash_DMA" doc="ARM/Readme_M355_Flash_DMA.txt" folder="ADuCM355/examples/DigitalDie/M355_Flash_DMA">
+      <description>Example demonstrating how to use DMA to move data from RAM to Flash</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_Flash_DMA.uvprojx"/>
+        <environment name="iar" load="IAR/M355_Flash_DMA.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>DigitalDie/M355_Flash_DMA</keyword>
+      </attributes>
+    </example>
+    <example name="M355_GPIO" doc="ARM/Readme_M355_GPIO.txt" folder="ADuCM355/examples/DigitalDie/M355_GPIO">
+      <description>Example demonstrating how to configure the GPIOs</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_GPIO.uvprojx"/>
+        <environment name="iar" load="IAR/M355_GPIO.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>DigitalDie/M355_GPIO</keyword>
+      </attributes>
+    </example>
+    <example name="M355_I2C_Master" doc="ARM/Readme_M355_I2C_Master.txt" folder="ADuCM355/examples/DigitalDie/M355_I2C_Master">
+      <description>Example demonstrating how to configure the ADuCm355 I2C master mode</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_I2C_Master.uvprojx"/>
+        <environment name="iar" load="IAR/M355_I2C_Master.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>DigitalDie/M355_I2C_Master</keyword>
+      </attributes>
+    </example>
+    <example name="M355_I2C_Slave" doc="ARM/Readme_M355_I2C_Slave.txt" folder="ADuCM355/examples/DigitalDie/M355_I2C_Slave">
+      <description>Example demonstrating how configure the ADuCm355 I2C slave mode</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_I2C_Slave.uvprojx"/>
+        <environment name="iar" load="IAR/M355_I2C_Slave.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>DigitalDie/M355_I2C_Slave</keyword>
+      </attributes>
+    </example>
+    <example name="M355_PWM" doc="ARM/Readme_M355_PWM.txt" folder="ADuCM355/examples/DigitalDie/M355_PWM">
+      <description>Example demonstrating how to use the AFE PWM feature</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_PWM.uvprojx"/>
+        <environment name="iar" load="IAR/M355_PWM.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>DigitalDie/M355_PWM</keyword>
+      </attributes>
+    </example>
+    <example name="M355_RTC" doc="ARM/Readme_M355_RTC.txt" folder="ADuCM355/examples/DigitalDie/M355_RTC">
+      <description>Example demonstrating how to use the RTC </description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_RTC.uvprojx"/>
+        <environment name="iar" load="IAR/M355_RTC.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>DigitalDie/M355_RTC</keyword>
+      </attributes>
+    </example>
+    <example name="M355_SPI_Master." doc="ARM/Readme_M355_SPI_Master.txt" folder="ADuCM355/examples/DigitalDie/M355_SPI_Master">
+      <description>Example demonstrating how to configure the ADuCM355 SPI Mastermode</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_SPI_Master.uvprojx"/>
+        <environment name="iar" load="IAR/M355_SPI_Master.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>DigitalDie/M355_SPI_Master</keyword>
+      </attributes>
+    </example>
+    <example name="M355_SPI_Slave" doc="ARM/Readme_M355_SPI_Slave.txt" folder="ADuCM355/examples/DigitalDie/M355_SPI_Slave">
+      <description>Example demonstrating how to configure the ADuCM355 SPI Slave mode</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_SPI_Slave.uvprojx"/>
+        <environment name="iar" load="IAR/M355_SPI_Slave.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>DigitalDie/M355_SPI_Slave</keyword>
+      </attributes>
+    </example>
+    <example name="M355_Timers" doc="ARM/Readme_M355_Timers.txt" folder="ADuCM355/examples/DigitalDie/M355_Timers">
+      <description>Example demonstrating how to configure the general purpose timers</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_Timers.uvprojx"/>
+        <environment name="iar" load="IAR/M355_Timers.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>DigitalDie/M355_Timers</keyword>
+      </attributes>
+    </example>
+    <example name="M355_Uart_FIFO" doc="ARM/Readme_M355_Uart_FIFO.txt" folder="ADuCM355/examples/DigitalDie/M355_Uart_FIFO">
+      <description>Example demonstrating how to use the UART</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_Uart_FIFO.uvprojx"/>
+        <environment name="iar" load="IAR/M355_Uart_FIFO.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>DigitalDie/M355_Uart_FIFO</keyword>
+      </attributes>
+    </example>
+    <example name="M355_Uart_Wakeup" doc="ARM/Readme_M355_UART_Wakeup.txt" folder="ADuCM355/examples/DigitalDie/M355_UART_Wakeup">
+      <description>Demonstrating how the Uart can wakeup the device</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/M355_Uart_Wakeup.uvprojx"/>
+        <environment name="iar" load="IAR/M355_Uart_Wakeup.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>DigitalDie/M355_UART_Wakeup</keyword>
+      </attributes>
+    </example>
+    <example name="Blinky" doc="ARM/README_Blinky.txt" folder="ADuCM355/examples/Blinky">
+      <description>Demonstrating a simple LED blink example</description>
+      <board name="EVAL-ADuCM355QSPZ" vendor="AnalogDevices"/>
+      <project>
+        <environment name="uv" load="ARM/Blinky.uvprojx"/>
+        <environment name="iar" load="IAR/Blinky.ewp"/>
+      </project>
+      <attributes>
+        <component Cclass="CMSIS" Cgroup="CORE"/>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <component Cclass="Device" Cgroup="Peripheral Libraries"/>
+        <category>Not provided</category>
+        <keyword>Blinky</keyword>
+      </attributes>
+    </example>
+  </examples>
+</package>
+
+
